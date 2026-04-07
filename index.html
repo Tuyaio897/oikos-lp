@@ -286,26 +286,27 @@ img{display:block;max-width:100%; object-fit:cover;}
 }
 
 @media(min-width: 1025px) {
-  /* 1. O efeito de Puxar Card (Sticky) seguro se limitará ao Como Funciona */
-  .s-como {
-    position: sticky;
-    top: 0;
-    min-height: 100vh; /* Fix: Oculta o buraco escuro garantindo preenchimento de toda a altura */
+  /* Pastinhas padronizadas para terem o mesmo tamanho e comportamento */
+  .s-prob, .s-como, .s-diff, .s-cred, .s-cta {
+    min-height: 85vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     box-shadow: 0 -30px 60px rgba(0,0,0,0.5);
-    margin-bottom: 30vh; /* Buffer pra rolar antes do proximo card subir */
+  }
+
+  /* 1. O efeito de Puxar Card (Sticky) do Como Funciona */
+  .s-como {
+    position: sticky;
+    top: 0;
+    /* Sem margin-bottom: o próximo card vai rolar imediatamente por cima cobrindo o vão escuro! */
   }
   
   /* 2. As outras seções deslizam sobre a de baixo, mas rolam nativamente para garantir a leitura integral! */
-  .s-diff, .s-cred, .s-cta {
+  .s-prob, .s-diff, .s-cred, .s-cta {
     position: relative;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    box-shadow: 0 -30px 60px rgba(0,0,0,0.5);
   }
 
   .s-como { z-index: 12; }
