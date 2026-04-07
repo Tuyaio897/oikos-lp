@@ -203,6 +203,7 @@ img{display:block;max-width:100%; object-fit:cover;}
 .hero-vis{
   position:absolute; top:0; right: -2%; width:50%; height:100%;
   pointer-events:none; z-index:1; mix-blend-mode:screen;
+  will-change: opacity; transform: translateZ(0); /* Força aceleração de GPU pesada */
   /* Mask left edge to transparent to eliminate the squared blue tint line */
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%);
   mask-image: linear-gradient(to right, transparent 0%, black 25%);
@@ -1018,20 +1019,30 @@ window.addEventListener('load', () => {
   if(purgadorVideo) {
     purgadorVideo.pause(); // Always keep paused initially to obey scroll physics
     
+    // Força o pré-carregamento para melhorar a performance de "seek"
+    purgadorVideo.preload = "auto";
+    
     const initVideoScrub = () => {
+      let reqId;
       ScrollTrigger.create({
         trigger: "#hero",
         start: "top top",
         end: "+=2500",   // Lock Hero on screen por uma distância longa e confortável
         pin: true,       // Freeze the section gracefully!
-        scrub: 2.5,      // Borracha elástica máxima! Oculta os "engasgos de hardware" de arquivos não gerados por Keyframes 1x1.
+        scrub: 1,        // Scrub menor (de 2.5 pra 1). Menos tempo tentando re-renderizar = menos travamentos!
         onUpdate: (self) => {
            if(purgadorVideo.duration) {
-              /* Acelera o final do vídeo para 60% do tempo de scroll!
-                 Isso garante que o vídeo termine muito antes do Hero soltar a página, 
-                 deixando-o "travado na tela e aberto" pra pessoa admirar! */
+              /* Acelera o final do vídeo para 60% do tempo de scroll! */
               let vidProgress = Math.min(1, self.progress / 0.6);
-              try { purgadorVideo.currentTime = vidProgress * purgadorVideo.duration; } catch(e){}
+              let targetTime = vidProgress * purgadorVideo.duration;
+
+              // Só atualiza o player se a diferença de tempo for perceptível pro frame, evitando micro-travamentos pesados
+              if (Math.abs(purgadorVideo.currentTime - targetTime) > 0.04) {
+                 if(reqId) cancelAnimationFrame(reqId);
+                 reqId = requestAnimationFrame(() => {
+                    try { purgadorVideo.currentTime = targetTime; } catch(e){}
+                 });
+              }
            }
         }
       });
