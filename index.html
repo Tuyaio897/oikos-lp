@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oikos Systems | Gestão de Purgadores de Vapor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   OIKOS OFFICIAL BRAND TOKENS
+───────────────────────────────────────── */
+:root {
+  /* Oikos Official Colors */
+  --azul-ind:      #0A2472;
+  --vapor-oliva:   #323725;
+  --laranja-erg:   #CE893B;
+  --azul-cald:     #282826;
+  --cinza-aco:     #C4C4C4;
+  --ok:            #8BAC33;
+  --vazando:       #C75A0D;
+
+  /* Premium Base */
+  --bg-base:       #020815; /* Ultra dark navy for contrast */
+  --bg-elevated:   #040c1e;
+  
+  --bg-glass:      rgba(10, 36, 114, 0.25);
+  --border-glass:  rgba(255, 255, 255, 0.08);
+  --text-primary:  #ffffff;
+  --text-muted:    var(--cinza-aco);
+  
+  --ff-d:          'Sora', sans-serif;
+  --ff-b:          'Inter', sans-serif;
+  
+  --accent:        var(--laranja-erg);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--ff-b);
+  overflow-x: clip;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%; object-fit:cover;}
+
+/* ─────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.lbl{
+  display:inline-block;font-family:var(--ff-b);font-weight:600;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:25px 0;
+  border-bottom:1px solid transparent;
+  transition:all .4s ease;
+}
+.nav.on{
+  background:rgba(2, 8, 21, 0.85); /* Deep Navy */
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom-color:var(--border-glass);
+  padding:14px 0;
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.nav-logo img{height:50px; transition:all .4s ease; transform-origin: left center;}
+.nav.on .nav-logo img{height:28px;}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:var(--ff-b);font-weight:500;font-size:14px;color:rgba(255,255,255,0.7);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn {
+  background: linear-gradient(135deg, var(--azul-cald), #1136a6);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.15);
+  padding:10px 24px;border-radius:40px;
+  font-family:var(--ff-b);font-weight:700; font-size:14px;
+  text-decoration:none;transition:all .3s;
+  box-shadow: 0 4px 12px rgba(10,36,114,0.4), inset 0 1px 2px rgba(255,255,255,0.2);
+}
+.nav-btn:hover{
+  background: linear-gradient(135deg, #1136a6, #1646d9);
+  color:#fff;
+  box-shadow: 0 6px 16px rgba(10,36,114,0.6), inset 0 1px 2px rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hbg span{display:block;width:22px;height:1.5px;background:rgba(255,255,255,.9);border-radius:1px}
+.mob{
+  display:none;position:fixed;inset:0;background:rgba(2, 8, 21, 0.95);
+  backdrop-filter:blur(20px);
+  z-index:998;flex-direction:column;justify-content:center;
+  padding:0 60px;gap:32px;
+}
+.mob.open{display:flex}
+.mob a{font-family:var(--ff-d);font-weight:600;font-size:32px;color:var(--text-muted);transition:color .2s}
+.mob a:hover{color:#fff}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+@keyframes moveBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero{
+  min-height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;
+  padding: 120px 0 100px 0;
+  background: linear-gradient(-45deg, #020815, #081a42, #020815, #051433);
+  background-size: 400% 400%;
+  animation: moveBg 25s ease infinite;
+}
+/* Subte Glows of the Official Colors */
+.hero-glow-1 {
+  position: absolute; top:-50%; left:-10%; width: 1000px; height: 1000px;
+  background: radial-gradient(circle, var(--azul-ind) 0%, transparent 60%);
+  opacity: 0.2; pointer-events: none; z-index: 0; filter: blur(60px);
+}
+.hero-glow-2 {
+  position: absolute; bottom:-20%; right:-10%; width: 800px; height: 800px;
+  background: radial-gradient(circle, var(--laranja-erg) 0%, transparent 60%);
+  opacity: 0.1; pointer-events: none; z-index: 0; filter: blur(80px);
+}
+.hero .wrap{
+  display:flex; align-items:center; position:relative; z-index:2; width: 100%;
+}
+.hero-content{ max-width:650px; }
+.hero-eyebrow{
+  display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  font-family:var(--ff-b);font-weight:600;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--accent);
+}
+.hero-eyebrow::before{
+  display:none;
+}
+.hero-h1{
+  font-family:var(--ff-d);font-weight:300;
+  font-size:clamp(32px, 3.5vw, 46px);
+  line-height:1.05;letter-spacing:-1px;
+  color:#fff;margin-bottom:24px;
+}
+.hero-h1 strong { font-weight: 700; color: #fff; }
+.hero-p{
+  font-family:var(--ff-b);font-weight:400;font-size:18px;
+  line-height:1.5;color:var(--text-muted);
+  max-width:480px;margin-bottom:40px;
+}
+.btn-azul {
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  background: linear-gradient(135deg, var(--azul-cald), #1136a6); color:#fff;
+  font-family:var(--ff-d);font-weight:700; font-size:16px; padding:16px 36px;
+  border-radius:40px; text-decoration:none; position:relative; overflow:hidden;
+  transition:transform .3s, box-shadow .3s;
+  box-shadow: 0 8px 20px rgba(10, 36, 114, 0.4), inset 0 2px 4px rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+@keyframes btnSteam {
+  0% { transform: translateX(-10%) scaleY(1); opacity: 0; }
+  50% { opacity: 1; transform: translateX(20%) scaleY(1.3); }
+  100% { transform: translateX(50%) scaleY(1); opacity: 0; }
+}
+.btn-azul::before {
+  content: ''; position:absolute; bottom:-10px; left:-50%; width:200%; height:70%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 60%);
+  filter: blur(6px); animation: btnSteam 4s infinite linear; pointer-events: none;
+}
+.btn-azul:hover {
+  transform:translateY(-3px);
+  box-shadow: 0 15px 30px rgba(10, 36, 114, 0.6), inset 0 2px 4px rgba(255,255,255,0.25);
+}
+.btn-azul svg { width: 22px; height: 22px; transition: transform 0.3s; }
+.btn-azul:hover svg { transform: translateX(5px); }
+.hero-stats{
+  display:flex;gap:40px;margin-top:48px;
+  padding-top:32px; border-top:1px solid var(--border-glass);
+}
+.hstat-n{
+  font-family:var(--ff-d);font-weight:700;font-size:26px;
+  color:#fff;line-height:1.1;margin-bottom:6px;
+}
+.hstat-l{
+  font-family:var(--ff-b);font-size:12px;font-weight:500;
+  color:var(--text-muted);line-height:1.4;
+}
+
+/* HERO PURGADOR EFFECTS */
+/* Video Backdrop Overlay */
+.hero-vis{
+  position:absolute; top:0; right: -2%; width:50%; height:100%;
+  pointer-events:none; z-index:1; mix-blend-mode:screen;
+  /* Mask left edge to transparent to eliminate the squared blue tint line */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%);
+  mask-image: linear-gradient(to right, transparent 0%, black 25%);
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, #020815 0%, transparent 50%),
+              linear-gradient(0deg, #020815 10%, transparent 40%);
+}
+#purgadorVideo { width:100%; height:100%; object-fit:contain; object-position: right center; transform: scale(1.1); }
+.vis-halo{
+  position:absolute; width:480px;height:480px;border-radius:50%;
+  background:var(--accent);opacity:.08; filter:blur(100px);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:0;
+}
+.vis-floor{
+  position:absolute; bottom:55px;left:50%;transform:translateX(-50%);
+  width:360px;height:12px; background:var(--accent);filter:blur(40px);
+  opacity:.15;pointer-events:none;z-index:0;
+}
+.vapor{
+  position:absolute;top:0;left:50%; transform:translateX(-50%);
+  width:400px;height:220px; pointer-events:none;z-index:10;overflow:visible;
+}
+.vp{
+  position:absolute;border-radius:50%; background:rgba(255,255,255,.06);
+  animation:vup linear infinite; filter:blur(4px);
+}
+@keyframes vup{
+  0%  {transform:translateY(0) scale(1);opacity:0}
+  30% {opacity:.1}
+  70% {opacity:.05}
+  100%{transform:translateY(-200px) scale(4);opacity:0}
+}
+.purg{
+  position:relative; width:420px;height:620px;
+  overflow:visible;z-index:1;
+}
+.pl{
+  position:absolute;left:50%; transform:translateX(-50%);
+  width:100%;will-change:transform;
+}
+.pl img{width:100%}
+.pl-body { bottom:0;      height:365px; z-index:1 }
+.pl-disc { bottom:318px;  height:145px; z-index:2 } 
+.pl-cap  { bottom:420px;  height:240px; z-index:3 } 
+.pl-glow { position:absolute; bottom:420px; left:50%; transform:translateX(-50%); width:80px; height:20px; background:var(--accent); filter:blur(20px); opacity:0; z-index:4; pointer-events:none; }
+
+/* ─────────────────────────────────────────
+   TICKER
+───────────────────────────────────────── */
+.ticker{
+  background: linear-gradient(90deg, #1e2116, #2d3122, #1e2116);
+  background-size: 400% 400%;
+  animation: moveBg 15s ease infinite;
+  padding:20px 0;
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  overflow:hidden; position:relative; z-index:2;
+}
+.ticker-inner{
+  display:flex;gap:0; animation:tickerMove 40s linear infinite; white-space:nowrap;
+}
+.ticker-item{
+  display:flex;align-items:center;gap:24px;padding:0 40px;
+  font-family:var(--ff-b);font-weight:500;font-size:13px;
+  letter-spacing:1px; color:var(--text-muted);flex-shrink:0; text-transform:uppercase;
+}
+.ticker-item strong{ color:#fff; font-family:var(--ff-d); font-weight:700;}
+.ticker-dot{ width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0; }
+@keyframes tickerMove{ 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ─────────────────────────────────────────
+   SECTIONS GENERAL
+───────────────────────────────────────── */
+.s-prob, .s-como, .s-diff, .s-cred, .s-cta, .s-prod{
+  padding:120px 0; position:relative;overflow:hidden;
+}
+
+@media(min-width: 1025px) {
+  /* 1. O efeito de Puxar Card (Sticky) seguro se limitará ao Como Funciona */
+  .s-como {
+    position: sticky;
+    top: 0;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    box-shadow: 0 -30px 60px rgba(0,0,0,0.5);
+    margin-bottom: 30vh; /* Buffer pra rolar antes do proximo card subir */
+  }
+  
+  /* 2. As outras seções deslizam sobre a de baixo, mas rolam nativamente para garantir a leitura integral! */
+  .s-diff, .s-cred, .s-cta {
+    position: relative;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    box-shadow: 0 -30px 60px rgba(0,0,0,0.5);
+  }
+
+  .s-como { z-index: 12; }
+  .s-diff { z-index: 13; }
+  .s-cred { z-index: 14; }
+  .s-cta  { z-index: 15; }
+  footer  { position: relative; z-index: 16; }
+}
+
+/* Base is always #020815, we use overlays for dynamic contrast */
+
+.sec-head { margin-bottom: 64px; }
+.sec-head h2 {
+  font-family:var(--ff-d);font-weight:700;
+  font-size:clamp(32px,4vw,48px);
+  line-height:1.1;color:#fff;margin-bottom:24px; letter-spacing:-1px;
+}
+.sec-head.center { text-align: center; }
+
+/* Dashboard Porduct Section */
+.s-prod {
+  background: var(--bg-base);
+}
+.s-prod::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle at top, rgba(10,36,114,0.15), transparent 70%);
+  pointer-events:none;
+}
+.prod-sub{
+  font-family:var(--ff-b);font-size:18px;
+  color:var(--text-muted);max-width:600px;
+  margin:16px auto 0;line-height:1.5;
+}
+.platform-container {
+  display: flex; justify-content: center; align-items: center;
+  position: relative; margin-top: 60px;
+  min-height: 800px; /* Space for the floating cards */
+}
+/* PHONES */
+.phone-showcase {
+  display: flex; justify-content: center; align-items: center;
+  gap: 40px; perspective: 1200px;
+  position:relative; z-index:10;
+}
+.phone-mockup {
+  width: 260px; height: 540px;
+  background: #000; border-radius: 40px;
+  border: 4px solid var(--cinza-aco);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 40px 80px rgba(0,0,0,0.6), inset 0 0 0 6px #000;
+  position: relative; overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.phone-mockup::before {
+  content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:110px; height:20px; background:#000; border-bottom-left-radius:12px; border-bottom-right-radius:12px; z-index:20;
+}
+.phone-mockup img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+}
+
+@keyframes floatP1 { 0%, 100% { transform: rotateY(15deg) rotateX(5deg) translateY(20px); } 50% { transform: rotateY(15deg) rotateX(5deg) translateY(5px); } }
+@keyframes floatP2 { 0%, 100% { transform: translateY(-30px) scale(1.05); } 50% { transform: translateY(-45px) scale(1.05); } }
+@keyframes floatP3 { 0%, 100% { transform: rotateY(-15deg) rotateX(5deg) translateY(20px); } 50% { transform: rotateY(-15deg) rotateX(5deg) translateY(5px); } }
+
+.phone-1 { animation: floatP1 6s ease-in-out infinite; z-index: 1; }
+.phone-2 { animation: floatP2 6s ease-in-out infinite 1s; z-index: 2; border-color:#fff; box-shadow: 0 50px 100px rgba(0,0,0,0.9), inset 0 0 0 6px #000; }
+.phone-3 { animation: floatP3 6s ease-in-out infinite 2s; z-index: 1; }
+
+/* FLOATING CARDS AROUND MOCKUP */
+.fc-hover {
+  position: absolute;
+  width: 300px;
+  background: rgba(10,36,114, 0.4); /* Industrial Blue Glass */
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-left: 2px solid var(--accent);
+  border-radius: 12px; padding: 32px 24px;
+  z-index: 30;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+  transition: transform 0.3s ease;
+}
+.fc-hover:hover { transform: translateY(-8px); }
+/* Placement Desktop Only */
+.fc-1 { top: 60px; left: -100px; }
+.fc-2 { bottom: 60px; right: 180px; }
+.fc-3 { top: 120px; right: -100px; }
+
+.fc-ico{width:32px;height:32px;margin-bottom:16px; stroke:var(--accent)}
+.fc-t{font-family:var(--ff-d);font-weight:600;font-size:18px;color:#fff;margin-bottom:8px}
+.fc-d{font-family:var(--ff-b);font-size:14px;color:rgba(255,255,255,0.8);line-height:1.5}
+
+/* ─────────────────────────────────────────
+   O PROBLEMA
+───────────────────────────────────────── */
+.s-prob { background: var(--bg-elevated); }
+.s-prob::after{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg, rgba(50,55,37,0.1) 0%, transparent 80%); /* Vapor Oliva hint */
+  pointer-events:none;
+}
+.prob-ghost{
+  position:absolute;
+  left:0; top:50%; transform:translateY(-50%);
+  font-family:var(--ff-d);font-weight:800;
+  font-size:800px;line-height:1;
+  color:rgba(255,255,255,.015);
+  pointer-events:none;user-select:none;
+  letter-spacing:-40px; z-index:0;
+}
+.s-prob .wrap {
+  display:grid; grid-template-columns: 1fr 1fr; gap:80px; align-items:center;
+  position:relative; z-index:2;
+}
+.prob-img-wrap {
+  border-radius:24px; overflow:hidden;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  position: relative;
+  /* Fix layout squishing */
+  width: 100%; max-height: 600px;
+}
+.prob-img-wrap img {
+  width: 100%; height: 100%; min-height:500px; object-fit: cover; object-position: center;
+}
+/* Immersive Image Overlay */
+.prob-img-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--bg-elevated) 0%, transparent 30%);
+}
+.prob-p{
+  font-family:var(--ff-b);font-size:18px;line-height:1.5;
+  color:var(--text-muted);margin:0 0 24px;
+}
+.prob-kicker{
+  font-family:var(--ff-d);font-weight:700;font-size:24px;
+  color:var(--accent);margin-top:40px;
+}
+
+/* ─────────────────────────────────────────
+   STEPS (Como Funciona)
+───────────────────────────────────────── */
+@keyframes moveOlive {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.s-como { 
+  background: linear-gradient(-45deg, #1e2116, #2d3122, #161810, #24281a); 
+  background-size: 400% 400%; 
+  animation: moveBg 15s ease infinite; 
+}
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.step{
+  background:rgba(255,255,255,0.03); 
+  border:1px solid var(--border-glass);
+  border-radius:12px; padding:48px 40px;
+}
+.step-n{
+  font-family:var(--ff-d);font-weight:800; font-size:60px;line-height:1;
+  color:rgba(255,255,255,0.08); margin-bottom:12px;display:block; letter-spacing:-2px;
+}
+.step-t{
+  font-family:var(--ff-d);font-weight:600;font-size:20px;
+  color:#fff;margin-bottom:16px;
+}
+.step-d{
+  font-family:var(--ff-b);font-size:15px; color:var(--text-muted);line-height:1.5;
+}
+
+/* ─────────────────────────────────────────
+   ANTES x DEPOIS (HIGH IMPACT)
+───────────────────────────────────────── */
+.s-diff { background: var(--bg-elevated); }
+.ba-block{
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border-radius:16px; overflow:hidden; margin-bottom:40px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+.ba-a, .ba-d { border-radius:0; padding:60px 48px; position:relative; }
+/* Vintage problem vs Premium resolution */
+.ba-a { background: #030812; border-right:2px solid rgba(0,0,0,0.5); }
+.ba-d { background: #0c1a3b; border-left: 4px solid var(--ok); }
+
+/* Glow on the right side box */
+@keyframes pulseGlow {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; box-shadow: inset 0 0 60px rgba(139,172,51,0.15); }
+  100% { opacity: 0.3; }
+}
+.ba-d::after {
+  content:''; position:absolute; inset:0; border: 2px solid var(--ok); opacity:0.3; pointer-events:none;
+  animation: pulseGlow 4s infinite ease-in-out;
+}
+.ba-tag{
+  display:inline-flex;align-items:center;font-family:var(--ff-d);font-weight:700;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;
+  background:rgba(0,0,0,0.3); padding:6px 12px; border-radius:4px;
+}
+.tga{color: var(--cinza-aco)}
+.tgd{color: var(--ok); background:rgba(139,172,51,0.15);}
+.ba-ttl{font-family:var(--ff-d);font-weight:700;font-size:24px;color:#fff;margin-bottom:16px}
+.ba-txt{font-family:var(--ff-b);font-size:16px;color:rgba(255,255,255,0.85);line-height:1.6}
+
+/* ─────────────────────────────────────────
+   CREDIBILIDADE
+───────────────────────────────────────── */
+.s-cred { 
+  background: linear-gradient(45deg, #24281a, #161810, #2d3122); 
+  background-size: 400% 400%; 
+  animation: moveBg 18s ease infinite; 
+  text-align: center;
+}
+/* NEWS MOCKUP */
+.news-mockup {
+  max-width: 800px; margin: 60px auto 0;
+  background: #fdfdfd; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  text-align: left;
+}
+.news-head {
+  background: #e8e8e8; padding: 12px 16px;
+  display: flex; align-items: center; justify-content: flex-start;
+  border-bottom: 1px solid #d0d0d0;
+}
+.news-dots { display:flex; gap:6px; }
+.news-dots span { width:12px; height:12px; border-radius:50%; display:block; }
+.dot-r { background:#ff5f56; }
+.dot-y { background:#ffbd2e; }
+.dot-g { background:#27c93f; }
+.news-url {
+  flex: 1; text-align: center; font-family: monospace; font-size: 11px;
+  color: #666; background: #fff; padding: 4px 8px; border-radius: 6px;
+  margin-left: 20px; max-width: 300px;
+}
+.news-body {
+  padding: 50px 60px;
+  background: #fff;
+}
+.news-tag {
+  font-family: var(--ff-b); font-weight: 700; font-size: 11px;
+  color: var(--vazando); letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 20px; border-bottom: 2px solid var(--vazando); padding-bottom: 8px; display:inline-block;
+}
+.news-title {
+  font-family: 'Georgia', 'Times New Roman', serif; font-size: 32px; line-height: 1.25;
+  color: #111; margin-bottom: 20px; font-weight: bold;
+}
+.news-text {
+  font-family: 'Georgia', 'Times New Roman', serif; font-size: 18px; color: #444; line-height: 1.6;
+}
+.cred-p {
+    font-size: 18px; color: var(--text-muted); max-width: 800px; margin: 0 auto 24px;
+}
+
+/* ─────────────────────────────────────────
+   CTA
+───────────────────────────────────────── */
+.s-cta { background: var(--bg-base); }
+.cta-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.cta-hl{
+  font-family:var(--ff-d);font-weight:700;
+  font-size:clamp(36px,4vw,52px);
+  line-height:1.1;color:#fff;letter-spacing:-1px;margin-bottom:24px;
+}
+.cta-sub{font-family:var(--ff-b);font-size:18px;color:var(--text-muted);line-height:1.5;margin-bottom:32px}
+.fgrp{margin-bottom:24px}
+.flbl{display:block;font-family:var(--ff-b);font-weight:500;font-size:12px;color:var(--text-primary);margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;}
+.finp{
+  display:block;width:100%;background:rgba(255,255,255,0.03);
+  border:1px solid var(--border-glass); border-radius:4px;
+  color:#fff;font-family:var(--ff-b);font-size:16px;
+  padding:16px;outline:none;
+  transition:all .3s;
+}
+.finp:focus{border-color:var(--accent); background:rgba(255,255,255,0.06);}
+.finp::placeholder{color:var(--text-muted)}
+.btn-sub{
+  display:block;width:100%;
+  background:var(--accent);color:#fff;
+  font-family:var(--ff-d);font-weight:700;font-size:16px;
+  padding:18px;border-radius:4px;border:none;cursor:pointer;
+  transition:transform .2s;margin-top:24px;
+}
+.btn-sub:hover{transform:scale(1.02); filter:brightness(1.1);}
+.fbox { background: var(--bg-elevated); padding: 40px; border-radius: 12px; border: 1px solid var(--border-glass); }
+.f-note{font-family:var(--ff-b);font-size:13px;color:var(--text-muted);text-align:center;margin-top:16px}
+.f-ok{display:none;text-align:center;padding:40px 0}
+.f-ok-ico{width:64px;height:64px;background:rgba(139,172,51,0.2);border:1px solid var(--ok);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.f-ok h3{font-family:var(--ff-d);font-weight:600;font-size:24px;color:#fff;margin-bottom:12px}
+
+/* FOOTER */
+footer{
+  background:var(--bg-base);
+  padding:60px 0 40px;
+  border-top:1px solid var(--border-glass);
+}
+.foot-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;margin-bottom:40px}
+.flinks a{font-family:var(--ff-b);font-size:14px;color:var(--text-muted);transition:color .2s}
+.flinks a:hover{color:#fff}
+.fcopy{font-family:var(--ff-b);font-size:13px;color:var(--text-muted);text-align:right;}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media(max-width:1440px){
+  /* LAPTOP OPTIMIZATION (Prevent squeezing) */
+  .wrap{padding:0 40px;}
+  .hero-h1{ font-size:clamp(28px, 3.5vw, 40px); margin-bottom: 16px;}
+  .hero-p{ font-size: 16px; margin-bottom: 24px;}
+  .hero-stats { margin-top: 24px; padding-top: 24px;}
+  .hero-vis { height: 500px; margin-top: 40px;}
+  .purg { transform: scale(0.75); transform-origin: top center; margin: 0 auto; }
+}
+
+@media(max-width:1024px){
+  .wrap{padding:0 24px}
+  .nav-links,.nav-btn{display:none}
+  .hbg{display:flex}
+  
+  .hero{ height: auto; min-height: 100vh; padding-bottom: 60px; }
+  .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:120px;padding-bottom: 40px;text-align:center; display:flex; flex-direction:column;}
+  .hero-eyebrow{justify-content:center;}
+  .hero-eyebrow::before{display:none;}
+  .hero-h1{font-size:38px; color: #fff;}
+  .hero-stats{flex-direction:column;gap:20px;text-align:center;align-items:center; margin-bottom: 40px;}
+  
+  .hero-vis{ width: 100%; height: 100%; top: 0; right: 0; mix-blend-mode: screen; opacity: 0.6; -webkit-mask-image: linear-gradient(to top, transparent 15%, black 40%); mask-image: linear-gradient(to top, transparent 15%, black 40%); }
+  .hero-overlay{ background: linear-gradient(0deg, #020815 30%, transparent 80%); pointer-events: none; }
+  .hero-content{ max-width: 100%; z-index: 5; position: relative;}
+  
+  .platform-container { min-height: auto; flex-direction: column; }
+  .phone-showcase { flex-direction:column; gap:40px; perspective:none; padding-bottom: 0px;}
+  .phone-1, .phone-3 { display: none; }
+  .phone-2 { animation: none; box-shadow: 0 40px 80px rgba(0,0,0,0.8); }
+  .phone-mockup { width: 100%; max-width:280px; margin:0 auto; z-index:1; }
+  
+  /* Semi-Floating Cards on mobile over the single phone */
+  .fc-row { position:relative; margin-top:0; }
+  .fc-hover { 
+    position:relative !important; top:auto !important; left:auto !important; bottom:auto !important; right:auto !important; 
+    width:95% !important; max-width:380px; margin: 0 auto !important; 
+    z-index: 40; /* Keep above the phone */
+  }
+  /* Offset cards to overlap the central phone dynamically */
+  .fc-1 { margin-top: -60px !important; margin-left: 0 !important; margin-bottom: 16px !important; }
+  .fc-2 { margin-right: 0 !important; margin-bottom: 16px !important;}
+  .fc-3 { margin-left: 0 !important; margin-bottom: 24px !important;}
+  
+  .s-prob .wrap { grid-template-columns:1fr; gap: 40px; text-align:center;}
+  .prob-ghost { left:50%; transform:translate(-50%, -50%); }
+  .prob-img-wrap { max-height: 300px; }
+
+  .steps {grid-template-columns:1fr}
+  
+  .ba-block{grid-template-columns:1fr}
+  .ba-a, .ba-d { padding:40px 24px; border:none !important; border-bottom:1px solid rgba(255,255,255,0.1) !important;}
+  .ba-d::after { display:none; } /* remove glow overlapping on mobile */
+
+  .news-mockup { margin: 40px 10px 0; }
+  .news-body { padding: 30px 24px; }
+  .news-title { font-size: 24px; }
+
+  .cta-g{grid-template-columns:1fr;gap:48px; text-align:center;}
+  .fbox { padding:24px; }
+  .foot-g{grid-template-columns:1fr;text-align:center}
+  .fcopy{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#" class="nav-logo">
+      <img src="./assets/logo-oikos.svg" alt="Oikos Systems">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#s-prod">A Plataforma</a></li>
+      <li><a href="#s-prob">O Problema</a></li>
+      <li><a href="#s-como">Como funciona</a></li>
+      <li><a href="#s-cta">Contato</a></li>
+    </ul>
+    <a href="#s-cta" class="nav-btn">Diagnóstico gratuito</a>
+    <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mob" id="mob">
+  <a href="#s-prod"  onclick="cm()">A Plataforma</a>
+  <a href="#s-prob"  onclick="cm()">O Problema</a>
+  <a href="#s-como"  onclick="cm()">Como funciona</a>
+  <a href="#s-cta"   onclick="cm()" style="color:var(--accent)">Diagnóstico gratuito</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <!-- VIDEO BLEED BACKDROP -->
+  <div class="hero-vis" id="heroVis">
+    <video id="purgadorVideo" src="./assets/purgador.mp4" muted playsinline></video>
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="wrap">
+    <!-- TEXT -->
+    <div class="hero-content fa">
+      <div class="hero-eyebrow" style="margin-top: 40px; margin-bottom: 32px;">
+        <span style="display:inline-block; padding: 6px 14px; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; font-weight: 600; letter-spacing: 2px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); font-size: 10px;">⚙️ INVENTÁRIO INDUSTRIAL</span>
+      </div>
+
+      <h1 class="hero-h1 fa">
+        Enquanto sua caldeira produz vapor, seus purgadores <strong>estão jogando dinheiro fora.</strong>
+      </h1>
+
+      <p class="hero-p fa">
+        A Oikos transforma o inventário de purgadores da sua planta em gestão real. Custo de perda em reais, histórico de inspeções e visibilidade total do sistema de vapor.
+      </p>
+
+      <div class="fa" style="margin-bottom: 32px; display: flex; flex-direction: column; align-items: flex-start;">
+        <a href="#s-cta" class="btn-azul">
+          Quero meu diagnóstico gratuito
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <p style="font-family: var(--ff-b); font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 16px; max-width: 480px; line-height: 1.5; font-weight: 400;">
+          A primeira inspeção é por nossa conta, assim você descobre quantos purgadores estão com falha e quanto isso representa por mês em reais. <strong style="color: rgba(255,255,255,0.8); font-weight: 600;">Sem compromisso. Sem enrolação.</strong>
+        </p>
+      </div>
+
+      <div class="hero-stats fa">
+        <div class="hstat">
+          <div class="hstat-n">15–30%</div>
+          <div class="hstat-l">dos purgadores<br>com alguma falha</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">24h/dia</div>
+          <div class="hstat-l">de perda sem<br>alarme ou registro</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">R$ 0</div>
+          <div class="hstat-l">de retorno sem<br>identificação da falha</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="tickerInner">
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Até <strong>30%</strong> dos purgadores instalados estão falhando agora</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Perda de vapor opera <strong>24h por dia</strong> sem nenhum alarme</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span><strong>R$ 109.990/mês</strong> em um único purgador — TG-002, Cavalete 02</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Diagnóstico gratuito: <strong>a primeira inspeção é por nossa conta</strong></span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Até <strong>5%</strong> do consumo de energia desperdiçado em falhas</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Até <strong>30%</strong> dos purgadores instalados estão falhando agora</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Perda de vapor opera <strong>24h por dia</strong> sem nenhum alarme</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span><strong>R$ 109.990/mês</strong> em um único purgador — TG-002, Cavalete 02</span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Diagnóstico gratuito: <strong>a primeira inspeção é por nossa conta</strong></span></div>
+    <div class="ticker-item"><div class="ticker-dot"></div><span>Até <strong>5%</strong> do consumo de energia desperdiçado em falhas</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DASHBOARD (A PLATAFORMA)
+════════════════════════════════════════ -->
+<section class="s-prod" id="s-prod">
+  <div class="wrap">
+    <div class="sec-head center fa">
+      <span class="lbl">A PLATAFORMA</span>
+      <h2>O controle do seu vapor,<br>na palma da mão.</h2>
+      <p class="prod-sub">A dashboard Oikos centraliza tudo que seu time de manutenção precisa saber sobre os purgadores da planta, acessível de qualquer dispositivo.</p>
+    </div>
+
+    <div class="platform-container">
+      
+      <!-- PHONES -->
+      <div class="phone-showcase fa">
+        <div class="phone-mockup phone-1">
+          <img src="./assets/PRINT DASHBOARD/3b0a387d-8e64-472f-93db-f668df0a4bdd.jpg" alt="Relatório">
+        </div>
+        <div class="phone-mockup phone-2">
+          <img src="./assets/PRINT DASHBOARD/fbd2f001-4fdf-45e3-8d07-ef5edf6a9728.jpg" alt="Dashboard Principal">
+        </div>
+        <div class="phone-mockup phone-3">
+          <img src="./assets/PRINT DASHBOARD/b68e71bf-3f28-4bd9-88b2-771b5417d5fd.jpg" alt="Detalhes">
+        </div>
+      </div>
+
+      <!-- ABSOLUTE FLOATING CARDS -->
+      <div class="fc-hover fc-1 fa">
+        <svg class="fc-ico" viewBox="0 0 36 36" fill="none"><rect x="2" y="2" width="32" height="32" rx="2" stroke="var(--accent)" stroke-width="1.4"/><line x1="2" y1="11" x2="34" y2="11" stroke="var(--accent)" stroke-width="1"/><line x1="11" y1="2" x2="11" y2="34" stroke="var(--accent)" stroke-width="1"/><rect x="14" y="15" width="14" height="3" rx="1" fill="var(--accent)" opacity=".36"/><rect x="14" y="21" width="10" height="3" rx="1" fill="var(--accent)" opacity=".36"/><rect x="14" y="27" width="12" height="3" rx="1" fill="var(--accent)" opacity=".36"/></svg>
+        <div class="fc-t">Inventário completo</div>
+        <p class="fc-d">Todos os purgadores cadastrados com tag, localização, modelo, pressão e status.</p>
+      </div>
+
+      <div class="fc-hover fc-2 fa">
+        <svg class="fc-ico" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="14" stroke="var(--accent)" stroke-width="1.4"/><path d="M18 9 L18 18 L25 22" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round"/><circle cx="18" cy="18" r="2" fill="var(--accent)" opacity=".7"/></svg>
+        <div class="fc-t">Custo de perda em R$</div>
+        <p class="fc-d">Cada purgador com falha exibe o custo por hora, mês e ano. Direto à diretoria.</p>
+      </div>
+
+      <div class="fc-hover fc-3 fa">
+        <svg class="fc-ico" viewBox="0 0 36 36" fill="none"><rect x="3" y="3" width="30" height="30" rx="2" stroke="var(--accent)" stroke-width="1.4"/><polyline points="7,27 13,17 19,21 25,11 31,15" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="27" r="1.4" fill="var(--accent)"/><circle cx="13" cy="17" r="1.4" fill="var(--accent)"/><circle cx="19" cy="21" r="1.4" fill="var(--accent)"/><circle cx="25" cy="11" r="1.4" fill="var(--accent)"/></svg>
+        <div class="fc-t">Histórico Real</div>
+        <p class="fc-d">Compare e comprove o retorno do investimento a cada intervenção.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     O PROBLEMA
+════════════════════════════════════════ -->
+<section class="s-prob" id="s-prob">
+  <div class="prob-ghost">%</div>
+  <div class="wrap">
+    
+    <div class="prob-text-content">
+      <span class="lbl">O PROBLEMA</span>
+      <h2 class="fa">O problema que ninguém mede,<br>mas todo mundo paga.</h2>
+      <p class="prob-p fa">Purgadores com falha são silenciosos. Não disparam alarme, não aparecem no SCADA, não constam em nenhum relatório. Mas estão lá, vazando vapor, 24 horas por dia, 365 dias por ano.</p>
+      <p class="prob-p fa">Estudos do setor apontam que entre 15% e 30% dos purgadores instalados em indústrias operam com algum tipo de falha. Em uma planta de médio porte, isso representa centenas de milhares de reais desperdiçados por ano.</p>
+      <p class="prob-kicker fa">O custo existe. Só falta visibilidade.</p>
+    </div>
+
+    <!-- BOILER IMAGE FIXED GRID RATIO -->
+    <div class="prob-img-wrap fa">
+      <img src="./assets/boiler_steam_problem.png" alt="Vazamento em caldeira industrial">
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     COMO FUNCIONA
+════════════════════════════════════════ -->
+<section class="s-como" id="s-como">
+  <div class="wrap">
+    <div class="sec-head center fa">
+      <span class="lbl">COMO FUNCIONA</span>
+      <h2>Da inspeção ao controle permanente.</h2>
+    </div>
+    <div class="steps">
+      <div class="step fst">
+        <span class="step-n">01</span>
+        <div class="step-t">Inspeção no campo</div>
+        <p class="step-d">Avaliamos cada purgador com ultrassom. Cada ponto vira um registro digital imediato no app, com cálculo rigoroso de perda de massa (kg/h).</p>
+      </div>
+      <div class="step fst">
+        <span class="step-n">02</span>
+        <div class="step-t">Relatório instantâneo</div>
+        <p class="step-d">Ao fim da inspeção, você já recebe no mesmo segundo o relatório digital: mapa de purgadores, custo monetário das perdas e prioridade de manutenções.</p>
+      </div>
+      <div class="step fst">
+        <span class="step-n">03</span>
+        <div class="step-t">Plataforma contínua</div>
+        <p class="step-d">Os dados alimentam sua Dashboard Oikos, seu inventário imutável e ativo com todo o histórico de reparologia, monitorando do zero à excelência térmica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ANTES x DEPOIS
+════════════════════════════════════════ -->
+<section class="s-diff">
+  <div class="wrap">
+    <div class="sec-head center fa">
+      <span class="lbl">POR QUE OIKOS</span>
+      <h2>Inspeção inteligente. Gestão permanente.</h2>
+    </div>
+
+    <div class="ba-block">
+      <div class="ba-a fab"><span class="ba-tag tga"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>ANTES</span><div class="ba-ttl">Papelada. Documentos PDF</div><p class="ba-txt">Inspeção feita. Um PDF sem contexto arquivado em e-mail. Ninguém cruza os dados com as inspeções antigas. Meses depois a conta de gás continua cara.</p></div>
+      <div class="ba-d fad"><span class="ba-tag tgd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>COM OIKOS</span><p class="ba-txt">O inspetor desliga a máquina e seu relatório de campo inteiro já está flutuando em sua dashboard online viva, alimentando um histórico que toda a gestão consegue rastrear e cruzar de ano a ano.</p></div>
+    </div>
+
+    <div class="ba-block">
+      <div class="ba-a fab"><span class="ba-tag tga"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>ANTES</span><div class="ba-ttl">Focado apenas na Física</div><p class="ba-txt">Diagnóstico entregue: "perda de vapor, defeito mecânico". Mas nenhuma noção exata para os gestores diretores do verdadeiro impacto no capital.</p></div>
+      <div class="ba-d fad"><span class="ba-tag tgd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>COM OIKOS</span><p class="ba-txt">Os parâmetros termodinâmicos são instantaneamente traduzidos em <strong>Custo Monetário Real</strong> (R$/ano perdido), a linguagem que justifica budgets imediatos para ações da manutenção.</p></div>
+    </div>
+    
+    <div class="ba-block">
+      <div class="ba-a fab"><span class="ba-tag tga"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>ANTES</span><div class="ba-ttl">Isolado e sem Histórico</div><p class="ba-txt">A cada nova quebra, uma equipe diferente analisa tudo do zero. Ninguém sabe há quanto tempo a falha começou ou qual modelo está durando menos na sua linha.</p></div>
+      <div class="ba-d fad"><span class="ba-tag tgd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>COM OIKOS</span><p class="ba-txt">O seu Dashboard constrói uma linha do tempo térmica contínua de cada purgador. Você rastreia as manutenções, entende a vida útil por tag e elimina fornecedores ineficientes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CREDIBILIDADE
+════════════════════════════════════════ -->
+<section class="s-cred">
+  <div class="wrap">
+    <div class="sec-head center fa">
+      <span class="lbl">FUNDAMENTOS</span>
+      <h2>Construído para a realidade da indústria brasileira.</h2>
+    </div>
+    <p class="cred-p fa">A Oikos nasceu da necessidade de profissionais experientes na utilidade de campo. Validado nas fábricas reais antes mesmo de ser consolidado como tecnologia, o software roda com robustez e veracidade onde a pressão é palpável.</p>
+    <div class="news-mockup fa">
+      <div class="news-head">
+        <div class="news-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+        <div class="news-url">timesind.co/energy-economics</div>
+      </div>
+      <div class="news-body">
+         <div class="news-tag">EM DESTAQUE</div>
+         <h3 class="news-title">"Segundo o Departamento de Energia dos EUA, falhas em purgadores somam de 3% a 5% do consumo total de energia de uma planta."</h3>
+         <p class="news-text">Para faturas na casa das centenas de milhares, dezenas de montantes imensos são jogados aos ares mensalmente sem qualquer constatação prévia por parte da diretoria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CTA
+════════════════════════════════════════ -->
+<section class="s-cta" id="s-cta">
+  <div class="wrap">
+    <div class="cta-g">
+      <div class="fa">
+        <span class="lbl">COMECE AGORA</span>
+        <h2 class="cta-hl">Descubra quanto sua planta está perdendo.</h2>
+        <p class="cta-sub">Agende a inspeção diagnóstica gratuita. Em uma visita, você tem o inventário completo dos seus purgadores e o custo real de cada falha em reais.</p>
+        <p style="font-family:var(--ff-b); font-weight:600; font-size:16px; color:var(--text-muted)">Sem compromisso. A inspeção é por nossa conta.</p>
+      </div>
+      <div class="fa">
+        <div class="fbox">
+          <form id="cForm">
+            <div class="fgrp"><label class="flbl">Nome completo *</label><input type="text" class="finp" placeholder="Seu nome" required></div>
+            <div class="fgrp"><label class="flbl">WhatsApp *</label><input type="text" class="finp" id="wpp" placeholder="(00) 00000-0000" required></div>
+            <div class="fgrp"><label class="flbl">Empresa *</label><input type="text" class="finp" placeholder="Nome da indústria" required></div>
+            <button type="submit" class="btn-sub">Solicitar diagnóstico gratuito</button>
+            <div class="f-note">Seus dados estão seguros conosco.</div>
+          </form>
+          <div class="f-ok" id="fOk">
+            <div class="f-ok-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Solicitação enviada!</h3>
+            <p class="f-note">Um especialista da Oikos entrará em contato em breve pelo WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-g">
+      <div>
+        <img src="./assets/logo-oikos.svg" alt="Oikos Systems" style="height: 32px; margin-bottom: 20px;">
+        <p style="font-family:var(--ff-b); font-size: 13px; color:var(--text-muted); max-width:240px">Gestão inteligente e tecnologia avançada para sistemas de vapor indústriais.</p>
+      </div>
+      <div class="flinks" style="display:flex; flex-direction:column; gap:12px">
+        <a href="#s-prod">Dashboard Plataforma</a>
+        <a href="#s-prob">Como a Falha Drena Dinheiro</a>
+        <a href="#s-como">Como Funciona a Inspeção</a>
+      </div>
+      <div class="fcopy">
+        <p>© 2026 Oikos Systems.</p>
+        <p>Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* MOUSE FX */
+const cur = document.getElementById('cur'), prg = document.getElementById('prog');
+document.addEventListener('mousemove', e => {
+  cur.style.transform = `translate(${e.clientX-6}px,${e.clientY-6}px)`;
+});
+document.addEventListener('mousedown',()=>cur.classList.add('c-act'));
+document.addEventListener('mouseup',()=>cur.classList.remove('c-act'));
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement, b = document.body;
+  const p = (h.scrollTop||b.scrollTop) / ((h.scrollHeight||b.scrollHeight) - h.clientHeight) * 100;
+  prg.style.width = p + '%';
+});
+
+/* NAV BAR SCROLL */
+const n = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  n.classList.toggle('on', window.scrollY > 40);
+});
+
+/* MOBILE MENU */
+const m = document.getElementById('mob'), hg = document.getElementById('hbg');
+hg.addEventListener('click', () => m.classList.toggle('open'));
+function cm() { m.classList.remove('open'); }
+
+/* GSAP ANIMATIONS */
+window.addEventListener('load', () => {
+
+  /* 
+     VÍDEO HERO: SCROLL-DRIVEN SCRUBBING
+     This ties the purgador.mp4 playback exclusively to the user's scroll speed, 
+     pinning the entire Hero section for 3000 pixels until the video concludes.
+  */
+  const purgadorVideo = document.getElementById("purgadorVideo");
+  if(purgadorVideo) {
+    purgadorVideo.pause(); // Always keep paused initially to obey scroll physics
+    
+    const initVideoScrub = () => {
+      ScrollTrigger.create({
+        trigger: "#hero",
+        start: "top top",
+        end: "+=2500",   // Lock Hero on screen por uma distância longa e confortável
+        pin: true,       // Freeze the section gracefully!
+        scrub: 2.5,      // Borracha elástica máxima! Oculta os "engasgos de hardware" de arquivos não gerados por Keyframes 1x1.
+        onUpdate: (self) => {
+           if(purgadorVideo.duration) {
+              /* Acelera o final do vídeo para 60% do tempo de scroll!
+                 Isso garante que o vídeo termine muito antes do Hero soltar a página, 
+                 deixando-o "travado na tela e aberto" pra pessoa admirar! */
+              let vidProgress = Math.min(1, self.progress / 0.6);
+              try { purgadorVideo.currentTime = vidProgress * purgadorVideo.duration; } catch(e){}
+           }
+        }
+      });
+    };
+
+    // If metadata is already loaded (common inside window.load), run immediately. Otherwise, listen.
+    if (purgadorVideo.readyState >= 1) {
+        initVideoScrub();
+    } else {
+        purgadorVideo.addEventListener("loadedmetadata", initVideoScrub);
+    }
+  }
+
+  /* General Scroll Fade Up */
+  gsap.utils.toArray('.fa').forEach(el => {
+    gsap.from(el, { scrollTrigger:{trigger:el,start:'top 88%'},
+      y:40, opacity:0, duration:.9, ease:'power3.out' });
+  });
+
+  /* Staggered features */
+  ['.steps'].forEach(sel => {
+    document.querySelectorAll(sel).forEach(row => {
+      const items = row.querySelectorAll('.fst');
+      if (items.length)
+        gsap.from(items, { scrollTrigger:{trigger:row,start:'top 88%'},
+          y:36, opacity:0, duration:.8, ease:'power3.out', stagger:.18 });
+    });
+  });
+
+  /* Diferenciais Before/After */
+  document.querySelectorAll('.fab').forEach(el =>
+    gsap.from(el, { scrollTrigger:{trigger:el,start:'top 89%'}, x:-36, opacity:0, duration:.85, ease:'power3.out' }));
+  document.querySelectorAll('.fad').forEach(el =>
+    gsap.from(el, { scrollTrigger:{trigger:el,start:'top 89%'}, x:36, opacity:0, duration:.85, ease:'power3.out' }));
+});
+
+/* FORM FX */
+document.getElementById('cForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, ok = document.getElementById('fOk');
+  gsap.to(f, { opacity:0, scale:.97, duration:.28, ease:'power2.in',
+    onComplete(){ f.style.display='none'; ok.style.display='block';
+      gsap.from(ok, {opacity:0,y:16,duration:.5,ease:'power3.out'}); }
+  });
+});
+
+/* PHONE MASK */
+document.getElementById('wpp').addEventListener('input', e => {
+  let v = e.target.value.replace(/\D/g,'').slice(0,11);
+  if (v.length > 7)      v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+  else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+  else if (v.length)     v = `(${v}`;
+  e.target.value = v;
+});
+</script>
+</body>
+</html>
