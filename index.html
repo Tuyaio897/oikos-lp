@@ -160,6 +160,7 @@ img{display:block;max-width:100%; object-fit:cover;}
   line-height:1.5;color:var(--text-muted);
   max-width:480px;margin-bottom:40px;
 }
+.hero-cta-box { margin-bottom: 32px; display: flex; flex-direction: column; align-items: flex-start; }
 .btn-azul {
   display:inline-flex;align-items:center;justify-content:center;gap:12px;
   background: linear-gradient(135deg, var(--azul-cald), #1136a6); color:#fff;
@@ -623,6 +624,12 @@ footer{
   .wrap{padding:0 24px}
   .nav-links,.nav-btn{display:none}
   .hbg{display:flex}
+  .nav-logo img { height: 36px; }
+  .nav.on .nav-logo img { height: 28px; }
+  .mob a { font-size: 24px; }
+  
+  .hero-cta-box { align-items: center; }
+  .hero-cta-box p { text-align: center; }
   
   .hero{ height: auto; min-height: 100vh; padding-bottom: 60px; }
   .hero .wrap{grid-template-columns:1fr;gap:40px;padding-top:120px;padding-bottom: 40px;text-align:center; display:flex; flex-direction:column;}
@@ -731,7 +738,7 @@ footer{
         A Oikos transforma o inventário de purgadores da sua planta em gestão real. Custo de perda em reais, histórico de inspeções e visibilidade total do sistema de vapor.
       </p>
 
-      <div class="fa" style="margin-bottom: 32px; display: flex; flex-direction: column; align-items: flex-start;">
+      <div class="fa hero-cta-box">
         <a href="#s-cta" class="btn-azul">
           Quero meu diagnóstico gratuito
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -1021,34 +1028,42 @@ window.addEventListener('load', () => {
   */
   const purgadorVideo = document.getElementById("purgadorVideo");
   if(purgadorVideo) {
-    purgadorVideo.pause(); // Always keep paused initially to obey scroll physics
-    
-    // Força o pré-carregamento para melhorar a performance de "seek"
     purgadorVideo.preload = "auto";
     
     const initVideoScrub = () => {
+      let mm = gsap.matchMedia();
       let reqId;
-      ScrollTrigger.create({
-        trigger: "#hero",
-        start: "top top",
-        end: "+=2500",   // Lock Hero on screen por uma distância longa e confortável
-        pin: true,       // Freeze the section gracefully!
-        scrub: 1,        // Scrub menor (de 2.5 pra 1). Menos tempo tentando re-renderizar = menos travamentos!
-        onUpdate: (self) => {
-           if(purgadorVideo.duration) {
-              /* Acelera o final do vídeo para 60% do tempo de scroll! */
-              let vidProgress = Math.min(1, self.progress / 0.6);
-              let targetTime = vidProgress * purgadorVideo.duration;
 
-              // Só atualiza o player se a diferença de tempo for perceptível pro frame, evitando micro-travamentos pesados
-              if (Math.abs(purgadorVideo.currentTime - targetTime) > 0.04) {
-                 if(reqId) cancelAnimationFrame(reqId);
-                 reqId = requestAnimationFrame(() => {
-                    try { purgadorVideo.currentTime = targetTime; } catch(e){}
-                 });
-              }
-           }
-        }
+      mm.add("(min-width: 1025px)", () => {
+        // DESKTOP: Roda o ScrollTrigger e prende na tela
+        purgadorVideo.pause();
+        ScrollTrigger.create({
+          trigger: "#hero",
+          start: "top top",
+          end: "+=2500",   
+          pin: true,       
+          scrub: 1,        
+          onUpdate: (self) => {
+             if(purgadorVideo.duration) {
+                let vidProgress = Math.min(1, self.progress / 0.6);
+                let targetTime = vidProgress * purgadorVideo.duration;
+
+                if (Math.abs(purgadorVideo.currentTime - targetTime) > 0.04) {
+                   if(reqId) cancelAnimationFrame(reqId);
+                   reqId = requestAnimationFrame(() => {
+                      try { purgadorVideo.currentTime = targetTime; } catch(e){}
+                   });
+                }
+             }
+          }
+        });
+      });
+
+      mm.add("(max-width: 1024px)", () => {
+         // MOBILE: Desliga completamente o ScrollTrigger. 
+         // Solta o painel (sem pin) e só deixa o vídeo rolando solto no fundo! Zero travamentos.
+         purgadorVideo.loop = true;
+         purgadorVideo.play().catch(()=>{});
       });
     };
 
