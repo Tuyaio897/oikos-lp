@@ -1,0 +1,37 @@
+/* ─────────────────────────────────────────────────────────────
+   OIKOS — TOKENS (§6.2)
+   Derivados do manual de marca, com os hex corrigidos para
+   passarem em contraste AA quando usados como texto.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Marca */
+  --oikos-oliva:       #323725;
+  --oikos-oliva-900:   #1E2117;
+  --oikos-oliva-700:   #454B33;
+  --oikos-oliva-100:   #EDEFE8;
+  --oikos-laranja:     #CE893B;
+  --oikos-laranja-700: #9C5F1D; /* USE ESTE para texto laranja sobre fundo claro */
+  --oikos-laranja-100: #FAF0E2;
+  --oikos-grafite:     #282826;
+  --oikos-grafite-600: #5B5B57;
+  --oikos-aco:         #C4C4C4;
+  --oikos-aco-100:     #F4F5F3;
+  --oikos-azul:        #0A2472;
+
+  /* Semântica de status — MESMAS do app e do relatório RPV. Não divergir. */
+  --status-ok:         #8BAC33;
+  --status-vazando:    #C75A0D;
+  --status-bloqueado:  #3730A3;
+  --status-fora:       #6B7280;
+  --status-nao-aval:   #5B21B6;
+
+  /* Base */
+  --bg:                #FFFFFF;
+  --bg-alt:            var(--oikos-aco-100);
+  --border:            #DDDFD9;
+  --focus:             var(--oikos-azul);
+
+  /* Raio: máximo 4px em card, 2px em botão/tag (§6.4) */
+  --raio-card: 4px;
+  --raio-btn: 2px;
+}
