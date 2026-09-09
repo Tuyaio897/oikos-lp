@@ -10,8 +10,13 @@ export const FAQ_HOME: Pergunta[] = [
       'Verificação por tato e ruído identifica o purgador obviamente quebrado, não o que está passando vapor a 12 kg/h. Em uma auditoria manual documentada pela Emerson, considerada 95% a 97% confiável pela própria equipe, 16 de 24 purgadores falhos não foram detectados. A diferença não é diligência: é instrumento e método padronizado.',
   },
   {
-    pergunta: 'Quanto custa a inspeção?',
+    pergunta: 'Como funciona a contratação?',
     resposta: OFERTA.explicacao,
+  },
+  {
+    pergunta: 'Minha equipe consegue mesmo fazer a inspeção sozinha?',
+    resposta:
+      'Consegue. O UP100 foi feito para uso de campo por equipe de manutenção, e a leitura é objetiva — não depende de ouvido treinado. O que exige método é a classificação e o cálculo da perda, e essa parte continua sendo nossa, todo mês.',
   },
   {
     pergunta: 'Quanto tempo leva uma inspeção?',

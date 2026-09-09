@@ -80,12 +80,12 @@ export default function Contato() {
             </ul>
           </div>
 
-          <div className="card pilha-2">
+          <div className="card card-filete pilha-2">
             <h2 className="t-h3">{OFERTA.nome}</h2>
-            <p className="t-body t-mudo">{OFERTA.explicacao}</p>
             <p className="t-body" style={{ fontWeight: 600 }}>
-              {OFERTA.selo}
+              {OFERTA.chamada}
             </p>
+            <p className="t-body t-mudo">{OFERTA.explicacao}</p>
           </div>
         </div>
 

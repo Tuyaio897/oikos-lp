@@ -8,14 +8,21 @@ import { ContadorPerda } from '@/components/data/ContadorPerda';
 import { FAQ, FAQJsonLd } from '@/components/blocks/FAQ';
 import { FormDiagnostico } from '@/components/forms/FormDiagnostico';
 import { PreviaHistorico } from '@/components/blocks/PreviaPainel';
+import { ListaReferencias } from '@/components/blocks/ListaReferencias';
+import {
+  IlustracaoPurgador,
+  IlustracaoUltrassom,
+  IlustracaoCiclo,
+} from '@/components/blocks/Ilustracoes';
 import { FAQ_HOME } from '@/config/faq';
-import { OFERTA } from '@/config/oferta';
+import { OFERTA, EQUIPAMENTO } from '@/config/oferta';
+import { REFERENCIAS } from '@/config/referencias';
 import { SITE } from '@/config/site';
 
 export const metadata: Metadata = {
   title: 'Oikos — Inspeção de purgadores de vapor e gestão de perdas',
   description:
-    'Inspeção purgador a purgador com ultrassom, laudo com a perda em R$/ano e gestão contínua no sistema Oikos. Independentes de fabricante. SP, PR e SC.',
+    'Inspeção purgador a purgador com ultrassom, laudo com a perda em R$/ano e contrato mensal para a sua equipe manter o parque sob controle. SP, PR e SC.',
   alternates: { canonical: '/' },
 };
 
@@ -43,16 +50,15 @@ const PASSOS = [
   },
   {
     numero: '03',
-    titulo: 'Gestão contínua no sistema Oikos',
+    titulo: 'Contrato mensal de cuidado',
     texto:
-      'Os dados alimentam o sistema. Sua equipe registra as rondas pelo aplicativo, o histórico de cada purgador fica rastreável por tag, as intervenções são priorizadas por perda estimada e o relatório de economia acumulada é gerado automaticamente.',
+      'A partir daí, sua própria equipe faz as rondas periódicas com o equipamento. A Oikos cuida do método, da análise e do histórico — e a falha passa a ser encontrada em semanas, não em anos.',
   },
 ];
 
 const COMPARATIVO = [
   {
-    antes:
-      'Inspeção termina em PDF arquivado em e-mail. Ninguém cruza com a inspeção anterior.',
+    antes: 'Inspeção termina em PDF arquivado em e-mail. Ninguém cruza com a inspeção anterior.',
     depois:
       'Registro digital em campo, disponível no mesmo dia, comparável com todo o histórico da planta.',
   },
@@ -63,10 +69,12 @@ const COMPARATIVO = [
       'Perda convertida em R$/hora, R$/mês e R$/ano no custo de vapor da planta. A verba se justifica sozinha.',
   },
   {
-    antes:
-      'A cada falha, a análise recomeça do zero. Ninguém sabe qual modelo dura menos na linha.',
-    depois:
-      'Linha do tempo por tag: intervenções, vida útil por fabricante e reincidência identificada.',
+    antes: 'A cada falha, a análise recomeça do zero. Ninguém sabe qual modelo dura menos na linha.',
+    depois: 'Linha do tempo por tag: intervenções, vida útil por fabricante e reincidência identificada.',
+  },
+  {
+    antes: 'A próxima medição depende de contratar e agendar uma nova auditoria.',
+    depois: 'Sua equipe mede quando precisa, na frequência que a planta pede.',
   },
 ];
 
@@ -78,27 +86,30 @@ const CONSTA_NO_LAUDO = [
   'Perda estimada em kg/h',
   'Custo por hora, por mês e por ano',
   'Foto do ponto inspecionado',
-  'Acessórios e observações de campo',
   'Resumo executivo com taxa de falha e perda total',
 ];
 
 export default function Home() {
   return (
     <>
-      {/* ══ HERÓI (§7.3) ══ */}
-      <section className="secao" style={{ paddingBlock: 48 }}>
-        <div className="container grade-2">
+      {/* ══ HERÓI ══ */}
+      <section className="heroi">
+        <div className="container grade-2 topo">
           <div className="pilha-6 entrada">
+            <span className="marcador">Engenharia de eficiência térmica</span>
             <h1 className="t-display">
-              Sua planta perde vapor agora. A Oikos mede quanto isso custa.
+              Sua planta perde vapor agora. A Oikos mede{' '}
+              <span className="realce">quanto isso custa</span>.
             </h1>
             <p className="t-body-lg t-mudo prosa">
-              Inspeção técnica purgador a purgador, laudo com a perda convertida em reais
-              e gestão contínua do parque no sistema Oikos. Atendimento em{' '}
-              {SITE.regiaoAtendimentoTexto}.
+              Inspeção técnica purgador a purgador com ultrassom, laudo com a perda
+              convertida em reais e um contrato mensal que deixa a sua própria equipe
+              mantendo o parque sob controle. Atendimento em {SITE.regiaoAtendimentoTexto}.
             </p>
             <div className="linha-botoes">
-              <Botao href="/contato">{OFERTA.ctaPrimario}</Botao>
+              <Botao href="/contato" seta>
+                {OFERTA.ctaPrimario}
+              </Botao>
               <Botao href="/laudo-exemplo" variante="secundario">
                 {OFERTA.ctaSecundario}
               </Botao>
@@ -109,15 +120,16 @@ export default function Home() {
           </div>
 
           <div style={{ position: 'relative' }} className="entrada entrada-2">
-            <Image
-              src="/imagens/campo/caldeira-vapor.png"
-              alt="Linha de vapor industrial com perda visível em ponto de purga"
-              width={900}
-              height={600}
-              priority
-              sizes="(min-width: 1024px) 46vw, 100vw"
-              style={{ width: '100%', height: 'auto', borderRadius: 'var(--raio-card)' }}
-            />
+            <div className="moldura moldura-azul">
+              <Image
+                src="/imagens/campo/caldeira-vapor.png"
+                alt="Linha de vapor industrial com perda visível em ponto de purga"
+                width={900}
+                height={600}
+                priority
+                sizes="(min-width: 1024px) 46vw, 100vw"
+              />
+            </div>
             <div className="cartao-contador">
               <ContadorPerda />
             </div>
@@ -125,20 +137,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══ SETORES ATENDIDOS (§7.4) ══ */}
-      <div className="secao-alt" style={{ paddingBlock: 20, borderBlock: '1px solid var(--border)' }}>
+      {/* ══ SETORES ATENDIDOS ══ */}
+      <div style={{ borderBottom: '1px solid var(--border)', paddingBlock: 22 }}>
         <div className="container">
           <p className="t-small t-mudo" style={{ textAlign: 'center' }}>
-            {SETORES.join(' · ')}
+            {SETORES.join('  ·  ')}
           </p>
         </div>
       </div>
 
-      {/* ══ O PROBLEMA (§7.5) ══ */}
+      {/* ══ O PROBLEMA ══ */}
       <Secao fundo="alt">
-        <div className="grade-2">
+        <div className="grade-2 topo">
           <div className="pilha-6">
-            <h2 className="t-h2">O custo que não aparece em nenhum relatório</h2>
+            <TituloSecao
+              marcador="O problema"
+              titulo="O custo que não aparece em nenhum relatório"
+            />
             <div className="prosa t-body t-mudo">
               <p>
                 Purgador com falha não dispara alarme, não aparece no SCADA e não entra em
@@ -147,7 +162,7 @@ export default function Home() {
               </p>
               <p>
                 A literatura técnica é consistente:{' '}
-                <strong style={{ color: 'var(--oikos-grafite)' }}>
+                <strong style={{ color: 'var(--grafite)' }}>
                   entre 15% e 30% dos purgadores instalados operam com algum tipo de falha
                 </strong>{' '}
                 quando não há programa regular de inspeção. Mesmo plantas com manutenção
@@ -160,42 +175,53 @@ export default function Home() {
             </div>
           </div>
 
-          <Image
-            src="/imagens/campo/purgador-partes/body.png"
-            alt="Corpo de purgador termodinâmico aberto, com o disco e a sede expostos"
-            width={800}
-            height={600}
-            sizes="(min-width: 1024px) 46vw, 100vw"
-            style={{ width: '100%', height: 'auto', borderRadius: 'var(--raio-card)', background: 'var(--bg)' }}
-          />
+          <div className="card" style={{ padding: 28 }}>
+            <IlustracaoPurgador />
+            <p className="t-small t-mudo" style={{ marginTop: 16 }}>
+              Purgador termodinâmico em corte. Com a sede desgastada, o disco deixa de
+              vedar e o vapor vivo passa direto para o retorno de condensado.
+            </p>
+          </div>
         </div>
 
-        <div className="grade-3" style={{ marginTop: 48 }}>
-          <Dado valor="15–30%" fonte="doeFemp">
-            dos purgadores falham sem programa regular de inspeção.
-          </Dado>
-          <Dado valor="5–10%" fonte="doeFemp">
-            falham a cada ano mesmo com manutenção ativa.
-          </Dado>
-          <Dado valor="2 de 3" fonte="emerson">
-            das falhas passaram despercebidas em auditoria manual documentada.
-          </Dado>
+        <div className="grade-3" style={{ marginTop: 56 }}>
+          <div className="card card-filete">
+            <Dado valor="15–30%" fonte="doeFemp">
+              dos purgadores falham sem programa regular de inspeção.
+            </Dado>
+          </div>
+          <div className="card card-filete">
+            <Dado valor="5–10%" fonte="doeFemp">
+              falham a cada ano mesmo com manutenção ativa.
+            </Dado>
+          </div>
+          <div className="card card-filete">
+            <Dado valor="2 de 3" fonte="emerson">
+              das falhas passaram despercebidas em auditoria manual documentada.
+            </Dado>
+          </div>
         </div>
       </Secao>
 
-      {/* ══ COMO FUNCIONA (§7.6) ══ */}
+      {/* ══ COMO FUNCIONA ══ */}
       <Secao>
-        <TituloSecao titulo="Da inspeção ao controle permanente" />
-        <div className="grade-3" style={{ marginTop: 48 }}>
+        <TituloSecao
+          marcador="Como funciona"
+          titulo="Da inspeção ao controle permanente"
+          centralizado
+        />
+        <div className="grade-3" style={{ marginTop: 56 }}>
           {PASSOS.map((passo) => (
-            <div
-              key={passo.numero}
-              className="pilha-4"
-              style={{ borderTop: '1px solid var(--border)', paddingTop: 20 }}
-            >
+            <div key={passo.numero} className="card card-interativo pilha-4">
               <span
                 className="t-data"
-                style={{ color: 'var(--oikos-aco)', fontSize: 32 }}
+                style={{
+                  fontSize: 40,
+                  background: 'linear-gradient(120deg, var(--azul-500), var(--verde-500))',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                }}
                 aria-hidden="true"
               >
                 {passo.numero}
@@ -205,30 +231,115 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <div style={{ marginTop: 56, maxWidth: 640, marginInline: 'auto' }}>
+          <IlustracaoCiclo />
+        </div>
       </Secao>
 
-      {/* ══ O LAUDO (§7.7) ══ */}
-      <Secao fundo="alt">
+      {/* ══ O EQUIPAMENTO ══ */}
+      <Secao fundo="escura">
         <div className="grade-2">
           <div className="pilha-6">
-            <h2 className="t-h2">O que você recebe ao final da inspeção</h2>
-            <p className="t-body-lg t-mudo prosa">
-              Um documento de 10 a 40 páginas com cada purgador da sua planta identificado,
-              classificado e precificado. Não é uma lista técnica: é um demonstrativo
-              financeiro que a gerência consegue ler e aprovar.
+            <TituloSecao
+              marcador="O equipamento"
+              titulo={
+                <>
+                  Medimos com {EQUIPAMENTO.modelo} — e{' '}
+                  <span className="realce">ensinamos sua equipe a medir</span>
+                </>
+              }
+              lead={EQUIPAMENTO.descricao}
+            />
+            <ul style={{ listStyle: 'none' }} className="pilha-4">
+              {EQUIPAMENTO.pontos.map((ponto) => (
+                <li key={ponto} style={{ display: 'flex', gap: 12 }} className="t-body">
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      flexShrink: 0,
+                      width: 22,
+                      height: 22,
+                      borderRadius: 999,
+                      background: 'var(--verde-500)',
+                      color: '#0B1220',
+                      display: 'grid',
+                      placeItems: 'center',
+                      fontSize: 13,
+                      fontWeight: 700,
+                      marginTop: 3,
+                    }}
+                  >
+                    ✓
+                  </span>
+                  <span className="t-mudo">{ponto}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="card">
+            <IlustracaoUltrassom />
+            <p className="t-small t-mudo" style={{ marginTop: 16 }}>
+              A energia acústica do vazamento se concentra acima de 20 kHz. É por isso que
+              tato e ouvido encontram o purgador rompido, mas não o que perde 12 kg/h em
+              silêncio.
             </p>
+          </div>
+        </div>
+      </Secao>
+
+      {/* ══ MODELO COMERCIAL ══ */}
+      <Secao fundo="verde">
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao
+              marcador="Modelo de contrato"
+              titulo={OFERTA.chamada}
+              lead={OFERTA.explicacao}
+            />
+            <div className="linha-botoes">
+              <Botao href="/contato" variante="verde" seta>
+                Falar sobre o contrato
+              </Botao>
+            </div>
+          </div>
+
+          <div className="pilha-4">
+            {OFERTA.pilares.map((pilar) => (
+              <div key={pilar.titulo} className="card card-interativo">
+                <h3 className="t-h3" style={{ marginBottom: 8 }}>
+                  {pilar.titulo}
+                </h3>
+                <p className="t-body t-mudo">{pilar.texto}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Secao>
+
+      {/* ══ O LAUDO ══ */}
+      <Secao>
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao
+              marcador="O entregável"
+              titulo="O que você recebe ao final da inspeção"
+              lead="Um documento de 10 a 40 páginas com cada purgador da sua planta identificado, classificado e precificado. Não é uma lista técnica: é um demonstrativo financeiro que a gerência consegue ler e aprovar."
+            />
             <ul className="pilha-2" style={{ listStyle: 'none' }}>
               {CONSTA_NO_LAUDO.map((item) => (
-                <li key={item} className="t-body" style={{ display: 'flex', gap: 10 }}>
-                  <span aria-hidden="true" style={{ color: 'var(--oikos-laranja-700)' }}>
+                <li key={item} className="t-body" style={{ display: 'flex', gap: 12 }}>
+                  <span aria-hidden="true" style={{ color: 'var(--verde)', fontWeight: 700 }}>
                     —
                   </span>
-                  {item}
+                  <span className="t-mudo">{item}</span>
                 </li>
               ))}
             </ul>
             <div className="linha-botoes">
-              <Botao href="/laudo-exemplo">Ver o laudo completo de exemplo</Botao>
+              <Botao href="/laudo-exemplo" seta>
+                Ver o laudo completo de exemplo
+              </Botao>
             </div>
           </div>
 
@@ -236,7 +347,7 @@ export default function Home() {
             <p className="t-small" style={{ fontWeight: 600 }}>
               Trecho do relatório — status por ponto
             </p>
-            <div className="tabela-wrap">
+            <div className="tabela-wrap" style={{ boxShadow: 'none' }}>
               <table className="tabela">
                 <thead>
                   <tr>
@@ -252,7 +363,7 @@ export default function Home() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>PV-1042</td>
+                    <td style={{ fontWeight: 600 }}>PV-1042</td>
                     <td>
                       <span className="chip-status chip-vazando">Vazando</span>
                     </td>
@@ -260,15 +371,15 @@ export default function Home() {
                     <td className="num">R$ 86.220</td>
                   </tr>
                   <tr>
-                    <td>PV-1043</td>
+                    <td style={{ fontWeight: 600 }}>PV-1043</td>
                     <td>
-                      <span className="chip-status chip-ok">OK</span>
+                      <span className="chip-status chip-ok">Operando</span>
                     </td>
                     <td className="num">—</td>
                     <td className="num">—</td>
                   </tr>
                   <tr>
-                    <td>PV-1051</td>
+                    <td style={{ fontWeight: 600 }}>PV-1051</td>
                     <td>
                       <span className="chip-status chip-bloqueado">Bloqueado</span>
                     </td>
@@ -286,11 +397,14 @@ export default function Home() {
         </div>
       </Secao>
 
-      {/* ══ SISTEMA OIKOS (§7.8) ══ */}
-      <Secao>
-        <div className="grade-2">
+      {/* ══ SISTEMA OIKOS ══ */}
+      <Secao fundo="alt">
+        <div className="grade-2 topo">
           <div className="pilha-6">
-            <h2 className="t-h2">O laudo não pode virar um PDF esquecido no e-mail</h2>
+            <TituloSecao
+              marcador="Sistema Oikos"
+              titulo="O laudo não pode virar um PDF esquecido no e-mail"
+            />
             <div className="prosa t-body t-mudo">
               <p>
                 Corrigir os purgadores uma vez não resolve: de 5% a 10% da população falha
@@ -304,7 +418,7 @@ export default function Home() {
               </p>
             </div>
             <div className="linha-botoes">
-              <Botao href="/sistema" variante="secundario">
+              <Botao href="/sistema" variante="secundario" seta>
                 Conhecer o sistema Oikos
               </Botao>
             </div>
@@ -313,7 +427,7 @@ export default function Home() {
           <PreviaHistorico />
         </div>
 
-        <div className="grade-3" style={{ marginTop: 48 }}>
+        <div className="grade-3" style={{ marginTop: 56 }}>
           {[
             {
               titulo: 'Inventário permanente',
@@ -331,11 +445,7 @@ export default function Home() {
                 'O que foi trocado, quando, por qual fabricante e quanto durou. O conhecimento deixa de morar na cabeça de uma pessoa.',
             },
           ].map((bloco) => (
-            <div
-              key={bloco.titulo}
-              className="pilha-2"
-              style={{ borderTop: '1px solid var(--border)', paddingTop: 20 }}
-            >
+            <div key={bloco.titulo} className="card card-interativo pilha-2">
               <h3 className="t-h3">{bloco.titulo}</h3>
               <p className="t-body t-mudo">{bloco.texto}</p>
             </div>
@@ -343,10 +453,14 @@ export default function Home() {
         </div>
       </Secao>
 
-      {/* ══ COMPARATIVO (§7.9) ══ */}
-      <Secao fundo="alt">
-        <TituloSecao titulo="Inspeção pontual e gestão permanente não são a mesma coisa" />
-        <div className="tabela-wrap" style={{ marginTop: 40, background: 'var(--bg)' }}>
+      {/* ══ COMPARATIVO ══ */}
+      <Secao>
+        <TituloSecao
+          marcador="Antes e depois"
+          titulo="Inspeção pontual e gestão permanente não são a mesma coisa"
+          centralizado
+        />
+        <div className="tabela-wrap" style={{ marginTop: 48 }}>
           <table className="tabela">
             <thead>
               <tr>
@@ -370,54 +484,86 @@ export default function Home() {
         </div>
       </Secao>
 
-      {/* ══ INDEPENDÊNCIA E MÉTODO (§7.10) ══ */}
+      {/* ══ INDEPENDÊNCIA ══ */}
       <Secao fundo="escura">
-        <div className="pilha-6" style={{ maxWidth: '62ch' }}>
-          <h2 className="t-h2">Não vendemos purgadores</h2>
-          <div className="prosa t-body t-mudo">
-            <p>
-              Fabricantes fazem auditoria para vender peça. A Oikos é remunerada pela
-              gestão da eficiência, não pela troca — nosso interesse é que o purgador dure.
-              O diagnóstico é isento, e a recomendação de reparo é a tecnicamente correta,
-              não a comercialmente conveniente.
-            </p>
-            <p>
-              A metodologia é padronizada e apoiada por leitura assistida: o mesmo
-              purgador, avaliado por dois técnicos diferentes, recebe a mesma
-              classificação. É isso que torna o histórico comparável ao longo dos anos.
-            </p>
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao marcador="Independência" titulo="Não vendemos purgadores" />
+            <div className="prosa t-body t-mudo">
+              <p>
+                Fabricantes fazem auditoria para vender peça. A Oikos é remunerada pela
+                gestão da eficiência, não pela troca — nosso interesse é que o purgador
+                dure. O diagnóstico é isento, e a recomendação de reparo é a tecnicamente
+                correta, não a comercialmente conveniente.
+              </p>
+              <p>
+                A metodologia é padronizada e apoiada por leitura assistida: o mesmo
+                purgador, avaliado por dois técnicos diferentes, recebe a mesma
+                classificação. É isso que torna o histórico comparável ao longo dos anos.
+              </p>
+            </div>
+            <div className="linha-botoes">
+              <Botao href="/empresa" variante="secundario">
+                Sobre a Oikos
+              </Botao>
+            </div>
           </div>
-          <div className="linha-botoes">
-            <Botao href="/empresa" variante="secundario">
-              Sobre a Oikos
-            </Botao>
+
+          <div className="moldura">
+            <Image
+              src="/imagens/campo/purgador-partes/disco.png"
+              alt="Disco de purgador termodinâmico, a peça que veda a passagem de vapor"
+              width={800}
+              height={800}
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              style={{ background: 'var(--azul-950)' }}
+            />
           </div>
         </div>
       </Secao>
 
-      {/* ══ FAQ (§7.11) ══ */}
+      {/* ══ REFERÊNCIAS ══ */}
+      <Secao fundo="alt">
+        <TituloSecao
+          marcador="Base científica"
+          titulo="A conta não é nossa — é da literatura"
+          lead="Todo número deste site vem de uma destas fontes ou do cálculo do próprio laudo. Elas estão abertas, para você conferir antes de falar com qualquer vendedor."
+          centralizado
+        />
+        <div style={{ marginTop: 48 }}>
+          <ListaReferencias itens={REFERENCIAS.slice(0, 3)} />
+        </div>
+        <div className="linha-botoes" style={{ marginTop: 32, justifyContent: 'center' }}>
+          <Botao href="/referencias" variante="secundario" seta>
+            Ver todas as referências
+          </Botao>
+        </div>
+      </Secao>
+
+      {/* ══ FAQ ══ */}
       <Secao>
-        <TituloSecao titulo="Perguntas que sempre aparecem" />
-        <div style={{ marginTop: 32, maxWidth: 820 }}>
+        <TituloSecao
+          marcador="Dúvidas"
+          titulo="Perguntas que sempre aparecem"
+          centralizado
+        />
+        <div style={{ marginTop: 48, maxWidth: 840, marginInline: 'auto' }}>
           <FAQ perguntas={FAQ_HOME} />
         </div>
-        <div style={{ marginTop: 32 }}>
+        <div style={{ marginTop: 40, textAlign: 'center' }}>
           <ListaFontes chaves={['doeFemp', 'emerson']} />
         </div>
       </Secao>
 
-      {/* ══ CTA FINAL (§7.12) ══ */}
-      <Secao fundo="alt" id="contato">
-        <div className="grade-2">
+      {/* ══ CTA FINAL ══ */}
+      <Secao fundo="verde" id="contato">
+        <div className="grade-2 topo">
           <div className="pilha-6">
-            <h2 className="t-h2">Descubra quanto sua planta está perdendo</h2>
-            <p className="t-body-lg t-mudo prosa">
-              Em uma visita, você recebe o inventário completo dos seus purgadores e o
-              custo real de cada falha.
-            </p>
-            <p className="t-body" style={{ fontWeight: 600 }}>
-              {OFERTA.selo}
-            </p>
+            <TituloSecao
+              marcador="Comece pela medição"
+              titulo="Descubra quanto sua planta está perdendo"
+              lead="Em uma visita, você recebe o inventário completo dos seus purgadores e o custo real de cada falha."
+            />
             <p className="t-small t-mudo prosa">
               Prefere entender a ordem de grandeza antes de falar com alguém?{' '}
               <Link href="/laudo-exemplo" className="link-azul">

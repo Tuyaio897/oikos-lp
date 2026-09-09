@@ -32,7 +32,7 @@ const FAQ_INSPECAO: Pergunta[] = [
   {
     pergunta: 'Que equipamento vocês usam?',
     resposta:
-      'Ultrassom para leitura acústica do escoamento interno e medição de temperatura de entrada e saída. A combinação das duas leituras é o que separa um purgador operando normalmente de um travado aberto — só a temperatura, sozinha, engana.',
+      'O detector ultrassônico UP100, somado à medição de temperatura de entrada e saída. A combinação das duas leituras é o que separa um purgador operando normalmente de um travado aberto — só a temperatura, sozinha, engana. No contrato mensal, é o mesmo equipamento que fica com a sua equipe para as rondas periódicas.',
   },
   {
     pergunta: 'Vocês fazem o reparo também?',
@@ -177,7 +177,7 @@ export default function Inspecao() {
             <h3 className="t-h3">Modelo comercial</h3>
             <p className="t-body t-mudo">{OFERTA.explicacao}</p>
             <p className="t-body" style={{ fontWeight: 600 }}>
-              {OFERTA.selo}
+              {OFERTA.chamada}
             </p>
             <p className="t-small t-mudo">
               Atendimento em {SITE.regiaoAtendimentoTexto}, com equipe própria. Escopo e

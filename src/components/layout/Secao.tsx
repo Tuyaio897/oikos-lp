@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
 
-type Fundo = 'claro' | 'alt' | 'escura';
+type Fundo = 'claro' | 'alt' | 'verde' | 'escura';
 
 const FUNDO: Record<Fundo, string> = {
   claro: 'secao',
   alt: 'secao secao-alt',
+  verde: 'secao secao-verde',
   escura: 'secao secao-escura',
 };
 
@@ -29,16 +30,18 @@ export function Secao({
 /**
  * Título de seção.
  *
- * Não existe prop de "eyebrow": os rótulos em caixa alta acima de cada título
- * foram removidos por decisão do §7.1 — eram redundantes com o próprio título
- * e são o padrão de template mais reconhecível que existe.
+ * `marcador` é um rótulo pequeno e colorido acima do título — não é o eyebrow
+ * em CAIXA ALTA que foi removido do site antigo. Serve de marcador visual de
+ * navegação e carrega o filete azul→verde da marca.
  */
 export function TituloSecao({
+  marcador,
   titulo,
   lead,
   centralizado = false,
   nivel = 2,
 }: {
+  marcador?: string;
   titulo: ReactNode;
   lead?: ReactNode;
   centralizado?: boolean;
@@ -46,16 +49,17 @@ export function TituloSecao({
 }) {
   const Tag = nivel === 1 ? 'h1' : 'h2';
   return (
-    <div className={centralizado ? 'pilha-4' : 'pilha-4'} style={centralizado ? { textAlign: 'center' } : undefined}>
+    <div
+      className="pilha-4"
+      style={
+        centralizado
+          ? { textAlign: 'center', alignItems: 'center', maxWidth: 760, marginInline: 'auto' }
+          : undefined
+      }
+    >
+      {marcador ? <span className="marcador">{marcador}</span> : null}
       <Tag className={nivel === 1 ? 't-display' : 't-h2'}>{titulo}</Tag>
-      {lead ? (
-        <p
-          className="t-body-lg t-mudo prosa"
-          style={centralizado ? { marginInline: 'auto' } : undefined}
-        >
-          {lead}
-        </p>
-      ) : null}
+      {lead ? <p className="t-body-lg t-mudo prosa">{lead}</p> : null}
     </div>
   );
 }

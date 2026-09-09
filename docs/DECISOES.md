@@ -1,6 +1,6 @@
 # Decisões e pendências
 
-Atualizado em 08/09/2026.
+Atualizado em 09/09/2026.
 
 ---
 
@@ -88,15 +88,31 @@ Ver `.env.example`. Nenhuma é obrigatória para o build — o site sobe e funci
 
 ## 2. Decisões tomadas
 
-### 2.1 Oferta de entrada: gratuidade eliminada (§1.5)
+### 2.1 Modelo comercial: contrato mensal de cuidado (§1.5)
 
-**Decisão: modelo `garantia` (Opção A).**
+O site antigo prometia "diagnóstico gratuito" em quatro lugares, contradizendo a *Estratégia de Precificação Oikos*, seção 5 ("Desconto pontual, sim; gratuidade, nunca").
 
-O site antigo prometia "diagnóstico gratuito" em quatro lugares, contradizendo frontalmente a *Estratégia de Precificação Oikos*, seção 5 ("Desconto pontual, sim; gratuidade, nunca") e o pedido mínimo de R$ 7.500 por visita.
+A primeira versão deste redesign resolveu isso com uma garantia de resultado ("se o laudo não identificar perdas maiores que o valor da inspeção, você não paga"). **O time pediu para remover essa promessa** — ela foi retirada de todo o site.
 
-Todo o copy consome `src/config/oferta.ts`. O selo publicado é: *"Se o laudo não identificar perdas maiores que o valor da inspeção, você não paga."*
+**Modelo publicado:** a Oikos faz a inspeção inicial e entrega o laudo; a partir daí, um **contrato mensal de cuidado com o purgador** deixa a própria equipe da planta fazendo as rondas periódicas com o equipamento, enquanto a Oikos mantém o método, a análise e o histórico.
 
-**Para mudar:** trocar a constante `MODELO` para `'piloto'` ou `'gratuito'`. Os textos das três variantes já estão escritos.
+Todo o copy consome `src/config/oferta.ts` — `chamada`, `explicacao` e `pilares`. Não existe mais campo `selo`.
+
+### 2.1.1 Equipamento UP100 — CONFIRMAR
+
+`EQUIPAMENTO` em `src/config/oferta.ts` publica o modelo como **UP100**, descrito como detector ultrassônico de referência.
+
+**Pendente:** o fabricante não foi assumido. Se for o Ultraprobe 100 da UE Systems, vale nomear — mas nome de fabricante não se inventa. Confirmar antes de divulgar o site.
+
+Também vale confirmar a mecânica comercial exata do equipamento no contrato (cedido, locado ou vendido junto), porque o texto atual diz apenas "com o equipamento".
+
+### 2.1.2 Referências científicas
+
+Nova página `/referencias` e bloco na home, alimentados por `src/config/referencias.ts`.
+
+Cada link foi verificado antes de entrar. Inclui um artigo revisado por pares (*Measurement*, Elsevier, 2026, sobre detecção acústica com arranjo MEMS), as duas publicações do DOE/FEMP que sustentam as faixas de falha citadas no site, o registro OSTI/NREL, a prática recomendada da ASHE e a literatura técnica da UE Systems sobre o método ultrassônico.
+
+**Regra:** se uma referência sair do ar, remover a entrada em vez de deixar link quebrado. Nenhuma citação foi construída.
 
 ### 2.2 Markdown em vez de MDX — desvio da spec
 
@@ -166,4 +182,16 @@ Registrados aqui conforme a regra de trabalho nº 5.
 
 2. **Contador de perda do herói.** O §6.1 elege o contador como "onde gastar ousadia". Ele está implementado e funcional, mas desligado pela dependência do item 1.1 — a alternativa seria publicar um número que o laudo não sustenta, o que viola o §4. Volta sozinho quando a tabela oficial chegar.
 
-3. **`index.html` legado.** Foi removido do repositório. Se o projeto na Vercel não estiver com o preset **Next.js**, o deploy vai falhar de forma visível em vez de servir silenciosamente o site antigo — o que é o comportamento desejado, mas exige conferir o preset.
+3. **Direção visual — o §6.2 foi sobreposto pelo time.** A especificação pedia site predominantemente claro, laranja em no máximo ~5% da área, azul restrito a links e **proibia gradiente, glow e sombra colorida**.
+
+   O time pediu explicitamente mais azul e mais verde por todo o site, botões mais elaborados e um acabamento visual mais forte. Pela regra de trabalho nº 5, a instrução do time vence — e fica registrada aqui.
+
+   O que mudou: paleta ampliada com escalas completas de azul e verde; herói e duas seções em azul quase preto; botões com gradiente, sombra e elevação no hover; cards com sombra e reação ao ponteiro; raio de canto de 8px em botão e 14px em card (a spec pedia 2px e 4px).
+
+   O que foi mantido da spec: **o laranja continua reservado a dado de perda** — não virou cor de ícone nem de decoração; o contraste AA continua verificado em todo texto; e não há fade-and-slide-up em cada seção ao rolar.
+
+4. **Chips de status.** O §6.2 exige que as cores de status sejam idênticas às do app e do relatório RPV. Aplicadas como preenchimento sólido com texto branco, elas reprovavam AA em 13px (vazando 4,29:1; operando 3,95:1).
+
+   A cor foi mantida, mas mudou a aplicação: fundo tingido claro, borda e ponto na cor do status, texto escuro. A cor continua sendo o sinal de identificação e o contraste subiu para cerca de 15:1. Se o relatório precisar bater pixel a pixel com o site, este é o ponto a revisar junto.
+
+5. **`index.html` legado.** Foi removido do repositório. Se o projeto na Vercel não estiver com o preset **Next.js**, o deploy vai falhar de forma visível em vez de servir silenciosamente o site antigo — o que é o comportamento desejado, mas exige conferir o preset.

@@ -5,7 +5,7 @@ export type ItemNav = { href: string; rotulo: string };
 export const NAV_PRINCIPAL: ItemNav[] = [
   { href: '/inspecao', rotulo: 'Inspeção' },
   { href: '/sistema', rotulo: 'Sistema Oikos' },
-  { href: '/cases', rotulo: 'Cases' },
+  { href: '/referencias', rotulo: 'Referências' },
   { href: '/conteudo', rotulo: 'Conteúdo' },
   { href: '/empresa', rotulo: 'Empresa' },
 ];
@@ -35,6 +35,7 @@ export const RODAPE: { titulo: string; itens: ItemNav[] }[] = [
     titulo: 'Conteúdo',
     itens: [
       { href: '/conteudo', rotulo: 'Conhecimento técnico' },
+      { href: '/referencias', rotulo: 'Referências científicas' },
       { href: '/conteudo/quanto-custa-um-purgador-com-falha', rotulo: 'Quanto custa um purgador com falha' },
       { href: '/conteudo/auditoria-manual-deixa-passar-falhas', rotulo: 'Por que a auditoria manual falha' },
     ],

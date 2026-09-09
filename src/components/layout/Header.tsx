@@ -43,16 +43,7 @@ export function Header() {
   const tel = linkTelefone();
 
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        background: 'var(--bg)',
-        borderBottom: rolado ? '1px solid var(--border)' : '1px solid transparent',
-        transition: 'border-color .2s ease',
-      }}
-    >
+    <header className="cabecalho" data-rolado={rolado}>
       <div
         className="container"
         style={{
@@ -84,12 +75,7 @@ export function Header() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 500,
-                      paddingBlock: 8,
-                      borderBottom: ativo ? '2px solid var(--oikos-laranja)' : '2px solid transparent',
-                    }}
+                    className="nav-link"
                     aria-current={ativo ? 'page' : undefined}
                   >
                     {item.rotulo}
@@ -105,7 +91,8 @@ export function Header() {
           {tel && preenchido(SITE.telefone) ? (
             <a
               href={tel}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 15, fontWeight: 600 }}
+              className="nav-link"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 600 }}
             >
               <Phone size={16} aria-hidden="true" />
               <span className="num">{SITE.telefone}</span>
@@ -114,14 +101,14 @@ export function Header() {
           <Link
             href={linkSistema()}
             className="btn btn-secundario"
-            style={{ minHeight: 40, padding: '8px 16px', fontSize: 15 }}
+            style={{ minHeight: 44, padding: '10px 18px', fontSize: 15 }}
           >
             Acessar o sistema
           </Link>
           <Link
             href="/contato"
             className="btn btn-primario"
-            style={{ minHeight: 40, padding: '8px 18px', fontSize: 15 }}
+            style={{ minHeight: 44, padding: '10px 20px', fontSize: 15 }}
           >
             Falar com um especialista
           </Link>

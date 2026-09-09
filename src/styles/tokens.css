@@ -1,37 +1,95 @@
 /* ─────────────────────────────────────────────────────────────
-   OIKOS — TOKENS (§6.2)
-   Derivados do manual de marca, com os hex corrigidos para
-   passarem em contraste AA quando usados como texto.
+   OIKOS — TOKENS
+
+   Paleta ampliada a pedido do time: azul e verde passam a carregar o
+   site, e não apenas os links. O laranja fica reservado para dado de
+   perda e alerta — é o que mantém o significado dele.
+
+   Os hex de texto foram ajustados para passar em contraste AA; os hex
+   originais do manual continuam disponíveis como cor de superfície.
    ───────────────────────────────────────────────────────────── */
 :root {
-  /* Marca */
-  --oikos-oliva:       #323725;
-  --oikos-oliva-900:   #1E2117;
-  --oikos-oliva-700:   #454B33;
-  --oikos-oliva-100:   #EDEFE8;
-  --oikos-laranja:     #CE893B;
-  --oikos-laranja-700: #9C5F1D; /* USE ESTE para texto laranja sobre fundo claro */
-  --oikos-laranja-100: #FAF0E2;
-  --oikos-grafite:     #282826;
-  --oikos-grafite-600: #5B5B57;
-  --oikos-aco:         #C4C4C4;
-  --oikos-aco-100:     #F4F5F3;
-  --oikos-azul:        #0A2472;
+  /* ── Azul Industrial — cor condutora do site ── */
+  --azul-950:  #050F33;
+  --azul-900:  #071A52;
+  --azul:      #0A2472;  /* Azul Industrial do manual */
+  --azul-700:  #123A9E;
+  --azul-500:  #2557C7;
+  --azul-300:  #7C9BE0;
+  --azul-100:  #E8EDFA;
+  --azul-50:   #F4F7FD;
 
-  /* Semântica de status — MESMAS do app e do relatório RPV. Não divergir. */
-  --status-ok:         #8BAC33;
+  /* ── Verde — segunda cor de marca ── */
+  --verde-900: #1E2117;
+  --verde-800: #323725;  /* Vapor Oliva do manual */
+  --verde-700: #454B33;
+  --verde:       #6E8A22;  /* verde de marca — ok como texto sobre branco */
+  --verde-texto: #4C6014;  /* texto verde pequeno sobre fundo verde claro (AA) */
+  --verde-500: #8BAC33;  /* verde do status "operando" */
+  --verde-300: #B9D16B;
+  --verde-100: #EDF2DC;
+  --verde-50:  #F6F9EE;
+
+  /* ── Laranja — só perda de dinheiro e ação primária ── */
+  --laranja:      #CE893B;
+  --laranja-700:  #9C5F1D;  /* texto laranja sobre claro (AA) */
+  --laranja-100:  #FAF0E2;
+
+  /* ── Neutros ── */
+  --grafite:      #16181C;
+  --grafite-700:  #3E434D;
+  --grafite-500:  #6B717E;
+  --aco:          #C4C4C4;
+  --aco-200:      #E4E7EC;
+  --aco-100:      #F4F5F3;
+
+  /* ── Semântica de status — MESMAS do app e do relatório RPV ── */
+  --status-ok:         #6E8A22;
   --status-vazando:    #C75A0D;
   --status-bloqueado:  #3730A3;
   --status-fora:       #6B7280;
   --status-nao-aval:   #5B21B6;
 
-  /* Base */
-  --bg:                #FFFFFF;
-  --bg-alt:            var(--oikos-aco-100);
-  --border:            #DDDFD9;
-  --focus:             var(--oikos-azul);
+  /* ── Base ── */
+  --bg:           #FFFFFF;
+  --bg-alt:       var(--azul-50);
+  --bg-verde:     var(--verde-50);
+  --border:       var(--aco-200);
+  --border-forte: #C9CFD9;
+  --focus:        var(--azul-500);
 
-  /* Raio: máximo 4px em card, 2px em botão/tag (§6.4) */
-  --raio-card: 4px;
-  --raio-btn: 2px;
+  /* ── Superfícies escuras ── */
+  --escuro:       var(--azul-950);
+  --escuro-alt:   var(--azul-900);
+
+  /* ── Gradientes ── */
+  --grad-azul:    linear-gradient(135deg, var(--azul-700) 0%, var(--azul-950) 100%);
+  --grad-verde:   linear-gradient(135deg, var(--verde-500) 0%, var(--verde-800) 100%);
+  --grad-btn:     linear-gradient(180deg, var(--azul-700) 0%, var(--azul) 100%);
+  --grad-btn-h:   linear-gradient(180deg, var(--azul-500) 0%, var(--azul-700) 100%);
+  --grad-luz:     radial-gradient(120% 100% at 20% 0%, rgba(37,87,199,.20) 0%, rgba(5,15,51,0) 60%);
+
+  /* ── Elevação ── */
+  --sombra-1:  0 1px 2px rgba(9, 18, 44, .06), 0 2px 8px rgba(9, 18, 44, .04);
+  --sombra-2:  0 2px 4px rgba(9, 18, 44, .07), 0 12px 28px rgba(9, 18, 44, .09);
+  --sombra-3:  0 8px 16px rgba(9, 18, 44, .10), 0 24px 56px rgba(9, 18, 44, .14);
+  --sombra-btn: 0 1px 2px rgba(7, 26, 82, .32), 0 6px 16px rgba(7, 26, 82, .24);
+
+  /* ── Raio ── */
+  --raio-btn:   8px;
+  --raio-card:  14px;
+  --raio-grande: 22px;
+
+  /* ── Compatibilidade com os nomes antigos ── */
+  --oikos-oliva:       var(--verde-800);
+  --oikos-oliva-700:   var(--verde-700);
+  --oikos-oliva-100:   var(--verde-100);
+  --oikos-laranja:     var(--laranja);
+  --oikos-laranja-700: var(--laranja-700);
+  --oikos-laranja-100: var(--laranja-100);
+  --oikos-grafite:     var(--grafite);
+  --oikos-grafite-600: var(--grafite-500);
+  --oikos-aco:         var(--aco);
+  --oikos-aco-100:     var(--aco-100);
+  --oikos-azul:        var(--azul);
 }

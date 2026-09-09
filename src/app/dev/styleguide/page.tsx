@@ -11,16 +11,21 @@ export const metadata: Metadata = {
 };
 
 const CORES = [
-  ['--oikos-oliva', 'Vapor Oliva'],
-  ['--oikos-oliva-700', 'Oliva 700'],
-  ['--oikos-oliva-100', 'Oliva 100'],
-  ['--oikos-laranja', 'Laranja Energia (fundo de botão)'],
-  ['--oikos-laranja-700', 'Laranja 700 (texto sobre claro)'],
-  ['--oikos-grafite', 'Grafite (texto)'],
-  ['--oikos-grafite-600', 'Grafite 600 (texto secundário)'],
-  ['--oikos-aco', 'Aço (bordas)'],
-  ['--oikos-aco-100', 'Aço 100 (superfície)'],
-  ['--oikos-azul', 'Azul Industrial (links)'],
+  ['--azul-950', 'Azul 950 (superfície escura)'],
+  ['--azul', 'Azul Industrial'],
+  ['--azul-700', 'Azul 700 (texto e botão)'],
+  ['--azul-500', 'Azul 500 (realce)'],
+  ['--azul-100', 'Azul 100'],
+  ['--azul-50', 'Azul 50 (fundo alternado)'],
+  ['--verde-800', 'Vapor Oliva'],
+  ['--verde', 'Verde (texto sobre claro)'],
+  ['--verde-500', 'Verde 500 (status operando)'],
+  ['--verde-50', 'Verde 50 (fundo alternado)'],
+  ['--laranja', 'Laranja Energia (dado de perda)'],
+  ['--laranja-700', 'Laranja 700 (texto sobre claro)'],
+  ['--grafite', 'Grafite (texto)'],
+  ['--grafite-500', 'Grafite 500 (texto secundário)'],
+  ['--border', 'Borda'],
 ];
 
 const STATUS = [
@@ -90,8 +95,8 @@ export default function Styleguide() {
           <Botao href="#" variante="secundario">
             Secundário
           </Botao>
-          <Botao href="#" variante="escuro">
-            Escuro
+          <Botao href="#" variante="verde">
+            Verde
           </Botao>
         </div>
         <div className="linha-botoes" style={{ marginTop: 24 }}>

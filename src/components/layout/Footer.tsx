@@ -21,7 +21,7 @@ export function Footer() {
   const mail = linkEmail();
 
   return (
-    <footer className="secao-escura" style={{ paddingBlock: 64 }}>
+    <footer className="rodape">
       <div className="container">
         <div
           style={{
@@ -105,7 +105,7 @@ export function Footer() {
           style={{
             marginTop: 48,
             paddingTop: 24,
-            borderTop: '1px solid rgba(255,255,255,.15)',
+            borderTop: '1px solid rgba(255,255,255,.14)',
             display: 'flex',
             flexWrap: 'wrap',
             gap: 16,

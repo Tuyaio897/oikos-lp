@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 
-type Variante = 'primario' | 'secundario' | 'escuro';
+type Variante = 'primario' | 'secundario' | 'verde';
 
 const CLASSE: Record<Variante, string> = {
   primario: 'btn btn-primario',
   secundario: 'btn btn-secundario',
-  escuro: 'btn btn-escuro',
+  verde: 'btn btn-verde',
 };
 
 type Props = {
@@ -14,11 +15,20 @@ type Props = {
   variante?: Variante;
   children: ReactNode;
   className?: string;
+  /** Seta que desliza no hover. Use no CTA principal de cada seção. */
+  seta?: boolean;
 };
 
 /** Botão-link. Para ações de formulário, use <button className="btn btn-primario">. */
-export function Botao({ href, variante = 'primario', children, className = '' }: Props) {
-  const classe = `${CLASSE[variante]} ${className}`.trim();
+export function Botao({ href, variante = 'primario', children, className = '', seta = false }: Props) {
+  const classe = `${CLASSE[variante]} ${seta ? 'link-seta' : ''} ${className}`.trim();
+  const conteudo = (
+    <>
+      {children}
+      {seta ? <ArrowRight size={18} aria-hidden="true" /> : null}
+    </>
+  );
+
   const externo = href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
 
   if (externo) {
@@ -28,14 +38,14 @@ export function Botao({ href, variante = 'primario', children, className = '' }:
         className={classe}
         {...(href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       >
-        {children}
+        {conteudo}
       </a>
     );
   }
 
   return (
     <Link href={href} className={classe}>
-      {children}
+      {conteudo}
     </Link>
   );
 }

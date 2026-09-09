@@ -132,6 +132,7 @@ export default function LaudoExemplo() {
         <div style={{ maxWidth: '62ch' }} className="pilha-6">
           <TituloSecao
             nivel={1}
+            marcador="O entregável"
             titulo="Um laudo de inspeção, aberto"
             lead="Este é o documento que você recebe ao final da inspeção: de 10 a 40 páginas com cada purgador identificado, classificado e precificado. Está aberto de propósito — sem formulário para ver."
           />
