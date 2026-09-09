@@ -2,7 +2,7 @@
  * Engine de cálculo de perda por purgador com falha do tipo blow-thru.
  *
  * Implementa a Metodologia OIKOS de Cálculo de Vazamento (Base Napier), v4.
- * Esta é a MESMA física do aplicativo e do relatório RPV — o site não pode
+ * Esta é a MESMA física do aplicativo e do relatório RPV, o site não pode
  * divergir do laudo.
  *
  * Validação: a implementação reproduz os três valores citados no relatório de
@@ -124,7 +124,7 @@ export const HORAS_ANO = [4000, 6000, 8000, 8760] as const;
  *
  * Derivados por engenharia reversa dos valores publicados no relatório RPV
  * (10,03 mm reproduz os 313,71 kg/h de um DN50 a 20 bar; 5,11 mm reproduz os
- * 43,11 kg/h; 3,10 mm reproduz os 12,99 kg/h). São valores de partida — o
+ * 43,11 kg/h; 3,10 mm reproduz os 12,99 kg/h). São valores de partida, o
  * diâmetro real do ponto é sempre editável na calculadora.
  *
  * CONFIRMAR com o time técnico se existe tabela oficial de d0 por DN e tipo
@@ -204,7 +204,7 @@ export function calcularPerda(entrada: EntradaCalculo): ResultadoCalculo {
 
 /**
  * Taxa de incremento do contador do herói, em R$ por segundo.
- * Vem da mesma fórmula acima — não é um número mágico.
+ * Vem da mesma fórmula acima, não é um número mágico.
  */
 export function reaisPorSegundo(entrada: EntradaCalculo = PADRAO): number {
   return calcularPerda(entrada).central / (entrada.horasAno * 3600);
@@ -220,7 +220,7 @@ export function formatarBRL(valor: number): string {
   return FORMATADOR_BRL.format(valor);
 }
 
-/** "R$ 380 mil" / "R$ 1,2 milhão" — para faixas, onde o centavo é ruído. */
+/** "R$ 380 mil" / "R$ 1,2 milhão", para faixas, onde o centavo é ruído. */
 export function formatarBRLCurto(valor: number): string {
   if (valor >= 1_000_000) {
     const milhoes = valor / 1_000_000;

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
  * Índice de cases (§8).
  *
  * Regra explícita da especificação: NÃO publicar case fictício. Enquanto não
- * houver caso real — mesmo que anonimizado por segmento — esta página assume o
+ * houver caso real, mesmo que anonimizado por segmento, esta página assume o
  * estado vazio de forma honesta, em vez de encenar prova social que não existe.
  */
 export default function Cases() {
@@ -50,8 +50,8 @@ export default function Cases() {
           <h2 className="t-h3">Ainda não publicamos nenhum case</h2>
           <p className="t-body t-mudo">
             Não publicamos caso sem autorização do cliente, e não publicamos caso
-            construído. Quando o primeiro estiver liberado — anonimizado por segmento, se
-            for o caso — ele aparece aqui com os números de campo.
+            construído. Quando o primeiro estiver liberado, anonimizado por segmento, se
+            for o caso, ele aparece aqui com os números de campo.
           </p>
           <p className="t-body t-mudo">
             Enquanto isso, o que dá para inspecionar de verdade é o formato do nosso

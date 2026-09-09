@@ -13,7 +13,7 @@ import {
  * Rodapé institucional (§5 e §12).
  *
  * Para o comprador industrial, a ausência de CNPJ, endereço e telefone é sinal
- * de que "não existe empresa". Cada campo só aparece quando tem valor real —
+ * de que "não existe empresa". Cada campo só aparece quando tem valor real,
  * ver `preenchido()` em src/config/site.ts.
  */
 export function Footer() {
@@ -113,7 +113,7 @@ export function Footer() {
           }}
         >
           <p className="t-small t-mudo">
-            {SITE.razaoSocial} — CNPJ {SITE.cnpj}
+            {SITE.razaoSocial}, CNPJ {SITE.cnpj}
           </p>
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <Link href="/politica-de-privacidade" className="t-small t-mudo">

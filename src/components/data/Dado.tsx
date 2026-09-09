@@ -30,14 +30,14 @@ export function Dado({
           rel="noopener noreferrer"
           className="link-azul t-small"
         >
-          {f.rotulo.split(' — ')[0]}
+          {f.rotulo.split(', ')[0]}
         </a>
       </p>
     </div>
   );
 }
 
-/** KPI sem fonte externa — para números que vêm do próprio cálculo. */
+/** KPI sem fonte externa, para números que vêm do próprio cálculo. */
 export function KPI({
   valor,
   rotulo,

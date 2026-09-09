@@ -28,7 +28,7 @@ export const OFERTA = {
     {
       titulo: 'Método e análise com a Oikos',
       texto:
-        'Medir é a parte fácil. O que sustenta o laudo é a classificação padronizada e o cálculo da perda — isso continua sendo nosso, todo mês.',
+        'Medir é a parte fácil. O que sustenta o laudo é a classificação padronizada e o cálculo da perda. Isso continua sendo nosso, todo mês.',
     },
     {
       titulo: 'A perda não volta',
@@ -47,7 +47,7 @@ export const EQUIPAMENTO = {
   fabricante: 'UE Systems',
   categoria: 'Detector ultrassônico de inspeção de purgadores',
   descricao:
-    'O UP100, da UE Systems, é um dos detectores ultrassônicos de referência para inspeção de purgadores. Ele desloca a leitura para a faixa acima de 20 kHz, onde o escoamento de vapor por um orifício realmente se manifesta — e onde o ouvido humano não alcança.',
+    'O UP100, da UE Systems, é um dos detectores ultrassônicos de referência para inspeção de purgadores. Ele desloca a leitura para a faixa acima de 20 kHz, onde o escoamento de vapor por um orifício realmente se manifesta, e onde o ouvido humano não alcança.',
   /** No contrato, o aparelho fica na planta. Cada cliente tem o seu. */
   cessao:
     'Durante o contrato, o UP100 fica na sua planta. Não é equipamento compartilhado entre clientes nem emprestado por visita: cada cliente tem o seu, disponível no dia em que a equipe precisar medir.',

@@ -1,7 +1,7 @@
 /**
  * Eventos de analytics (§9 e §10.2).
  *
- * Empurra para o dataLayer do GTM apenas se o consentimento tiver sido dado —
+ * Empurra para o dataLayer do GTM apenas se o consentimento tiver sido dado,
  * o GTM so e carregado depois do aceite no banner de cookies (§12).
  */
 

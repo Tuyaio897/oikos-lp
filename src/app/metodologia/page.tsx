@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/metodologia' },
 };
 
-/** Exemplos calculados pela engine — nenhum número é digitado à mão. */
+/** Exemplos calculados pela engine, nenhum número é digitado à mão. */
 const EXEMPLOS = ORIFICIOS_TIPICOS.map((o) => {
   const pressao = o.rotulo === 'DN50' ? 20 : o.rotulo === 'DN25' ? 10 : 8;
   const { teorico, oikos } = perdaKgH(o.diametroMm, pressao);
@@ -41,11 +41,7 @@ export default function Metodologia() {
             <TituloSecao
               nivel={1}
               marcador="Metodologia"
-              titulo={
-                <>
-                  Sem <span className="realce">caixa preta</span>
-                </>
-              }
+              titulo="Sem caixa preta"
               lead="Toda perda que a Oikos publica sai da Equação de Napier para escoamento crítico, com os fatores de correção declarados. Você pode refazer a conta."
             />
             <div className="linha-botoes">
@@ -75,7 +71,7 @@ export default function Metodologia() {
               Um purgador travado aberto descarregando para a atmosfera ou para uma linha
               de retorno de baixa pressão opera em <strong>regime sônico</strong>: o
               escoamento atinge a velocidade do som no orifício e deixa de depender da
-              pressão a jusante. Formalmente, quando (p₁ − p₂) / p₁ ≥ 0,691 — condição
+              pressão a jusante. Formalmente, quando (p₁ − p₂) / p₁ ≥ 0,691, condição
               praticamente sempre atendida na operação industrial.
             </p>
             <p>
@@ -221,7 +217,7 @@ export default function Metodologia() {
                 A Oikos documenta abertamente essa variabilidade em vez de escondê-la.
               </p>
               <p>
-                Rejeitamos equações empíricas cegas — fórmulas que somam linearmente
+                Rejeitamos equações empíricas cegas, fórmulas que somam linearmente
                 pressão manométrica com densidade quebram a coerência dimensional e não
                 sobrevivem a uma conferência técnica. Entregamos a física, ajustada por
                 fatores abertos e auditáveis.
@@ -242,7 +238,7 @@ export default function Metodologia() {
           <div className="grade-2" style={{ gap: 24 }}>
             <div className="card-vidro">
               <KPI
-                valor={`${Math.round(INCERTEZA.minima * 100)}–${Math.round(INCERTEZA.maxima * 100)}%`}
+                valor={`${Math.round(INCERTEZA.minima * 100)}-${Math.round(INCERTEZA.maxima * 100)}%`}
                 rotulo="Incerteza declarada"
                 nota="publicada, não escondida"
               />

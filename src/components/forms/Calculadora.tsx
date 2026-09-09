@@ -113,7 +113,7 @@ export function Calculadora() {
             ))}
           </div>
           <p className="t-small t-mudo">
-            É o diâmetro que mais pesa no resultado — a perda cresce com o quadrado dele.
+            É o diâmetro que mais pesa no resultado, a perda cresce com o quadrado dele.
             Se não souber, use a bitola típica acima.
           </p>
         </div>
@@ -261,7 +261,7 @@ export function Calculadora() {
           <div className="pilha-4" style={{ marginTop: 16 }}>
             <p className="t-body t-mudo">
               A perda de cada ponto vem da Equação de Napier para escoamento crítico de
-              fluidos compressíveis — a mesma física do laudo, não uma fórmula empírica.
+              fluidos compressíveis, a mesma física do laudo, não uma fórmula empírica.
             </p>
             <p
               className="t-small num"

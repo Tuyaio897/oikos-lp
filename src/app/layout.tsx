@@ -8,7 +8,7 @@ import './globals.css';
 
 /**
  * Fontes self-hosted pelo next/font: zero CLS e nenhuma requisição para o
- * Google em runtime — o que também ajuda em LGPD (§10.2). O @import de fonte
+ * Google em runtime, o que também ajuda em LGPD (§10.2). O @import de fonte
  * que existia no CSS antigo bloqueava o render e foi removido.
  */
 const sora = Sora({
@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(urlCanonica()),
   title: {
-    default: 'Oikos — Inspeção de purgadores de vapor e gestão de perdas',
+    default: 'Oikos, Inspeção de purgadores de vapor e gestão de perdas',
     template: '%s | Oikos',
   },
   description:

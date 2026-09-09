@@ -4,7 +4,7 @@ descricao: A conta que transforma kg/h de vapor perdido em R$/ano, com as premis
 data: 2026-09-08
 ---
 
-Toda discussão sobre purgador trava no mesmo ponto: o pessoal de manutenção sabe que há perda, e a diretoria não aprova verba para "perda". O que destrava é a conversão para reais — feita de um jeito que aguente ser questionada.
+Toda discussão sobre purgador trava no mesmo ponto: o pessoal de manutenção sabe que há perda, e a diretoria não aprova verba para "perda". O que destrava é a conversão para reais, feita de um jeito que aguente ser questionada.
 
 A conta em si é simples. O que separa um número que convence de um número que constrange é a disciplina com as premissas.
 
@@ -32,7 +32,7 @@ Por isso a inspeção registra, para cada ponto: diâmetro nominal, pressão de 
 
 Aqui mora o exagero mais frequente.
 
-Usar 8.760 h/ano — o ano inteiro — só é honesto se a planta realmente opera sem parada. A maioria não opera: há parada programada, há sazonalidade, há linha que roda em dois turnos.
+Usar 8.760 h/ano, o ano inteiro, só é honesto se a planta realmente opera sem parada. A maioria não opera: há parada programada, há sazonalidade, há linha que roda em dois turnos.
 
 Uma planta de alimentos com parada anual e operação em três turnos costuma ficar entre 7.500 e 8.200 horas. Uma sucroalcooleira na entressafra é outra história completamente.
 
@@ -40,7 +40,7 @@ Uma planta de alimentos com parada anual e operação em três turnos costuma fi
 
 ## 3. O custo do vapor (R$/t)
 
-Este é o número que mais gente erra — e o mais fácil de acertar, porque a planta já tem.
+Este é o número que mais gente erra, e o mais fácil de acertar, porque a planta já tem.
 
 O custo do vapor é o custo do combustível somado ao tratamento da água, à energia elétrica das bombas e ao rateio de manutenção da caldeira, dividido pela massa de vapor gerada. Ele varia muito conforme o combustível: uma planta a gás natural e uma a biomassa não têm o mesmo custo por tonelada, nem de longe.
 
@@ -60,23 +60,23 @@ Repare que o número só significa alguma coisa porque veio acompanhado de DN, p
 
 ## Por que a faixa é mais honesta que o número exato
 
-Quando a estimativa é feita antes da inspeção — sem medição ponto a ponto — o resultado correto é uma **faixa**, não um valor único.
+Quando a estimativa é feita antes da inspeção, sem medição ponto a ponto, o resultado correto é uma **faixa**, não um valor único.
 
 A dispersão é real: dois purgadores do mesmo modelo, na mesma pressão, podem perder valores bem diferentes conforme o grau de abertura e o estado da sede. Apresentar "R$ 612.480,00 por ano" para uma planta que ainda não foi inspecionada é falsa precisão, e o interlocutor técnico percebe.
 
-Apresentar "entre R$ 430 mil e R$ 800 mil por ano, e a inspeção dirá onde nessa faixa" é mais defensável — e, na prática, converte melhor, porque soa como engenharia em vez de venda.
+Apresentar "entre R$ 430 mil e R$ 800 mil por ano, e a inspeção dirá onde nessa faixa" é mais defensável, e, na prática, converte melhor, porque soa como engenharia em vez de venda.
 
 ## O que sustenta o número numa auditoria
 
 Se a intenção é usar o dado como evidência em auditoria energética (ISO 50001, por exemplo), três coisas precisam estar no documento:
 
 1. **A memória de cálculo por ponto**, não só o total.
-2. **A origem de cada premissa** — quem forneceu o custo do vapor, de onde veio a hora de operação.
+2. **A origem de cada premissa**, quem forneceu o custo do vapor, de onde veio a hora de operação.
 3. **O método de medição**, incluindo o instrumento e a escala de classificação usada.
 
 É o que separa um relatório de um orçamento com aparência de relatório.
 
 ## Referências
 
-- U.S. Department of Energy / FEMP — *Steam Trap Performance Assessment*
-- U.S. Department of Energy — *Improving Steam System Performance: A Sourcebook for Industry*
+- U.S. Department of Energy / FEMP, *Steam Trap Performance Assessment*
+- U.S. Department of Energy, *Improving Steam System Performance: A Sourcebook for Industry*

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Secao, TituloSecao } from '@/components/layout/Secao';
 import { Botao } from '@/components/ui/Botao';
+import { Foto } from '@/components/ui/Foto';
 import { KPI } from '@/components/data/Dado';
 import { OFERTA } from '@/config/oferta';
 import { LAUDO } from '@/config/laudo';
@@ -12,14 +13,14 @@ import {
 } from '@/lib/calculo-perda';
 
 /**
- * Parque hipotético usado no exemplo. Os agregados são derivados da engine —
+ * Parque hipotético usado no exemplo. Os agregados são derivados da engine,
  * nenhum número aqui é digitado à mão, para que o site nunca divirja do laudo.
  */
 const DEMO: EntradaCalculo = { ...PADRAO, pressaoBar: 10, diametroOrificioMm: 5.1 };
 const resumo = calcularPerda(DEMO);
 
 export const metadata: Metadata = {
-  title: 'Laudo de exemplo — relatório de perdas por purgador',
+  title: 'Laudo de exemplo, relatório de perdas por purgador',
   description:
     'Veja um laudo de inspeção de purgadores completo e anonimizado: inventário, status por ponto, perda em kg/h e custo por hora, mês e ano.',
   alternates: { canonical: '/laudo-exemplo' },
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
 const PONTOS = [
   {
     tag: 'PV-1042',
-    local: 'Cavalete 02 — Linha de secagem',
+    local: 'Cavalete 02, Linha de secagem',
     fabricante: 'Termodinâmico DN25',
     pressao: '10 bar',
     status: 'vazando' as const,
@@ -44,17 +45,17 @@ const PONTOS = [
   },
   {
     tag: 'PV-1043',
-    local: 'Cavalete 02 — Linha de secagem',
+    local: 'Cavalete 02, Linha de secagem',
     fabricante: 'Termodinâmico DN25',
     pressao: '10 bar',
     status: 'ok' as const,
     rotulo: 'Operando',
-    kgh: '—',
-    ano: '—',
+    kgh: '0',
+    ano: 'R$ 0',
   },
   {
     tag: 'PV-1051',
-    local: 'Casa de caldeiras — Coletor principal',
+    local: 'Casa de caldeiras, Coletor principal',
     fabricante: 'Balde invertido DN15',
     pressao: '8 bar',
     status: 'bloqueado' as const,
@@ -64,23 +65,23 @@ const PONTOS = [
   },
   {
     tag: 'PV-1077',
-    local: 'Área 300 — Traço de vapor',
+    local: 'Área 300, Traço de vapor',
     fabricante: 'Termostático DN15',
     pressao: '6 bar',
     status: 'fora' as const,
     rotulo: 'Fora de operação',
-    kgh: '—',
-    ano: '—',
+    kgh: 'n/a',
+    ano: 'n/a',
   },
   {
     tag: 'PV-1090',
-    local: 'Área 400 — Trocador de calor',
+    local: 'Área 400, Trocador de calor',
     fabricante: 'Boia DN50',
     pressao: '12 bar',
     status: 'nao-aval' as const,
     rotulo: 'Não avaliado',
-    kgh: '—',
-    ano: '—',
+    kgh: 'n/a',
+    ano: 'n/a',
   },
 ];
 
@@ -96,7 +97,7 @@ const BLOCOS_COMENTADOS = [
   {
     titulo: 'Resumo executivo',
     texto:
-      'Abre o documento com a taxa de falha do parque, a perda total anual e a quantidade de pontos por status. É a página que circula na diretoria — as outras existem para sustentá-la.',
+      'Abre o documento com a taxa de falha do parque, a perda total anual e a quantidade de pontos por status. É a página que circula na diretoria, as outras existem para sustentá-la.',
   },
   {
     titulo: 'Inventário completo',
@@ -106,7 +107,7 @@ const BLOCOS_COMENTADOS = [
   {
     titulo: 'Status por ponto',
     texto:
-      'A classificação em escala fechada. As cores são as mesmas no laudo, no sistema e neste site — é o que torna a leitura imediata para quem já viu um relatório anterior.',
+      'A classificação em escala fechada. As cores são as mesmas no laudo, no sistema e neste site, é o que torna a leitura imediata para quem já viu um relatório anterior.',
   },
   {
     titulo: 'Perda em kg/h e em reais',
@@ -129,20 +130,25 @@ export default function LaudoExemplo() {
   return (
     <>
       <Secao>
-        <div style={{ maxWidth: '62ch' }} className="pilha-6">
-          <TituloSecao
-            nivel={1}
-            marcador="O entregável"
-            titulo="Um laudo de inspeção, aberto"
-            lead="Este é o documento que você recebe ao final da inspeção: de 10 a 40 páginas com cada purgador identificado, classificado e precificado. Está aberto de propósito — sem formulário para ver."
-          />
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao
+              nivel={1}
+              marcador="O entregável"
+              titulo="Um laudo de inspeção, aberto"
+              lead="Este é o documento que você recebe ao final da inspeção: de 10 a 40 páginas com cada purgador identificado, classificado e precificado. Está aberto de propósito, sem formulário para ver."
+            />
+          </div>
+          <div className="moldura">
+            <Foto slot="traduzirLaudo" prioridade />
+          </div>
         </div>
       </Secao>
 
       <Secao fundo="alt">
         <TituloSecao
           titulo="Resumo executivo"
-          lead="Planta de demonstração — Alimentos / PR. É um exemplo construído para mostrar o formato do documento, não um cliente: os agregados abaixo saem da mesma fórmula que a Oikos usa em campo, aplicada a um parque hipotético de 250 pontos."
+          lead="Planta de demonstração, Alimentos / PR. É um exemplo construído para mostrar o formato do documento, não um cliente: os agregados abaixo saem da mesma fórmula que a Oikos usa em campo, aplicada a um parque hipotético de 250 pontos."
         />
 
         <div className="grade-3" style={{ marginTop: 48 }}>
@@ -200,7 +206,7 @@ export default function LaudoExemplo() {
         <p className="t-small t-mudo" style={{ marginTop: 16 }}>
           Amostra de 5 dos {DEMO.purgadores} pontos do exemplo. Custo calculado com vapor a
           R$ {DEMO.custoVaporPorTonelada}/t e {DEMO.horasAno.toLocaleString('pt-BR')} horas
-          de operação por ano — no laudo real, as premissas são as da sua planta e ficam
+          de operação por ano, no laudo real, as premissas são as da sua planta e ficam
           declaradas no rodapé de cada tabela.
         </p>
       </Secao>

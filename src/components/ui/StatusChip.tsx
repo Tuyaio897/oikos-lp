@@ -1,7 +1,7 @@
 export type Status = 'ok' | 'vazando' | 'bloqueado' | 'fora' | 'nao-aval';
 
 /**
- * Cores e rótulos de status — os MESMOS do app e do relatório RPV.
+ * Cores e rótulos de status, os MESMOS do app e do relatório RPV.
  *
  * A consistência entre o que o cliente vê no site e o que recebe no laudo é
  * uma prova de seriedade (§6.2). Não divergir daqui.

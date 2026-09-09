@@ -4,7 +4,7 @@ import { z } from 'zod';
  * Contrato do lead (§10.5).
  *
  * Vive fora do arquivo da Server Action porque um módulo 'use server' só pode
- * exportar funções async — o schema é um objeto.
+ * exportar funções async, o schema é um objeto.
  */
 export const LeadSchema = z.object({
   nome: z.string().min(3, 'Informe seu nome completo.'),
@@ -21,7 +21,7 @@ export const LeadSchema = z.object({
   consentimento: z.literal(true, {
     message: 'É necessário aceitar a política de privacidade.',
   }),
-  /** Honeypot: precisa vir vazio (§10.2 — nunca captcha aritmético). */
+  /** Honeypot: precisa vir vazio (§10.2, nunca captcha aritmético). */
   website: z.string().max(0),
   etapa: z.enum(['parcial', 'completo']),
 });

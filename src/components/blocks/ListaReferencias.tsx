@@ -4,7 +4,7 @@ import { REFERENCIAS, type Referencia } from '@/config/referencias';
 /**
  * Lista de referências técnicas e científicas.
  *
- * Cada item abre a fonte original. Nenhuma citação foi construída — se um link
+ * Cada item abre a fonte original. Nenhuma citação foi construída, se um link
  * sair do ar, tirar a entrada em vez de deixar o link quebrado.
  */
 export function ListaReferencias({ itens = REFERENCIAS }: { itens?: Referencia[] }) {

@@ -20,10 +20,8 @@ export function Header() {
     return () => window.removeEventListener('scroll', aoRolar);
   }, []);
 
-  // Fecha o menu ao navegar.
   useEffect(() => setAberto(false), [pathname]);
 
-  // Trava o scroll do corpo enquanto o painel mobile está aberto.
   useEffect(() => {
     document.body.style.overflow = aberto ? 'hidden' : '';
     return () => {
@@ -44,33 +42,24 @@ export function Header() {
 
   return (
     <header className="cabecalho" data-rolado={rolado}>
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: 24,
-          minHeight: 72,
-        }}
-      >
-        <Link href="/" aria-label="Oikos — página inicial" style={{ flexShrink: 0 }}>
-          {/* O logo original é branco (feito para o fundo escuro antigo). O
-              header agora é claro, então usa a variante em Vapor Oliva. */}
+      <div className="container cabecalho-linha">
+        <Link href="/" aria-label="Oikos, página inicial" style={{ flexShrink: 0, display: 'flex' }}>
+          {/* O logo original é branco, feito para o fundo escuro antigo.
+              O header é claro, então usa a variante em Vapor Oliva. */}
           <Image
             src="/imagens/logo-oikos-escuro.svg"
             alt="Oikos"
-            width={132}
-            height={36}
+            width={124}
+            height={34}
             priority
-            style={{ height: 36, width: 'auto' }}
+            style={{ height: 34, width: 'auto' }}
           />
         </Link>
 
         <nav aria-label="Navegação principal" className="nav-desktop">
-          <ul style={{ display: 'flex', gap: 28, listStyle: 'none', alignItems: 'center' }}>
+          <ul>
             {NAV_PRINCIPAL.map((item) => {
-              const ativo = pathname.startsWith(item.href);
+              const ativo = pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <li key={item.href}>
                   <Link
@@ -86,31 +75,39 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="acoes-desktop" style={{ alignItems: 'center', gap: 16 }}>
-          {/* Indústria liga. Telefone visível em desktop (§7.2). */}
+        <div className="acoes-desktop" style={{ alignItems: 'center', gap: 22, flexShrink: 0 }}>
           {tel && preenchido(SITE.telefone) ? (
             <a
               href={tel}
-              className="nav-link"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 600 }}
+              className="tel-header"
+              style={{
+                alignItems: 'center',
+                gap: 7,
+                fontSize: 15,
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                color: 'var(--grafite-700)',
+              }}
             >
-              <Phone size={16} aria-hidden="true" />
+              <Phone size={15} aria-hidden="true" />
               <span className="num">{SITE.telefone}</span>
             </a>
           ) : null}
+
           <Link
             href={linkSistema()}
-            className="btn btn-secundario"
-            style={{ minHeight: 44, padding: '10px 18px', fontSize: 15 }}
+            className="nav-link link-sistema-header"
+            style={{ height: 'auto', fontWeight: 600, color: 'var(--azul-700)' }}
           >
             Acessar o sistema
           </Link>
+
           <Link
             href="/contato"
             className="btn btn-primario"
-            style={{ minHeight: 44, padding: '10px 20px', fontSize: 15 }}
+            style={{ minHeight: 46, padding: '11px 20px', fontSize: 15, whiteSpace: 'nowrap' }}
           >
-            Falar com um especialista
+            Falar com especialista
           </Link>
         </div>
 
@@ -121,7 +118,7 @@ export function Header() {
           aria-controls="menu-mobile"
           aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
           onClick={() => setAberto((v) => !v)}
-          style={{ width: 48, height: 48, alignItems: 'center', justifyContent: 'center' }}
+          style={{ width: 48, height: 48, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
         >
           {aberto ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
@@ -132,7 +129,7 @@ export function Header() {
           id="menu-mobile"
           style={{
             position: 'fixed',
-            inset: '72px 0 0',
+            inset: '76px 0 0',
             background: 'var(--bg)',
             padding: '24px',
             overflowY: 'auto',
@@ -145,7 +142,13 @@ export function Header() {
                 <li key={item.href} style={{ borderBottom: '1px solid var(--border)' }}>
                   <Link
                     href={item.href}
-                    style={{ display: 'block', fontSize: 20, fontWeight: 600, padding: '14px 0', minHeight: 48 }}
+                    style={{
+                      display: 'block',
+                      fontSize: 19,
+                      fontWeight: 600,
+                      padding: '15px 0',
+                      minHeight: 48,
+                    }}
                   >
                     {item.rotulo}
                   </Link>

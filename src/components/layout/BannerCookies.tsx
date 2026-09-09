@@ -8,7 +8,7 @@ const CHAVE = 'oikos-consentimento-analytics';
 /**
  * Banner de cookies (§12).
  *
- * O GTM só é injetado depois do aceite — recusar é uma opção real, não
+ * O GTM só é injetado depois do aceite, recusar é uma opção real, não
  * decorativa, e é o padrão enquanto o visitante não escolhe. Sem GTM_ID
  * configurado, o banner nem aparece: não há o que consentir.
  */

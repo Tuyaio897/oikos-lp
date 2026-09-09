@@ -3,13 +3,13 @@ titulo: Política de Privacidade
 atualizadoEm: 2026-09-08
 ---
 
-Esta política descreve como a Oikos Desenvolvimento Ltda. trata os dados pessoais coletados neste site, em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados — LGPD).
+Esta política descreve como a Oikos Desenvolvimento Ltda. trata os dados pessoais coletados neste site, em conformidade com a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados, LGPD).
 
 ## Quem é o controlador
 
 **Oikos Desenvolvimento Ltda.**
 CNPJ 68.928.719/0001-20
-R. Monsenhor Manoel Vicente, 550 — Água Verde, Curitiba/PR, CEP 80620-230
+R. Monsenhor Manoel Vicente, 550, Água Verde, Curitiba/PR, CEP 80620-230
 Contato para assuntos de privacidade: **comercial@oikos.eco.br**
 
 ## Quais dados coletamos
@@ -19,7 +19,7 @@ Coletamos apenas os dados que você informa voluntariamente nos formulários do 
 - **Etapa de contato:** nome completo, número de WhatsApp e e-mail corporativo.
 - **Etapa de qualificação:** empresa, cidade e UF da planta, quantidade aproximada de purgadores e segmento de atuação.
 
-Se você preencher a primeira etapa e não concluir a segunda, os dados já informados são registrados como contato parcial — para que possamos retornar o seu interesse.
+Se você preencher a primeira etapa e não concluir a segunda, os dados já informados são registrados como contato parcial, para que possamos retornar o seu interesse.
 
 Não coletamos dados sensíveis, não solicitamos documentos pessoais e não realizamos qualquer tipo de perfilamento automatizado que produza efeitos jurídicos sobre você.
 
@@ -35,22 +35,22 @@ Não vendemos, alugamos nem cedemos seus dados a terceiros para fins de marketin
 
 ## Base legal
 
-O tratamento dos dados do formulário é fundamentado no **consentimento** do titular (art. 7º, I, da LGPD), manifestado pela marcação da caixa de aceite — que nunca vem pré-marcada — e, quanto ao prosseguimento de tratativas comerciais, nos **procedimentos preliminares relacionados a contrato** a pedido do titular (art. 7º, V).
+O tratamento dos dados do formulário é fundamentado no **consentimento** do titular (art. 7º, I, da LGPD), manifestado pela marcação da caixa de aceite, que nunca vem pré-marcada, e, quanto ao prosseguimento de tratativas comerciais, nos **procedimentos preliminares relacionados a contrato** a pedido do titular (art. 7º, V).
 
 ## Com quem compartilhamos
 
 Para operar o site e o atendimento comercial, utilizamos os seguintes operadores, que tratam os dados exclusivamente por nossa conta e ordem:
 
-- **Vercel Inc.** — hospedagem do site;
-- **Resend** — envio das notificações de contato por e-mail;
-- **Sistema de gestão comercial (CRM)** — registro e acompanhamento do atendimento;
-- **Google (Google Tag Manager / Google Analytics)** — medição de uso do site, **somente se você aceitar** os cookies de análise.
+- **Vercel Inc.**, hospedagem do site;
+- **Resend**, envio das notificações de contato por e-mail;
+- **Sistema de gestão comercial (CRM)**, registro e acompanhamento do atendimento;
+- **Google (Google Tag Manager / Google Analytics)**, medição de uso do site, **somente se você aceitar** os cookies de análise.
 
 Parte desses serviços pode processar dados fora do Brasil. Nesses casos, a transferência internacional observa o disposto no art. 33 da LGPD.
 
 ## Cookies
 
-O site não usa cookies de análise ou publicidade sem o seu aceite. O banner exibido na primeira visita permite recusar — e recusar é uma opção real: as tags de medição simplesmente não são carregadas. Sua escolha fica registrada no seu próprio navegador e pode ser alterada limpando os dados do site.
+O site não usa cookies de análise ou publicidade sem o seu aceite. O banner exibido na primeira visita permite recusar, e recusar é uma opção real: as tags de medição simplesmente não são carregadas. Sua escolha fica registrada no seu próprio navegador e pode ser alterada limpando os dados do site.
 
 Nenhum cookie é necessário para navegar, ler o conteúdo ou visualizar o laudo de exemplo.
 

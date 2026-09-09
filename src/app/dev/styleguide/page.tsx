@@ -49,12 +49,12 @@ export default function Styleguide() {
       <Secao fundo="alt">
         <h2 className="t-h2">Escala tipográfica</h2>
         <div className="pilha-6" style={{ marginTop: 32 }}>
-          <p className="t-display">display — 34/60px</p>
-          <p className="t-h2">h2 — 26/40px</p>
-          <p className="t-h3">h3 — 20/24px</p>
-          <p className="t-body-lg">body-lg — 17/19px</p>
-          <p className="t-body">body — 16/17px</p>
-          <p className="t-small">small — 14px</p>
+          <p className="t-display">display, 34/60px</p>
+          <p className="t-h2">h2, 26/40px</p>
+          <p className="t-h3">h3, 20/24px</p>
+          <p className="t-body-lg">body-lg, 17/19px</p>
+          <p className="t-body">body, 16/17px</p>
+          <p className="t-small">small, 14px</p>
           <p className="t-data">1.234.567</p>
         </div>
       </Secao>
@@ -112,7 +112,7 @@ export default function Styleguide() {
       <Secao>
         <h2 className="t-h2">Dados</h2>
         <div className="grade-3" style={{ marginTop: 32 }}>
-          <Dado valor="15–30%" fonte="doeFemp">
+          <Dado valor="15 a 30%" fonte="doeFemp">
             dos purgadores falham sem programa regular de inspeção.
           </Dado>
           <KPI valor="250" rotulo="Purgadores avaliados" nota="planta de exemplo" />
@@ -146,7 +146,7 @@ export default function Styleguide() {
                 <td>
                   <span className="chip-status chip-ok">Operando</span>
                 </td>
-                <td className="num">—</td>
+                <td className="num"></td>
               </tr>
             </tbody>
           </table>

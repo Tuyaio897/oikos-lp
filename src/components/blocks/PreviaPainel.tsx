@@ -9,16 +9,16 @@ import { LinhaStatus } from '@/components/ui/StatusChip';
  * reais que sugeririam clientes. Ver docs/DECISOES.md.
  *
  * Até existirem capturas reais anonimizadas, mostramos a estrutura da tela em
- * HTML, com os mesmos tokens e as mesmas cores de status do laudo. É honesto —
- * não finge ser uma captura — e é coerente com a direção de design do §6.1,
+ * HTML, com os mesmos tokens e as mesmas cores de status do laudo. É honesto,
+ * não finge ser uma captura, e é coerente com a direção de design do §6.1,
  * que pede estrutura tabular.
  */
 
 const INVENTARIO = [
   { tag: 'PV-1042', local: 'Cavalete 02', tipo: 'Termodinâmico DN25', status: 'vazando' as const, kgh: '43,11', ano: 'R$ 86.220' },
   { tag: 'PV-1051', local: 'Coletor principal', tipo: 'Balde invertido DN15', status: 'bloqueado' as const, kgh: '12,99', ano: 'R$ 25.980' },
-  { tag: 'PV-1043', local: 'Cavalete 02', tipo: 'Termodinâmico DN25', status: 'ok' as const, kgh: '—', ano: '—' },
-  { tag: 'PV-1077', local: 'Traço de vapor', tipo: 'Termostático DN15', status: 'fora' as const, kgh: '—', ano: '—' },
+  { tag: 'PV-1043', local: 'Cavalete 02', tipo: 'Termodinâmico DN25', status: 'ok' as const, kgh: '', ano: '' },
+  { tag: 'PV-1077', local: 'Traço de vapor', tipo: 'Termostático DN15', status: 'fora' as const, kgh: '', ano: '' },
 ];
 
 export function PreviaInventario({ legenda }: { legenda?: string }) {
@@ -33,7 +33,7 @@ export function PreviaInventario({ legenda }: { legenda?: string }) {
           }}
         >
           <p className="t-small" style={{ fontWeight: 600 }}>
-            Inventário — fila ordenada por perda anual
+            Inventário, fila ordenada por perda anual
           </p>
         </div>
         <div className="tabela-wrap" style={{ border: 'none', borderRadius: 0 }}>
@@ -78,7 +78,7 @@ export function PreviaInventario({ legenda }: { legenda?: string }) {
 }
 
 const HISTORICO = [
-  { data: '12/03/2026', evento: 'Substituição — termodinâmico DN25', detalhe: 'Durou 19 meses' },
+  { data: '12/03/2026', evento: 'Substituição, termodinâmico DN25', detalhe: 'Durou 19 meses' },
   { data: '04/08/2024', evento: 'Reparo de sede', detalhe: 'Reincidência em 7 meses' },
   { data: '15/01/2024', evento: 'Primeira inspeção', detalhe: 'Encontrado vazando' },
 ];

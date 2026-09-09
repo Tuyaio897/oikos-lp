@@ -103,7 +103,7 @@ export default async function Artigo({ params }: Props) {
             <>
               <h2 className="t-h2">Veja como isso aparece num laudo</h2>
               <p className="t-body t-mudo">
-                Um relatório de inspeção completo e anonimizado, aberto — sem formulário
+                Um relatório de inspeção completo e anonimizado, aberto, sem formulário
                 para visualizar.
               </p>
               <div className="linha-botoes">

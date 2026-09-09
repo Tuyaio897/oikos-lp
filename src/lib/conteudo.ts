@@ -6,7 +6,7 @@ import { marked } from 'marked';
  * Leitura do conteúdo em Markdown de `content/` no build (§10.2).
  *
  * Desvio registrado em docs/DECISOES.md: a spec pedia MDX. Usamos Markdown puro
- * com front-matter simples — mesma ergonomia de autoria, arquivos versionados no
+ * com front-matter simples, mesma ergonomia de autoria, arquivos versionados no
  * repositório e sem a cadeia de build do MDX. Se algum dia o conteúdo precisar
  * de componentes React embutidos, migrar para MDX é direto.
  */
@@ -100,7 +100,7 @@ export function buscarCase(slug: string): Case | undefined {
 
 export type Documento = { titulo: string; atualizadoEm: string; html: string };
 
-/** Documentos avulsos em content/legal — política de privacidade, termos. */
+/** Documentos avulsos em content/legal, política de privacidade, termos. */
 export function lerDocumentoLegal(slug: string): Documento | undefined {
   const encontrado = lerPasta('legal').find((d) => d.slug === slug);
   if (!encontrado) return undefined;

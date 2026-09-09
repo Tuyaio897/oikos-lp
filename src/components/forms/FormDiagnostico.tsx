@@ -95,7 +95,7 @@ export function FormDiagnostico() {
           <span style={{ width: etapa === 1 ? '50%' : '100%' }} />
         </div>
         <p className="t-small t-mudo">
-          Etapa {etapa} de 2 — {etapa === 1 ? 'contato' : 'sua planta'}
+          Etapa {etapa} de 2, {etapa === 1 ? 'contato' : 'sua planta'}
         </p>
       </div>
 

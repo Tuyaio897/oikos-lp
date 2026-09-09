@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Secao, TituloSecao } from '@/components/layout/Secao';
 import { Botao } from '@/components/ui/Botao';
+import { Foto } from '@/components/ui/Foto';
 import { Dado, ListaFontes } from '@/components/data/Dado';
 import { FAQ, FAQJsonLd } from '@/components/blocks/FAQ';
 import { OFERTA } from '@/config/oferta';
@@ -18,7 +19,7 @@ const FAQ_INSPECAO: Pergunta[] = [
   {
     pergunta: 'Preciso parar a produção durante a inspeção?',
     resposta:
-      'Não. A avaliação é feita com o sistema em operação — é com vapor passando que o ultrassom distingue um purgador travado aberto de um operando normalmente.',
+      'Não. A avaliação é feita com o sistema em operação, é com vapor passando que o ultrassom distingue um purgador travado aberto de um operando normalmente.',
   },
   {
     pergunta: 'Quanto tempo leva por purgador?',
@@ -32,7 +33,7 @@ const FAQ_INSPECAO: Pergunta[] = [
   {
     pergunta: 'Que equipamento vocês usam?',
     resposta:
-      'O detector ultrassônico UP100, somado à medição de temperatura de entrada e saída. A combinação das duas leituras é o que separa um purgador operando normalmente de um travado aberto — só a temperatura, sozinha, engana. No contrato mensal, é o mesmo equipamento que fica com a sua equipe para as rondas periódicas.',
+      'O detector ultrassônico UP100, somado à medição de temperatura de entrada e saída. A combinação das duas leituras é o que separa um purgador operando normalmente de um travado aberto, só a temperatura, sozinha, engana. No contrato mensal, é o mesmo equipamento que fica com a sua equipe para as rondas periódicas.',
   },
   {
     pergunta: 'Vocês fazem o reparo também?',
@@ -45,17 +46,17 @@ const ETAPAS = [
   {
     titulo: 'Levantamento prévio',
     texto:
-      'Antes de ir a campo, alinhamos o escopo: quantidade estimada de pontos, áreas cobertas, pressões de operação e o custo do vapor da sua planta — o número que vai converter kg/h em reais no laudo.',
+      'Antes de ir a campo, alinhamos o escopo: quantidade estimada de pontos, áreas cobertas, pressões de operação e o custo do vapor da sua planta, o número que vai converter kg/h em reais no laudo.',
   },
   {
     titulo: 'Avaliação ponto a ponto',
     texto:
-      'Cada purgador recebe leitura de ultrassom e de temperatura. O técnico registra no aplicativo Oikos, ainda em campo, a tag, a localização, o fabricante, o modelo, o DN, a pressão e a condição encontrada — com foto do ponto.',
+      'Cada purgador recebe leitura de ultrassom e de temperatura. O técnico registra no aplicativo Oikos, ainda em campo, a tag, a localização, o fabricante, o modelo, o DN, a pressão e a condição encontrada, com foto do ponto.',
   },
   {
     titulo: 'Classificação padronizada',
     texto:
-      'A condição é classificada em uma escala fechada — operando, vazando, bloqueado, fora de operação ou não avaliado. A escala é a mesma para toda a equipe, o que torna a inspeção deste ano comparável com a do ano que vem.',
+      'A condição é classificada em uma escala fechada, operando, vazando, bloqueado, fora de operação ou não avaliado. A escala é a mesma para toda a equipe, o que torna a inspeção deste ano comparável com a do ano que vem.',
   },
   {
     titulo: 'Cálculo da perda',
@@ -90,17 +91,25 @@ export default function Inspecao() {
   return (
     <>
       <Secao>
-        <div style={{ maxWidth: '62ch' }} className="pilha-6">
-          <TituloSecao
-            nivel={1}
-            titulo="Inspeção de purgadores de vapor"
-            lead="Cada purgador da sua planta avaliado com ultrassom, classificado por uma escala padronizada e precificado no custo de vapor da sua operação. Com a produção rodando."
-          />
-          <div className="linha-botoes">
-            <Botao href="/contato">{OFERTA.ctaPrimario}</Botao>
-            <Botao href="/laudo-exemplo" variante="secundario">
-              {OFERTA.ctaSecundario}
-            </Botao>
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao
+              nivel={1}
+              marcador="O serviço de campo"
+              titulo="Inspeção de purgadores de vapor"
+              lead="Cada purgador da sua planta avaliado com ultrassom, classificado por uma escala padronizada e precificado no custo de vapor da sua operação. Com a produção rodando."
+            />
+            <div className="linha-botoes">
+              <Botao href="/contato" seta>
+                {OFERTA.ctaPrimario}
+              </Botao>
+              <Botao href="/laudo-exemplo" variante="secundario">
+                {OFERTA.ctaSecundario}
+              </Botao>
+            </div>
+          </div>
+          <div className="moldura">
+            <Foto slot="inspecaoCasaCaldeiras" prioridade />
           </div>
         </div>
       </Secao>
@@ -115,11 +124,11 @@ export default function Inspecao() {
             das falhas passaram despercebidas em uma auditoria manual que a própria equipe
             considerava 95% a 97% confiável.
           </Dado>
-          <Dado valor="15–30%" fonte="doeFemp">
+          <Dado valor="15 a 30%" fonte="doeFemp">
             dos purgadores instalados operam com falha quando não há programa regular de
             inspeção.
           </Dado>
-          <Dado valor="5–10%" fonte="doeFemp">
+          <Dado valor="5 a 10%" fonte="doeFemp">
             da população volta a falhar a cada ano, mesmo depois de um programa bem
             executado.
           </Dado>
@@ -130,7 +139,14 @@ export default function Inspecao() {
       </Secao>
 
       <Secao>
-        <TituloSecao titulo="Como a inspeção é feita" />
+        <div className="grade-2 topo">
+          <div>
+            <TituloSecao marcador="Passo a passo" titulo="Como a inspeção é feita" />
+          </div>
+          <div className="moldura">
+            <Foto slot="medirTecnico" />
+          </div>
+        </div>
         <ol style={{ marginTop: 40, listStyle: 'none', maxWidth: 820 }}>
           {ETAPAS.map((etapa, i) => (
             <li
@@ -145,7 +161,7 @@ export default function Inspecao() {
             >
               <span
                 className="t-data"
-                style={{ fontSize: 28, color: 'var(--oikos-aco)' }}
+                style={{ fontSize: 28, color: 'var(--azul-300)' }}
                 aria-hidden="true"
               >
                 {String(i + 1).padStart(2, '0')}
@@ -164,7 +180,7 @@ export default function Inspecao() {
           <div className="pilha-4">
             <h2 className="t-h2">O que você recebe</h2>
             <p className="t-body t-mudo prosa">
-              O laudo é o produto da inspeção — e é o documento que sustenta o pedido de
+              O laudo é o produto da inspeção, e é o documento que sustenta o pedido de
               verba de manutenção, porque fala em reais e não em kg/h.
             </p>
             <div className="linha-botoes">

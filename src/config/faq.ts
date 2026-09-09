@@ -16,7 +16,7 @@ export const FAQ_HOME: Pergunta[] = [
   {
     pergunta: 'Minha equipe consegue mesmo fazer a inspeção sozinha?',
     resposta:
-      'Consegue. O UP100 foi feito para uso de campo por equipe de manutenção, e a leitura é objetiva — não depende de ouvido treinado. O que exige método é a classificação e o cálculo da perda, e essa parte continua sendo nossa, todo mês.',
+      'Consegue. O UP100 foi feito para uso de campo por equipe de manutenção, e a leitura é objetiva, não depende de ouvido treinado. O que exige método é a classificação e o cálculo da perda, e essa parte continua sendo nossa, todo mês.',
   },
   {
     pergunta: 'Quanto tempo leva uma inspeção?',
@@ -25,12 +25,12 @@ export const FAQ_HOME: Pergunta[] = [
   },
   {
     pergunta: 'Vocês atendem qual região?',
-    resposta: `Atendemos ${SITE.regiaoAtendimentoTexto} com equipe própria. Para plantas fora dessa região, avaliamos caso a caso — fale com a gente antes de descartar.`,
+    resposta: `Atendemos ${SITE.regiaoAtendimentoTexto} com equipe própria. Para plantas fora dessa região, avaliamos caso a caso, fale com a gente antes de descartar.`,
   },
   {
     pergunta: 'Preciso parar a produção durante a inspeção?',
     resposta:
-      'Não. A avaliação é feita com o sistema em operação — é justamente com vapor passando que o ultrassom e a leitura de temperatura conseguem distinguir um purgador travado aberto de um operando normalmente.',
+      'Não. A avaliação é feita com o sistema em operação, é justamente com vapor passando que o ultrassom e a leitura de temperatura conseguem distinguir um purgador travado aberto de um operando normalmente.',
   },
   {
     pergunta: 'Vocês vendem ou trocam purgadores?',
@@ -40,7 +40,7 @@ export const FAQ_HOME: Pergunta[] = [
   {
     pergunta: 'Como é calculada a perda em reais?',
     resposta:
-      'A perda de massa de cada purgador é calculada em kg/h a partir do diâmetro, da pressão de operação e da condição encontrada. Essa massa é multiplicada pelas horas de operação e pelo custo do vapor da sua planta — o seu custo, não uma média de mercado. Todas as premissas ficam declaradas no laudo.',
+      'A perda de massa de cada purgador é calculada em kg/h a partir do diâmetro, da pressão de operação e da condição encontrada. Essa massa é multiplicada pelas horas de operação e pelo custo do vapor da sua planta, o seu custo, não uma média de mercado. Todas as premissas ficam declaradas no laudo.',
   },
   {
     pergunta: 'E se eu quiser gerir tudo em planilha?',

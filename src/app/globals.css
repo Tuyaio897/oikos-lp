@@ -48,29 +48,22 @@ h1, h2, h3, h4 {
   letter-spacing: -0.025em;
 }
 
-.t-display { font-size: 38px; line-height: 1.06; letter-spacing: -0.035em; }
-.t-h2      { font-size: 28px; line-height: 1.14; }
-.t-h3      { font-size: 20px; line-height: 1.28; font-weight: 600; letter-spacing: -0.02em; }
-.t-body-lg { font-size: 17px; line-height: 1.6; }
-.t-body    { font-size: 16px; line-height: 1.65; }
+/* Escala fluida: acompanha o monitor em vez de saltar em breakpoints, e o
+   teto é mais baixo, porque em tela grande o título estava enorme demais. */
+.t-display { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.07; letter-spacing: -0.032em; }
+.t-h2      { font-size: clamp(25px, 2.7vw, 37px); line-height: 1.16; }
+.t-h3      { font-size: clamp(18px, 1.45vw, 21px); line-height: 1.3; font-weight: 600; letter-spacing: -0.015em; }
+.t-body-lg { font-size: clamp(16px, 1.15vw, 18px); line-height: 1.62; }
+.t-body    { font-size: clamp(15px, 1vw, 17px); line-height: 1.65; }
 .t-small   { font-size: 14px; line-height: 1.55; }
 .t-data {
   font-family: var(--font-display);
-  font-size: 34px; line-height: 1; font-weight: 700;
+  font-size: clamp(28px, 2.9vw, 40px); line-height: 1.04; font-weight: 700;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.032em;
 }
 /* Legenda dentro de um número grande volta ao tracking normal */
 .t-data .t-body, .t-data .t-small { letter-spacing: normal; font-family: var(--font-text); }
-
-@media (min-width: 768px) {
-  .t-display { font-size: 68px; }
-  .t-h2      { font-size: 44px; }
-  .t-h3      { font-size: 23px; }
-  .t-body-lg { font-size: 19px; }
-  .t-body    { font-size: 17px; }
-  .t-data    { font-size: 52px; }
-}
 
 .prosa { max-width: 62ch; }
 .prosa p + p { margin-top: 18px; }
@@ -78,49 +71,46 @@ h1, h2, h3, h4 {
 .t-mudo { color: var(--grafite-500); }
 .num { font-variant-numeric: tabular-nums; }
 
-/* Palavra destacada em título — gradiente azul→verde da marca */
-.realce {
-  background: linear-gradient(100deg, var(--azul-500) 0%, var(--verde-500) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
 
-/* Rótulo pequeno acima de um título de seção, com traço colorido.
-   Não é o "eyebrow" em caixa alta que foi removido: é minúsculo,
-   colorido e funciona como marcador de navegação visual. */
+/* Rótulo de seção em forma de tag. Não é o eyebrow em CAIXA ALTA do site
+   antigo: é minúsculo, em caixa normal, e serve de marcador de navegação. */
 .marcador {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 13px; font-weight: 600; letter-spacing: .01em;
+  display: inline-flex; align-items: center;
+  align-self: flex-start;
+  padding: 5px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--azul-100);
+  background: var(--azul-50);
   color: var(--azul-700);
-}
-.marcador::before {
-  content: ''; width: 28px; height: 2px; border-radius: 2px;
-  background: linear-gradient(90deg, var(--azul-500), var(--verde-500));
+  font-size: 13px; font-weight: 600; letter-spacing: .005em;
+  white-space: nowrap;
 }
 .secao-escura .marcador,
 .heroi .marcador,
-.rodape .marcador { color: var(--azul-300); }
-
-/* Sobre fundo quase preto, o gradiente de realce precisa dos tons claros */
-.secao-escura .realce,
-.heroi .realce {
-  background: linear-gradient(100deg, var(--azul-300) 0%, var(--verde-300) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.rodape .marcador {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.18);
+  color: #FFFFFF;
 }
+.secao-verde .marcador {
+  background: var(--verde-50);
+  border-color: var(--verde-100);
+  color: var(--verde-texto);
+}
+
 
 /* ─────────────────────────────────────────────────────────────
    LAYOUT
    ───────────────────────────────────────────────────────────── */
+/* O container cresce com o monitor em vez de travar em 1200px */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: clamp(1200px, 90vw, 1560px);
   margin-inline: auto;
   padding-inline: 22px;
 }
 @media (min-width: 768px) { .container { padding-inline: 40px; } }
+@media (min-width: 1600px) { .container { padding-inline: 56px; } }
 
 .secao { padding-block: 72px; position: relative; }
 @media (min-width: 768px) { .secao { padding-block: 120px; } }
@@ -130,7 +120,6 @@ h1, h2, h3, h4 {
 
 .secao-escura {
   background: var(--escuro);
-  background-image: var(--grad-luz);
   color: #FFFFFF;
 }
 .secao-escura h1, .secao-escura h2, .secao-escura h3 { color: #FFFFFF; }
@@ -170,56 +159,53 @@ h1, h2, h3, h4 {
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 
-/* Primário — azul da marca, com profundidade */
+/* Primário: azul chapado. Sem gradiente, contraste 14:1 sobre branco. */
 .btn-primario {
-  background: var(--grad-btn);
+  background: var(--azul);
   color: #FFFFFF;
-  box-shadow: var(--sombra-btn);
+  box-shadow: var(--sombra-1);
 }
-.btn-primario:hover { background: var(--grad-btn-h); box-shadow: 0 4px 8px rgba(7,26,82,.30), 0 14px 32px rgba(7,26,82,.32); }
+.btn-primario:hover { background: var(--azul-700); box-shadow: var(--sombra-2); }
 
-/* Secundário — contorno */
+/* Secundário: contorno */
 .btn-secundario {
   background: var(--bg);
   color: var(--azul-900);
   border-color: var(--border-forte);
+}
+.btn-secundario:hover { border-color: var(--azul); color: var(--azul); box-shadow: var(--sombra-1); }
+
+/* Verde: oliva chapado, contraste 12:1 */
+.btn-verde {
+  background: var(--verde-800);
+  color: #FFFFFF;
   box-shadow: var(--sombra-1);
 }
-.btn-secundario:hover { border-color: var(--azul-500); color: var(--azul-700); box-shadow: var(--sombra-2); }
-
-/* Verde — ação secundária positiva */
-.btn-verde {
-  background: var(--grad-verde);
-  color: #FFFFFF;
-  box-shadow: 0 1px 2px rgba(50,55,37,.3), 0 6px 16px rgba(50,55,37,.22);
-}
-.btn-verde:hover { box-shadow: 0 4px 10px rgba(50,55,37,.3), 0 14px 30px rgba(50,55,37,.28); }
+.btn-verde:hover { background: var(--verde-700); box-shadow: var(--sombra-2); }
 
 .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* Sobre fundo escuro, o primário precisa clarear para se destacar do fundo */
+/* Sobre fundo escuro o primário inverte: branco com texto azul quase preto.
+   É o maior contraste possível e evita azul sobre azul. */
 .heroi .btn-primario,
 .secao-escura .btn-primario {
-  background: linear-gradient(180deg, var(--azul-500) 0%, var(--azul-700) 100%);
-  box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(37,87,199,.36);
+  background: #FFFFFF;
+  color: var(--azul-950);
+  box-shadow: none;
 }
 .heroi .btn-primario:hover,
-.secao-escura .btn-primario:hover {
-  background: linear-gradient(180deg, #3A6BDB 0%, var(--azul-500) 100%);
-  box-shadow: 0 4px 10px rgba(0,0,0,.4), 0 16px 40px rgba(37,87,199,.46);
-}
+.secao-escura .btn-primario:hover { background: var(--azul-50); color: var(--azul-950); }
 
-/* Sobre fundo escuro */
 .heroi .btn-secundario,
 .secao-escura .btn-secundario,
 .rodape .btn-secundario {
-  background: rgba(255,255,255,.06);
+  background: transparent;
   color: #FFFFFF;
-  border-color: rgba(255,255,255,.28);
+  border-color: rgba(255,255,255,.38);
   box-shadow: none;
 }
 .heroi .btn-secundario:hover,
-.secao-escura .btn-secundario:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.6); color: #FFFFFF; }
+.secao-escura .btn-secundario:hover { background: rgba(255,255,255,.10); border-color: #FFFFFF; }
 
 .link-azul {
   color: var(--azul-700);
@@ -234,14 +220,17 @@ h1, h2, h3, h4 {
 .heroi .link-azul,
 .rodape .link-azul { color: var(--azul-300); text-decoration-color: rgba(124,155,224,.5); }
 
-.secao-escura .link-seta,
-.heroi .link-seta { color: var(--azul-300); }
+.secao-escura a.link-seta:not(.btn),
+.heroi a.link-seta:not(.btn) { color: var(--azul-300); }
 
-/* Link com seta que anda no hover */
+/* Link com seta que anda no hover.
+   A cor só se aplica fora de botão: .link-seta vinha depois de .btn-* com a
+   mesma especificidade e sobrescrevia a cor do texto do botão. */
 .link-seta {
   display: inline-flex; align-items: center; gap: 8px;
-  font-weight: 600; color: var(--azul-700);
+  font-weight: 600;
 }
+a.link-seta:not(.btn) { color: var(--azul-700); }
 .link-seta svg, .link-seta .seta { transition: transform .2s cubic-bezier(.2,.7,.3,1); }
 .link-seta:hover svg, .link-seta:hover .seta { transform: translateX(4px); }
 
@@ -270,7 +259,7 @@ h1, h2, h3, h4 {
 .card-filete { position: relative; overflow: hidden; }
 .card-filete::before {
   content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
-  background: linear-gradient(90deg, var(--azul-500), var(--verde-500));
+  background: var(--azul-500);
 }
 
 .card-vidro {
@@ -327,7 +316,7 @@ h1, h2, h3, h4 {
 .heroi .tabela-wrap .t-mudo, .secao-escura .tabela-wrap .t-mudo { color: var(--grafite-500); }
 
 .heroi .card .link-azul, .secao-escura .card .link-azul,
-.heroi .card .link-seta, .secao-escura .card .link-seta,
+.heroi .card a.link-seta:not(.btn), .secao-escura .card a.link-seta:not(.btn),
 .heroi .card .marcador, .secao-escura .card .marcador { color: var(--azul-700); }
 
 /* ─────────────────────────────────────────────────────────────
@@ -344,16 +333,14 @@ h1, h2, h3, h4 {
 /* Véu azul sobre foto — amarra a fotografia à paleta da marca */
 .moldura-azul::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(160deg, rgba(10,36,114,.42) 0%, rgba(5,15,51,.20) 45%, rgba(110,138,34,.20) 100%);
+  background: rgba(5, 15, 51, .18);
   pointer-events: none;
 }
 
 /* Superfície para renders de produto em PNG com fundo claro */
 .palco {
   border-radius: var(--raio-grande);
-  background:
-    radial-gradient(70% 70% at 50% 25%, rgba(255,255,255,.9) 0%, rgba(255,255,255,0) 70%),
-    var(--grad-azul);
+  background: var(--azul-950);
   padding: 32px;
   display: grid;
   place-items: center;
@@ -363,11 +350,88 @@ h1, h2, h3, h4 {
 
 .palco-claro {
   border-radius: var(--raio-grande);
-  background: linear-gradient(160deg, var(--azul-50), var(--verde-50));
+  background: var(--azul-50);
   border: 1px solid var(--border);
   padding: 28px;
   display: grid;
   place-items: center;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SLOT DE FOTO PENDENTE
+   Aparece enquanto o arquivo não existe em public/. Ver config/fotos.ts.
+   ───────────────────────────────────────────────────────────── */
+.foto-pendente {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 28px;
+  width: 100%;
+  border: 1px dashed var(--azul-300);
+  border-radius: var(--raio-grande);
+  background: var(--azul-50);
+  color: var(--azul-900);
+}
+.foto-pendente svg { color: var(--azul-500); }
+.foto-pendente-briefing {
+  color: var(--grafite-500);
+  max-width: 46ch;
+  line-height: 1.55;
+}
+.foto-pendente-caminho {
+  font-size: 12px;
+  color: var(--azul-700);
+  background: var(--bg);
+  border: 1px solid var(--azul-100);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+.secao-escura .foto-pendente,
+.heroi .foto-pendente {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.28);
+  color: #FFFFFF;
+}
+.secao-escura .foto-pendente svg,
+.heroi .foto-pendente svg { color: var(--azul-300); }
+.secao-escura .foto-pendente-briefing,
+.heroi .foto-pendente-briefing { color: rgba(226,232,246,.72); }
+.secao-escura .foto-pendente-caminho,
+.heroi .foto-pendente-caminho {
+  background: rgba(0,0,0,.28);
+  border-color: rgba(255,255,255,.2);
+  color: var(--azul-300);
+}
+
+/* Cartão de perda flutuando sobre a foto, sem cobri-la inteira.
+   Ocupa o canto inferior esquerdo e deixa a maior parte da imagem à vista. */
+.foto-com-cartao { position: relative; }
+.cartao-flutuante { margin-top: 16px; }
+
+@media (min-width: 1024px) {
+  .cartao-flutuante {
+    position: absolute;
+    left: -28px;
+    bottom: -28px;
+    width: min(286px, 54%);
+    margin-top: 0;
+    z-index: 2;
+  }
+}
+
+/* Faixa de dados abaixo do herói */
+.faixa-dados {
+  border-top: 1px solid rgba(255,255,255,.14);
+  margin-top: 56px;
+  padding-top: 32px;
+  display: grid;
+  gap: 28px;
+}
+@media (min-width: 768px) {
+  .faixa-dados { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -376,7 +440,6 @@ h1, h2, h3, h4 {
 .heroi {
   position: relative;
   background: var(--escuro);
-  background-image: var(--grad-luz);
   color: #FFFFFF;
   overflow: hidden;
   padding-block: 64px 72px;
@@ -398,13 +461,7 @@ h1, h2, h3, h4 {
 }
 .heroi > * { position: relative; }
 
-.cartao-contador { margin-top: 18px; }
-@media (min-width: 768px) {
-  .cartao-contador { position: absolute; left: 22px; right: 22px; bottom: 22px; margin-top: 0; }
-}
-@media (min-width: 1024px) {
-  .cartao-contador { left: -32px; right: auto; bottom: -24px; width: min(340px, 88%); }
-}
+
 
 /* ─────────────────────────────────────────────────────────────
    HEADER
@@ -424,25 +481,49 @@ h1, h2, h3, h4 {
 
 .nav-desktop, .acoes-desktop { display: none; }
 .botao-menu { display: inline-flex; }
+.tel-header { display: none; }
 
-@media (min-width: 1024px) {
+/* 1140px e nao 1024: a 1024 o menu ficava apertado e quebrava linha */
+@media (min-width: 1140px) {
   .nav-desktop { display: block; }
   .acoes-desktop { display: flex; }
   .botao-menu { display: none; }
 }
+/* Telefone e link do sistema so entram quando ha folga de verdade */
+@media (min-width: 1280px) { .link-sistema-header { display: inline-flex; } }
+@media (min-width: 1440px) { .tel-header { display: inline-flex; } }
+
+.cabecalho-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 76px;
+}
+.nav-desktop { min-width: 0; }
+.nav-desktop ul {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  list-style: none;
+}
+.link-sistema-header { display: none; }
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   font-size: 15px; font-weight: 500;
-  padding-block: 8px;
+  height: 76px;
   color: var(--grafite-700);
   transition: color .15s ease;
 }
 .nav-link:hover { color: var(--azul-700); }
 .nav-link::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  content: ''; position: absolute; left: 0; right: 0; bottom: 22px; height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--azul-500), var(--verde-500));
+  background: var(--azul-500);
   transform: scaleX(0); transform-origin: left;
   transition: transform .2s cubic-bezier(.2,.7,.3,1);
 }
@@ -460,6 +541,11 @@ h1, h2, h3, h4 {
   box-shadow: var(--sombra-1);
 }
 table.tabela { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+/* Dentro de card estreito a tabela precisa caber, não rolar */
+.tabela-wrap.compacta { overflow-x: visible; }
+table.tabela.compacta { min-width: 0; font-size: 14px; }
+table.tabela.compacta th, table.tabela.compacta td { padding: 11px 12px; }
+table.tabela.compacta .chip-status { padding: 3px 9px 3px 8px; font-size: 12px; gap: 6px; }
 table.tabela th, table.tabela td {
   text-align: left; padding: 15px 18px;
   border-bottom: 1px solid var(--border);
@@ -499,7 +585,7 @@ table.tabela td.num, table.tabela th.num { text-align: right; font-variant-numer
 .barra-progresso { height: 5px; background: var(--aco-200); border-radius: 999px; overflow: hidden; }
 .barra-progresso > span {
   display: block; height: 100%; border-radius: 999px;
-  background: linear-gradient(90deg, var(--azul-500), var(--verde-500));
+  background: var(--azul-500);
   transition: width .3s cubic-bezier(.2,.7,.3,1);
 }
 
@@ -596,7 +682,6 @@ table.tabela td.num, table.tabela th.num { text-align: right; font-variant-numer
    ───────────────────────────────────────────────────────────── */
 .rodape {
   background: var(--escuro);
-  background-image: var(--grad-luz);
   color: #FFFFFF;
   padding-block: 72px 32px;
 }

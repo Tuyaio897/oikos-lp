@@ -2,7 +2,7 @@
  * Referências técnicas e científicas.
  *
  * Regra: só entra aqui o que existe e pode ser aberto. Nenhuma citação foi
- * construída — cada link foi verificado. Se uma referência sair do ar, tirar
+ * construída, cada link foi verificado. Se uma referência sair do ar, tirar
  * daqui em vez de deixar o link quebrado.
  */
 
@@ -27,7 +27,7 @@ export const REFERENCIAS: Referencia[] = [
     href: 'https://www.sciencedirect.com/science/article/abs/pii/S0263224126022049',
   },
   {
-    titulo: 'Steam Trap Performance Assessment — Federal Technology Alert',
+    titulo: 'Steam Trap Performance Assessment, Federal Technology Alert',
     autor: 'U.S. Department of Energy / FEMP',
     ano: '1999',
     tipo: 'Publicação governamental',
@@ -36,7 +36,7 @@ export const REFERENCIAS: Referencia[] = [
     href: 'https://www1.eere.energy.gov/femp/pdfs/fta_steamtrap.pdf',
   },
   {
-    titulo: 'Inspect and Repair Steam Traps — Energy Tips: Steam, Tip Sheet #1',
+    titulo: 'Inspect and Repair Steam Traps, Energy Tips: Steam, Tip Sheet #1',
     autor: 'U.S. Department of Energy',
     ano: '2012',
     tipo: 'Publicação governamental',

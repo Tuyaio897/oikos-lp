@@ -30,7 +30,7 @@ export function Secao({
 /**
  * Título de seção.
  *
- * `marcador` é um rótulo pequeno e colorido acima do título — não é o eyebrow
+ * `marcador` é um rótulo pequeno e colorido acima do título, não é o eyebrow
  * em CAIXA ALTA que foi removido do site antigo. Serve de marcador visual de
  * navegação e carrega o filete azul→verde da marca.
  */

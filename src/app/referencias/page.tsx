@@ -21,15 +21,11 @@ export default function Referencias() {
             <TituloSecao
               nivel={1}
               marcador="Base científica"
-              titulo={
-                <>
-                  Não pedimos que você <span className="realce">acredite</span> na gente
-                </>
-              }
+              titulo="Acredite nos dados, não em nós"
               lead="Todo número que a Oikos publica vem de uma destas fontes ou do cálculo do próprio laudo. Elas estão aqui abertas, para você conferir antes de falar com qualquer vendedor."
             />
           </div>
-          <div className="palco-claro">
+          <div className="card">
             <IlustracaoUltrassom />
           </div>
         </div>
@@ -44,7 +40,7 @@ export default function Referencias() {
           <h2 className="t-h2">Da literatura para a sua planta</h2>
           <p className="t-body-lg t-mudo">
             As faixas de falha destas publicações valem para o parque médio. O número da
-            sua planta só aparece depois de medir ponto a ponto — e é isso que o laudo faz.
+            sua planta só aparece depois de medir ponto a ponto, e é isso que o laudo faz.
           </p>
           <div className="linha-botoes">
             <Botao href="/contato" seta>

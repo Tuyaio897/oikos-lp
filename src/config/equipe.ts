@@ -1,5 +1,5 @@
 /**
- * Sócios e equipe (§8 — página /empresa "com pessoas reais").
+ * Sócios e equipe (§8, página /empresa "com pessoas reais").
  *
  * Vazio de propósito: não inventamos pessoas. Enquanto a lista estiver vazia, a
  * seção não é renderizada. Para publicar, adicione as entradas com foto em

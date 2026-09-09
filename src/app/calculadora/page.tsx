@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 /**
  * A calculadora só vai ao ar com a tabela oficial de perda por DN e pressão
- * (§9 — "não publicar a calculadora com o placeholder"). Enquanto
+ * (§9, "não publicar a calculadora com o placeholder"). Enquanto
  * `CALCULADORA_PUBLICADA` for false, a rota responde 404: o código está pronto
  * e o conteúdo não fica exposto.
  */
@@ -42,7 +42,7 @@ export default function CalculadoraPagina() {
           <h2 className="t-h2">Estimativa não é laudo</h2>
           <p className="t-body t-mudo">
             Esta conta usa taxas de falha de literatura e uma perda média por ponto. Ela
-            serve para decidir se vale investigar — não para pedir verba. O número que
+            serve para decidir se vale investigar, não para pedir verba. O número que
             sustenta orçamento é o do laudo, medido purgador a purgador na sua planta.
           </p>
           <div className="linha-botoes">

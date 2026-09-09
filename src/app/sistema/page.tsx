@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { PreviaInventario, PreviaHistorico } from '@/components/blocks/PreviaPainel';
 import { Secao, TituloSecao } from '@/components/layout/Secao';
 import { Botao } from '@/components/ui/Botao';
+import { Foto } from '@/components/ui/Foto';
 import { OFERTA } from '@/config/oferta';
 import { linkSistema } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Sistema Oikos — gestão contínua de purgadores',
+  title: 'Sistema Oikos, gestão contínua de purgadores',
   description:
     'Inventário permanente por tag, fila de manutenção priorizada por valor de perda, histórico de intervenções e relatório de economia acumulada.',
   alternates: { canonical: '/sistema' },
@@ -21,7 +22,7 @@ const RECURSOS = [
   {
     titulo: 'Prioridade por valor',
     texto:
-      'A fila de manutenção ordenada pelo que custa mais caro deixar quebrado — não pelo que é mais fácil de alcançar. É o critério que a diretoria entende.',
+      'A fila de manutenção ordenada pelo que custa mais caro deixar quebrado, não pelo que é mais fácil de alcançar. É o critério que a diretoria entende.',
   },
   {
     titulo: 'Histórico por tag',
@@ -85,6 +86,7 @@ export default function Sistema() {
 
       <Secao>
         <TituloSecao
+          marcador="Na prática"
           titulo="Histórico por tag"
           lead="As mesmas cores de status do laudo. O que você vê aqui é o que chega no relatório."
         />
@@ -98,7 +100,8 @@ export default function Sistema() {
       </Secao>
 
       <Secao fundo="escura">
-        <div className="pilha-6" style={{ maxWidth: '62ch' }}>
+        <div className="grade-2 topo">
+          <div className="pilha-6">
           <h2 className="t-h2">Segurança dos dados da sua planta</h2>
           <div className="prosa t-body t-mudo">
             <p>
@@ -112,6 +115,10 @@ export default function Sistema() {
             <Botao href="/contato" variante="secundario">
               Falar com um especialista
             </Botao>
+          </div>
+          </div>
+          <div className="moldura">
+            <Foto slot="sistemaEmUso" />
           </div>
         </div>
       </Secao>

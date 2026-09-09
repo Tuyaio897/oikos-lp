@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Secao, TituloSecao } from '@/components/layout/Secao';
 import { Botao } from '@/components/ui/Botao';
+import { Foto } from '@/components/ui/Foto';
 import { EQUIPE } from '@/config/equipe';
 import { SITE, ENDERECO_LINHA, preenchido } from '@/config/site';
 
@@ -16,12 +17,18 @@ export default function Empresa() {
   return (
     <>
       <Secao>
-        <div style={{ maxWidth: '62ch' }} className="pilha-6">
-          <TituloSecao
-            nivel={1}
-            titulo="Engenharia de eficiência térmica, não software de prateleira"
-            lead="A Oikos mede a perda de vapor da sua planta purgador a purgador, traduz o resultado em reais e mantém o parque sob controle ao longo dos anos. O sistema é a ferramenta que faz o resultado durar — não o produto."
-          />
+        <div className="grade-2 topo">
+          <div className="pilha-6">
+            <TituloSecao
+              nivel={1}
+              marcador="Quem somos"
+              titulo="Engenharia de eficiência térmica, não software de prateleira"
+              lead="A Oikos mede a perda de vapor da sua planta purgador a purgador, traduz o resultado em reais e mantém o parque sob controle ao longo dos anos. O sistema é a ferramenta que faz o resultado durar, não o produto."
+            />
+          </div>
+          <div className="moldura">
+            <Foto slot="equipeOikos" prioridade />
+          </div>
         </div>
       </Secao>
 
@@ -31,14 +38,14 @@ export default function Empresa() {
             <h2 className="t-h2">Por que &ldquo;Oikos&rdquo;</h2>
             <div className="prosa t-body t-mudo">
               <p>
-                <em>Oikos</em> é a palavra grega para casa — e a raiz de
+                <em>Oikos</em> é a palavra grega para casa, e a raiz de
                 &ldquo;economia&rdquo; (<em>oikonomia</em>: a gestão da casa) e de
                 &ldquo;ecologia&rdquo; (<em>oikologia</em>: o estudo da casa).
               </p>
               <p>
                 É exatamente o que uma planta industrial precisa fazer com o seu sistema de
                 vapor: administrar a própria casa. Não é uma obra pontual, é gestão
-                continuada — e é por isso que o nome não fala de tecnologia.
+                continuada, e é por isso que o nome não fala de tecnologia.
               </p>
             </div>
           </div>
@@ -53,7 +60,7 @@ export default function Empresa() {
               </p>
               <p>
                 A consequência prática é simples: quando o laudo diz que um purgador está
-                bom, não há nada a ganhar dizendo o contrário — e quando diz que precisa
+                bom, não há nada a ganhar dizendo o contrário, e quando diz que precisa
                 trocar, quem executa é a sua equipe ou o fornecedor que você escolher.
               </p>
             </div>
@@ -67,7 +74,7 @@ export default function Empresa() {
           <div className="prosa t-body t-mudo">
             <p>
               A avaliação combina leitura de ultrassom com medição de temperatura, e a
-              condição encontrada é classificada em uma escala fechada — operando, vazando,
+              condição encontrada é classificada em uma escala fechada, operando, vazando,
               bloqueado, fora de operação ou não avaliado. A escala é a mesma para toda a
               equipe.
             </p>

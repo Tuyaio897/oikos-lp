@@ -2,7 +2,7 @@
  * Dados institucionais da Oikos.
  *
  * Fonte: Comprovante de Inscricao e de Situacao Cadastral (CNPJ), emitido em
- * 02/09/2026. Nada aqui e inventado — regra §4 da especificacao.
+ * 02/09/2026. Nada aqui e inventado, regra §4 da especificacao.
  *
  * Campos ainda marcados com PENDENTE nao sao renderizados: os componentes
  * chamam `preenchido()` antes de exibir, para que o site nunca mostre um dado
@@ -61,7 +61,7 @@ export const SITE = {
 } as const;
 
 /** Endereco em uma linha, para rodape e JSON-LD. */
-export const ENDERECO_LINHA = `${SITE.endereco.logradouro} — ${SITE.endereco.bairro}, ${SITE.endereco.cidade}/${SITE.endereco.uf}, CEP ${SITE.endereco.cep}`;
+export const ENDERECO_LINHA = `${SITE.endereco.logradouro}, ${SITE.endereco.bairro}, ${SITE.endereco.cidade}/${SITE.endereco.uf}, CEP ${SITE.endereco.cep}`;
 
 /** URL que realmente responde hoje. Usada em canonical, sitemap e JSON-LD. */
 export function urlCanonica(): string {

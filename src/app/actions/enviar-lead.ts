@@ -50,7 +50,7 @@ async function dispararEmail(lead: Lead): Promise<void> {
   await resend.emails.send({
     from: de,
     to: para,
-    subject: `[Oikos] ${lead.etapa === 'parcial' ? 'Lead parcial' : 'Novo lead'} — ${lead.nome}`,
+    subject: `[Oikos] ${lead.etapa === 'parcial' ? 'Lead parcial' : 'Novo lead'}, ${lead.nome}`,
     text: corpoEmail(lead),
   });
 }

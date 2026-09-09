@@ -11,7 +11,7 @@ Este site é um material informativo e comercial sobre os serviços de inspeçã
 
 ## Conteúdo técnico e estimativas
 
-O conteúdo técnico publicado aqui — artigos, referências e exemplos de cálculo — tem finalidade informativa.
+O conteúdo técnico publicado aqui, artigos, referências e exemplos de cálculo, tem finalidade informativa.
 
 Estimativas de perda apresentadas no site são baseadas em referências setoriais publicadas e em premissas declaradas junto de cada número. **Elas não substituem a inspeção em campo e não constituem compromisso de resultado.** O valor real de perda de uma planta só é conhecido após a medição ponto a ponto.
 
