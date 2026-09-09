@@ -2,6 +2,9 @@
   "name": "oikos-site",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +17,7 @@
     "@hookform/resolvers": "^5.2.1",
     "lucide-react": "^0.544.0",
     "marked": "^15.0.12",
-    "next": "15.5.4",
+    "next": "^15.5.25",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-hook-form": "^7.63.0",
@@ -26,6 +29,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
   }
