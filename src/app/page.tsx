@@ -35,21 +35,18 @@ const PASSOS = [
   {
     numero: '01',
     titulo: 'Inspeção em campo',
-    foto: 'medirTecnico' as const,
     texto:
       'Nosso técnico avalia cada purgador com ultrassom e medição de temperatura. Cada ponto é registrado no aplicativo Oikos com tag, localização, fabricante, modelo, diâmetro e pressão, e recebe o cálculo de perda de massa em kg/h.',
   },
   {
     numero: '02',
     titulo: 'Laudo com a perda em reais',
-    foto: 'traduzirLaudo' as const,
     texto:
       'Ao final da visita você recebe o relatório completo: mapa dos purgadores, status de cada um, perda em kg/h e o custo correspondente por hora, mês e ano, no custo de vapor da sua planta. É o documento que sustenta o pedido de verba de manutenção.',
   },
   {
     numero: '03',
     titulo: 'Contrato mensal de cuidado',
-    foto: 'manterRonda' as const,
     texto:
       'Deixamos o UP100 na sua planta e treinamos a sua equipe de manutenção para medir. As rondas passam a ser feitas por quem já está lá, sem contratar ninguém, e a Oikos segue cuidando do método, da análise e do histórico.',
   },
@@ -202,20 +199,23 @@ export default function Home() {
         />
         <div className="grade-3" style={{ marginTop: 56 }}>
           {PASSOS.map((passo) => (
-            <article key={passo.numero} className="card card-interativo pilha-4" style={{ padding: 0 }}>
-              <div style={{ borderRadius: 'var(--raio-card) var(--raio-card) 0 0', overflow: 'hidden' }}>
-                <Foto slot={passo.foto} sizes="(min-width: 768px) 32vw, 100vw" />
-              </div>
-              <div className="pilha-2" style={{ padding: '4px 24px 26px' }}>
-                <span
-                  className="t-small num"
-                  style={{ fontWeight: 700, color: 'var(--azul-500)', letterSpacing: '.04em' }}
-                >
-                  {passo.numero}
-                </span>
-                <h3 className="t-h3">{passo.titulo}</h3>
-                <p className="t-body t-mudo">{passo.texto}</p>
-              </div>
+            <article key={passo.numero} className="card card-interativo pilha-4">
+              <span
+                className="num"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: 'clamp(30px, 2.6vw, 38px)',
+                  lineHeight: 1,
+                  letterSpacing: '-0.03em',
+                  color: 'var(--azul-300)',
+                }}
+                aria-hidden="true"
+              >
+                {passo.numero}
+              </span>
+              <h3 className="t-h3">{passo.titulo}</h3>
+              <p className="t-body t-mudo">{passo.texto}</p>
             </article>
           ))}
         </div>
@@ -300,6 +300,9 @@ export default function Home() {
           </div>
 
           <div className="pilha-4">
+            <div className="moldura">
+              <Foto slot="manterRonda" />
+            </div>
             {OFERTA.pilares.map((pilar) => (
               <div key={pilar.titulo} className="card card-interativo">
                 <h3 className="t-h3" style={{ marginBottom: 8 }}>

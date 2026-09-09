@@ -139,14 +139,7 @@ export default function Inspecao() {
       </Secao>
 
       <Secao>
-        <div className="grade-2 topo">
-          <div>
-            <TituloSecao marcador="Passo a passo" titulo="Como a inspeção é feita" />
-          </div>
-          <div className="moldura">
-            <Foto slot="medirTecnico" />
-          </div>
-        </div>
+        <TituloSecao marcador="Passo a passo" titulo="Como a inspeção é feita" />
         <ol style={{ marginTop: 40, listStyle: 'none', maxWidth: 820 }}>
           {ETAPAS.map((etapa, i) => (
             <li

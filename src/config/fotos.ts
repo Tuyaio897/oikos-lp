@@ -42,28 +42,10 @@ export const FOTOS = {
       'O flagrante do problema: um purgador descarregando vapor vivo, com a pluma visível. É a foto mais valiosa do site inteiro. Se der, fotografar contra um fundo escuro, que faz a pluma aparecer. Vale também um purgador aberto na bancada com a sede visivelmente desgastada.',
   },
 
-  medirTecnico: {
-    arquivo: '/imagens/campo/tecnico-ultrassom.jpg',
-    alt: 'Técnico da Oikos medindo um purgador com detector ultrassônico',
-    rotulo: 'Etapa 01: medição com ultrassom',
-    proporcao: '4/3',
-    briefing:
-      'Técnico encostando a ponta do UP100 no corpo do purgador, de fone no ouvido. Enquadrar das mãos até o rosto. Precisa ficar claro que é medição de contato num ponto específico, não alguém segurando um aparelho para a câmera.',
-  },
-
-  traduzirLaudo: {
-    arquivo: '/imagens/campo/laudo-mesa.jpg',
-    alt: 'Laudo de inspeção de purgadores impresso sobre a mesa',
-    rotulo: 'Etapa 02: o laudo',
-    proporcao: '4/3',
-    briefing:
-      'O laudo impresso sobre uma mesa, aberto numa página com tabela e valores. Pode ter caneta e café ao lado, sem excesso de cenário. Cuidado: nenhum nome de cliente legível na foto. Use um laudo de demonstração ou cubra a identificação.',
-  },
-
   manterRonda: {
     arquivo: '/imagens/campo/ronda-tablet.jpg',
     alt: 'Equipe de manutenção registrando a ronda de purgadores pelo aplicativo',
-    rotulo: 'Etapa 03: ronda da equipe',
+    rotulo: 'Contrato: a ronda da equipe',
     proporcao: '4/3',
     briefing:
       'Alguém da equipe da planta, de EPI, com o celular ou tablet na mão registrando um ponto, com a tubulação ao fundo. Esta foto sustenta o argumento central do contrato: quem mede no dia a dia é a equipe do cliente.',

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Secao, TituloSecao } from '@/components/layout/Secao';
 import { Botao } from '@/components/ui/Botao';
-import { Foto } from '@/components/ui/Foto';
 import { KPI } from '@/components/data/Dado';
 import { OFERTA } from '@/config/oferta';
 import { LAUDO } from '@/config/laudo';
@@ -130,18 +129,13 @@ export default function LaudoExemplo() {
   return (
     <>
       <Secao>
-        <div className="grade-2 topo">
-          <div className="pilha-6">
-            <TituloSecao
-              nivel={1}
-              marcador="O entregável"
-              titulo="Um laudo de inspeção, aberto"
-              lead="Este é o documento que você recebe ao final da inspeção: de 10 a 40 páginas com cada purgador identificado, classificado e precificado. Está aberto de propósito, sem formulário para ver."
-            />
-          </div>
-          <div className="moldura">
-            <Foto slot="traduzirLaudo" prioridade />
-          </div>
+        <div style={{ maxWidth: '62ch' }} className="pilha-6">
+          <TituloSecao
+            nivel={1}
+            marcador="O entregável"
+            titulo="Um laudo de inspeção, aberto"
+            lead="Este é o documento que você recebe ao final da inspeção: de 10 a 40 páginas com cada purgador identificado, classificado e precificado. Está aberto de propósito, sem formulário para ver."
+          />
         </div>
       </Secao>
 
