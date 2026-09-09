@@ -189,12 +189,13 @@ export default function Inspecao() {
               </Botao>
             </div>
           </div>
-          <div className="card pilha-4">
+          <div className="card card-filete pilha-4">
             <h3 className="t-h3">Modelo comercial</h3>
-            <p className="t-body t-mudo">{OFERTA.explicacao}</p>
             <p className="t-body" style={{ fontWeight: 600 }}>
               {OFERTA.chamada}
             </p>
+            <p className="t-body t-mudo">{OFERTA.explicacao}</p>
+            <p className="t-body t-mudo">{OFERTA.semContratarNinguem}</p>
             <p className="t-small t-mudo">
               Atendimento em {SITE.regiaoAtendimentoTexto}, com equipe própria. Escopo e
               preço fechados antes da visita.

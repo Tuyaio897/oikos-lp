@@ -14,9 +14,14 @@ export const FAQ_HOME: Pergunta[] = [
     resposta: OFERTA.explicacao,
   },
   {
+    pergunta: 'Preciso contratar alguém para fazer as rondas?',
+    resposta:
+      'Não. A Oikos cede o UP100, que fica na sua planta durante todo o contrato, e treina a sua própria equipe de manutenção para medir. Quem já cuida da planta passa a fazer a ronda; você não contrata inspetor externo nem cria uma função nova.',
+  },
+  {
     pergunta: 'Minha equipe consegue mesmo fazer a inspeção sozinha?',
     resposta:
-      'Consegue. O UP100 foi feito para uso de campo por equipe de manutenção, e a leitura é objetiva, não depende de ouvido treinado. O que exige método é a classificação e o cálculo da perda, e essa parte continua sendo nossa, todo mês.',
+      'Consegue, e é para isso que existe o treinamento. O UP100 foi feito para uso de campo por equipe de manutenção, e a leitura é objetiva, não depende de ouvido treinado. O que exige método é a classificação e o cálculo da perda, e essa parte continua sendo nossa, todo mês.',
   },
   {
     pergunta: 'Quanto tempo leva uma inspeção?',

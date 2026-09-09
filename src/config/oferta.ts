@@ -13,17 +13,26 @@
 export const OFERTA = {
   nome: 'Contrato de cuidado com o purgador',
 
-  chamada: 'Sua equipe inspecionando, o nosso método garantindo o resultado.',
+  chamada: 'Deixamos o equipamento e treinamos a sua equipe.',
 
   explicacao:
-    'A Oikos faz a inspeção inicial e entrega o laudo com a perda de cada ponto em reais. A partir daí, o contrato mensal mantém o parque sob controle: sua própria equipe faz as rondas periódicas com o equipamento, e nós cuidamos do método, da análise e do histórico.',
+    'A Oikos faz a inspeção inicial e entrega o laudo com a perda de cada ponto em reais. A partir daí, o contrato mensal mantém o parque sob controle sem que você precise contratar mais ninguém: o UP100 fica na sua planta, treinamos a sua própria equipe de manutenção para medir, e nós continuamos cuidando do método, da análise e do histórico.',
+
+  /** Combate a leitura errada de que o cliente teria de contratar inspetor. */
+  semContratarNinguem:
+    'Você não precisa contratar um inspetor externo nem manter alguém dedicado a isso. Quem faz a ronda é a equipe de manutenção que já está na planta, com o equipamento que a Oikos deixa e o treinamento que a Oikos dá.',
 
   /** Por que o modelo é diferente de contratar auditoria avulsa. */
   pilares: [
     {
-      titulo: 'Autonomia da sua equipe',
+      titulo: 'Equipamento cedido, sem custo à parte',
       texto:
-        'O UP100 fica na sua planta durante o contrato. A inspeção periódica deixa de depender de agendar visita: sua equipe mede quando precisa, na frequência que a planta pede.',
+        'O UP100 fica na sua planta durante todo o contrato. Um por cliente, não compartilhado nem emprestado por visita. Você não compra o aparelho nem aluga de terceiros.',
+    },
+    {
+      titulo: 'Treinamento da sua equipe incluído',
+      texto:
+        'Nós treinamos a sua equipe de manutenção para medir com o UP100 e classificar o que encontrar. Ninguém precisa ser contratado para isso: quem já cuida da planta passa a medir.',
     },
     {
       titulo: 'Método e análise com a Oikos',
@@ -55,6 +64,6 @@ export const EQUIPAMENTO = {
     'Detecta vazamento parcial, que o tato e o ouvido não separam de operação normal',
     'Funciona com a linha em operação, sem parar a produção',
     'Leitura objetiva, que dois técnicos diferentes conseguem repetir',
-    'Fica com a sua equipe durante todo o contrato',
+    'Cedido pela Oikos e com treinamento incluído no contrato',
   ],
 } as const;

@@ -51,7 +51,7 @@ const PASSOS = [
     titulo: 'Contrato mensal de cuidado',
     foto: 'manterRonda' as const,
     texto:
-      'A partir daí, sua própria equipe faz as rondas periódicas com o equipamento. A Oikos cuida do método, da análise e do histórico, e a falha passa a ser encontrada em semanas, não em anos.',
+      'Deixamos o UP100 na sua planta e treinamos a sua equipe de manutenção para medir. As rondas passam a ser feitas por quem já está lá, sem contratar ninguém, e a Oikos segue cuidando do método, da análise e do histórico.',
   },
 ];
 
@@ -255,7 +255,10 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <p className="t-body t-mudo prosa">{EQUIPAMENTO.cessao}</p>
+            <p className="t-body t-mudo prosa">
+              {EQUIPAMENTO.cessao} O treinamento de uso para a sua equipe está incluído no
+              contrato.
+            </p>
           </div>
 
           <div className="pilha-4">
@@ -283,6 +286,12 @@ export default function Home() {
               titulo={OFERTA.chamada}
               lead={OFERTA.explicacao}
             />
+            <div className="card" style={{ background: 'var(--bg)' }}>
+              <p className="t-body" style={{ fontWeight: 600, marginBottom: 6 }}>
+                Você não contrata mais ninguém
+              </p>
+              <p className="t-body t-mudo">{OFERTA.semContratarNinguem}</p>
+            </div>
             <div className="linha-botoes">
               <Botao href="/contato" seta>
                 Falar sobre o contrato
