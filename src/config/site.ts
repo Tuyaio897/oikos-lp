@@ -44,13 +44,19 @@ export const SITE = {
 
   email: 'comercial@oikos.eco.br',
 
+  /**
+   * Endereco do site.
+   *
+   * O endereco registrado no CNPJ e a residencia dos socios, entao logradouro,
+   * numero, bairro e CEP NAO sao publicados. Fica so cidade e UF, que e o que
+   * o comprador industrial precisa saber e nao expoe ninguem.
+   *
+   * Quando a Oikos tiver endereco comercial, e so voltar a preencher aqui e
+   * repor os campos no rodape, no /contato, no /empresa e no JSON-LD.
+   */
   endereco: {
-    logradouro: 'R. Monsenhor Manoel Vicente, 550',
-    /** Complemento residencial (apto) omitido do site por privacidade. Ver DECISOES.md. */
-    bairro: 'Água Verde',
     cidade: 'Curitiba',
     uf: 'PR',
-    cep: '80620-230',
   },
 
   linkedin: `${PENDENTE}_LINKEDIN`,
@@ -60,8 +66,8 @@ export const SITE = {
   horarioAtendimento: 'Segunda a sexta, das 8h às 18h',
 } as const;
 
-/** Endereco em uma linha, para rodape e JSON-LD. */
-export const ENDERECO_LINHA = `${SITE.endereco.logradouro}, ${SITE.endereco.bairro}, ${SITE.endereco.cidade}/${SITE.endereco.uf}, CEP ${SITE.endereco.cep}`;
+/** Localizacao publicada. Sem logradouro: o endereco do CNPJ e residencial. */
+export const ENDERECO_LINHA = `${SITE.endereco.cidade}, ${SITE.endereco.uf}`;
 
 /** URL que realmente responde hoje. Usada em canonical, sitemap e JSON-LD. */
 export function urlCanonica(): string {

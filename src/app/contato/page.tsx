@@ -66,7 +66,7 @@ export default function Contato() {
                 </li>
               ) : null}
               <li>
-                <p className="t-small t-mudo">Endereço</p>
+                <p className="t-small t-mudo">Localização</p>
                 <p className="t-body">{ENDERECO_LINHA}</p>
               </li>
               <li>

@@ -54,10 +54,8 @@ function OrganizationJsonLd() {
     taxID: SITE.cnpj,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: SITE.endereco.logradouro,
       addressLocality: SITE.endereco.cidade,
       addressRegion: SITE.endereco.uf,
-      postalCode: SITE.endereco.cep,
       addressCountry: 'BR',
     },
     areaServed: SITE.regiaoAtendimento.map((uf) => ({

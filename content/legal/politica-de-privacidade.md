@@ -9,8 +9,10 @@ Esta política descreve como a Oikos Desenvolvimento Ltda. trata os dados pessoa
 
 **Oikos Desenvolvimento Ltda.**
 CNPJ 68.928.719/0001-20
-R. Monsenhor Manoel Vicente, 550, Água Verde, Curitiba/PR, CEP 80620-230
+Curitiba, PR
 Contato para assuntos de privacidade: **comercial@oikos.eco.br**
+
+O endereço completo consta do cadastro na Receita Federal e pode ser solicitado por escrito pelo e-mail acima.
 
 ## Quais dados coletamos
 

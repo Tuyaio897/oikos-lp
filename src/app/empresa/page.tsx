@@ -147,7 +147,7 @@ export default function Empresa() {
             <p className="t-body num">{SITE.cnpj}</p>
           </div>
           <div className="pilha-2">
-            <p className="t-small t-mudo">Endereço</p>
+            <p className="t-small t-mudo">Localização</p>
             <p className="t-body">{ENDERECO_LINHA}</p>
           </div>
           <div className="pilha-2">
