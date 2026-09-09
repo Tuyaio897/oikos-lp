@@ -262,8 +262,10 @@ export default function Home() {
           </div>
 
           <div className="pilha-4">
-            <div className="moldura">
-              <Foto slot="equipamentoUP100" />
+            <div className="card" style={{ padding: 18 }}>
+              <div style={{ maxWidth: 420, marginInline: 'auto' }}>
+                <Foto slot="equipamentoUP100" sizes="420px" />
+              </div>
             </div>
             <div className="card">
               <IlustracaoUltrassom />

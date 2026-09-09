@@ -17,7 +17,7 @@ const SLOTS = [
   { entrada: 'heroi-cavalete', destino: 'imagens/campo/heroi-cavalete.jpg', largura: 1600 },
   { entrada: 'purgador-vazando', destino: 'imagens/campo/purgador-vazando.jpg', largura: 1400 },
   { entrada: 'ronda-tablet', destino: 'imagens/campo/ronda-tablet.jpg', largura: 1400 },
-  { entrada: 'up100', destino: 'imagens/equipamento/up100.jpg', largura: 1200 },
+  { entrada: 'tecnico-ultrassom', destino: 'imagens/equipamento/up100.jpg', largura: 1200 },
   { entrada: 'casa-caldeiras', destino: 'imagens/campo/casa-caldeiras.jpg', largura: 1800 },
   { entrada: 'sistema-em-uso', destino: 'imagens/sistema/sistema-em-uso.jpg', largura: 1600 },
   { entrada: 'equipe', destino: 'imagens/equipe/equipe.jpg', largura: 1600 },
@@ -40,7 +40,10 @@ let importadas = 0;
 for (const slot of SLOTS) {
   const arquivo = disponiveis.find((nome) => {
     const ext = path.extname(nome).toLowerCase();
-    return EXTENSOES.includes(ext) && path.basename(nome, ext).toLowerCase() === slot.entrada;
+    if (!EXTENSOES.includes(ext)) return false;
+    // aceita extensao dupla, como "equipe.jpg.png"
+    const base = path.basename(nome, ext).replace(/\.(jpe?g|png|webp|avif)$/i, '');
+    return base.toLowerCase() === slot.entrada;
   });
 
   if (!arquivo) {

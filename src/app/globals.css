@@ -412,14 +412,17 @@ a.link-seta:not(.btn) { color: var(--azul-700); }
 .cartao-flutuante { margin-top: 16px; }
 
 @media (min-width: 1024px) {
+  /* A maior parte do cartão fica abaixo da foto: ele encosta no canto
+     inferior esquerdo em vez de cobrir o meio da imagem. */
   .cartao-flutuante {
     position: absolute;
-    left: -28px;
-    bottom: -28px;
-    width: min(286px, 54%);
+    left: -24px;
+    bottom: -64px;
+    width: min(278px, 50%);
     margin-top: 0;
     z-index: 2;
   }
+  .foto-com-cartao { margin-bottom: 64px; }
 }
 
 /* Faixa de dados abaixo do herói */

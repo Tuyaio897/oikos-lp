@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import Image from 'next/image';
 import { Camera } from 'lucide-react';
-import { FOTOS, type ChaveFoto } from '@/config/fotos';
+import { FOTOS, type ChaveFoto, type SlotFoto } from '@/config/fotos';
 
 /**
  * Slot de foto.
@@ -18,6 +18,7 @@ const PROPORCOES: Record<string, { css: string; valor: number }> = {
   '4/3': { css: '4 / 3', valor: 4 / 3 },
   '1/1': { css: '1 / 1', valor: 1 },
   '16/9': { css: '16 / 9', valor: 16 / 9 },
+  '2/1': { css: '2 / 1', valor: 2 },
 };
 
 function arquivoExiste(caminhoPublico: string): boolean {
@@ -39,7 +40,7 @@ export function Foto({
   sizes?: string;
   className?: string;
 }) {
-  const foto = FOTOS[slot];
+  const foto: SlotFoto = FOTOS[slot];
   const proporcao = PROPORCOES[foto.proporcao];
 
   if (!arquivoExiste(foto.arquivo)) {
@@ -69,7 +70,12 @@ export function Foto({
       sizes={sizes}
       priority={prioridade}
       className={className}
-      style={{ width: '100%', height: 'auto', aspectRatio: proporcao.css, objectFit: 'cover' }}
+      style={{
+        width: '100%',
+        height: 'auto',
+        aspectRatio: proporcao.css,
+        objectFit: foto.ajuste ?? 'cover',
+      }}
     />
   );
 }

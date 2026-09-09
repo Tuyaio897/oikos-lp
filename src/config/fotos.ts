@@ -18,7 +18,9 @@ export type SlotFoto = {
   /** O que fotografar. Escrito para quem vai a campo com o celular. */
   briefing: string;
   /** Proporção usada no layout, para enquadrar já na hora da foto. */
-  proporcao: '3/2' | '4/3' | '1/1' | '16/9';
+  proporcao: '3/2' | '4/3' | '1/1' | '16/9' | '2/1';
+  /** 'contain' preserva a imagem inteira. Use em foto de produto. */
+  ajuste?: 'cover' | 'contain';
   /** Rótulo curto mostrado no placeholder enquanto a foto não existe. */
   rotulo: string;
 };
@@ -55,7 +57,8 @@ export const FOTOS = {
     arquivo: '/imagens/equipamento/up100.jpg',
     alt: 'Detector ultrassônico UP100 da UE Systems',
     rotulo: 'Equipamento: o UP100',
-    proporcao: '1/1',
+    proporcao: '2/1',
+    ajuste: 'contain',
     briefing:
       'O UP100 sozinho, com o kit e o fone, sobre fundo neutro e claro. Foto de produto mesmo: aparelho limpo, luz difusa, sem sombra dura. É o que mostra que o equipamento cedido no contrato é um instrumento sério.',
   },
@@ -80,7 +83,7 @@ export const FOTOS = {
 
   equipeOikos: {
     arquivo: '/imagens/equipe/equipe.jpg',
-    alt: 'Equipe da Oikos',
+    alt: 'Fachada industrial com o letreiro da Oikos',
     rotulo: 'Empresa: a equipe',
     proporcao: '3/2',
     briefing:
