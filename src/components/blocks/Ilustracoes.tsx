@@ -111,9 +111,10 @@ export function IlustracaoUltrassom({ className = '' }: { className?: string }) 
         strokeLinecap="round"
       />
       <circle cx="270" cy="66" r="6" fill={LARANJA} stroke="#fff" strokeWidth="2.5" />
-      <text x="286" y="60" fontSize="12" fontWeight="700" fill="var(--laranja-700)">
+      <text x="378" y="52" textAnchor="end" fontSize="12" fontWeight="700" fill="var(--laranja-700)">
         energia do vazamento
       </text>
+      <line x1="276" y1="62" x2="330" y2="50" stroke={LARANJA} strokeWidth="1.5" opacity=".55" />
 
       {/* rótulo do eixo */}
       <text x="12" y="118" fontSize="11" fill="var(--grafite-500)" transform="rotate(-90 12 118)" textAnchor="middle">
