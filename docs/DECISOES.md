@@ -8,19 +8,31 @@ Atualizado em 09/09/2026.
 
 Cada item abaixo tem um lugar exato no código. Preencher o valor é a única ação necessária.
 
-### 1.1 Tabela oficial de perda (kg/h por DN e pressão) — [BLOQUEADOR]
+### 1.1 Metodologia de cálculo — RESOLVIDO
 
 **Arquivo:** `src/lib/calculo-perda.ts`
 
-A constante `PERDA_KG_H` é provisória e conservadora. A tabela oficial vive na engine do aplicativo Oikos — é ela que gera os 313,71 / 43,11 / 12,99 kg/h do relatório RPV. Se o site e o laudo divergirem, a credibilidade cai a zero na primeira reunião.
+A engine implementa a **Metodologia OIKOS de Cálculo de Vazamento (Base Napier), v4**, recebida do time em 09/09/2026. Não há mais tabela placeholder.
 
-Enquanto `TABELA_OFICIAL` for `false`:
+```
+ms(teórico) = 0,66 × 2,73 × C × (d0 / 4,654)² × √(Fγ × xT × p1 × ρ)
+ms(OIKOS)   = ms(teórico) × FT × FC        FT = 0,6   FC = 0,7
+```
 
-- `/calculadora` responde **404** (o §9 é explícito: não publicar com placeholder);
-- a rota some do sitemap e do rodapé automaticamente;
-- o **contador de perda do herói** não corre — o mesmo espaço mostra o dado de literatura do DOE/FEMP, com fonte. A taxa de incremento do contador viria da mesma fórmula, então publicá-lo com a tabela provisória seria publicar um número que o laudo não sustenta.
+**Validação:** a implementação reproduz os três valores do relatório RPV com desvio abaixo de 0,6%.
 
-**Para liberar:** substituir `PERDA_KG_H` pela tabela oficial e trocar `TABELA_OFICIAL` para `true`. Nada mais precisa mudar.
+| Ponto | Orifício | Pressão | Calculado | Relatório | Desvio |
+|---|---|---|---|---|---|
+| DN50 | 10,0 mm | 20 bar | 311,8 kg/h | 313,71 | −0,6% |
+| DN25 | 5,1 mm | 10 bar | 42,9 kg/h | 43,11 | −0,5% |
+| DN15 | 3,1 mm | 8 bar | 13,0 kg/h | 12,99 | +0,3% |
+
+Com isso, `/calculadora` saiu do 404, entrou no sitemap e na navegação, e o contador do herói voltou a rodar. Foi criada também a página `/metodologia`, que publica a fórmula, os fatores e a incerteza declarada.
+
+**Duas coisas ainda para confirmar:**
+
+1. **Densidade do vapor saturado.** A engine usa tabela de vapor padrão (1 a 22 bar abs), interpolada linearmente. Se a engine do app usa outra fonte ou outra interpolação, alinhar — divergência aqui muda o resultado em alguns por cento.
+2. **Diâmetros típicos por bitola.** `ORIFICIOS_TIPICOS` (DN15 = 3,1 mm; DN25 = 5,1 mm; DN50 = 10,0 mm) foi **derivado por engenharia reversa** dos valores do relatório, não recebido. São só valores de partida da calculadora — o diâmetro é sempre editável —, mas se existe tabela oficial de d₀ por DN e tipo construtivo, ela deve substituir esses três.
 
 ### 1.2 Revisão jurídica das políticas — [BLOQUEADOR]
 
@@ -30,17 +42,11 @@ Os textos publicados **descrevem com precisão o que o site realmente faz** — 
 
 Ainda assim, **o §12 exige revisão por quem tem responsabilidade legal** e este item continua aberto até isso acontecer. Foi publicado em vez de deixar 404 porque o rodapé e o checkbox de consentimento apontam para essas páginas — um link quebrado ali é pior, inclusive juridicamente.
 
-### 1.3 Confirmação do telefone / WhatsApp
+### 1.3 Telefone e WhatsApp — RESOLVIDO
 
-**Arquivo:** `src/config/site.ts`
+Confirmado pelo time: `(41) 9952-8006` é o número correto, e vale como WhatsApp. Está publicado em `src/config/site.ts` como `554199528006`, e todos os CTAs de WhatsApp foram reativados.
 
-O CNPJ registra `(41) 9952-8006` — oito dígitos após o DDD, formato de telefone fixo. Se for celular (e portanto WhatsApp), o número correto é provavelmente `(41) 99952-8006`, mas **o dígito extra não foi assumido**: inventar um dígito de telefone é pior do que não ter o campo.
-
-Estado atual:
-- `telefone` publicado exatamente como registrado;
-- `whatsapp` marcado como `PENDENTE` → **todos os CTAs de WhatsApp estão ocultos**, incluindo o do estado de sucesso do formulário.
-
-**Para liberar:** preencher `whatsapp` com o número em formato E.164 sem símbolos (ex.: `5541999528006`) e conferir `telefone` / `telefoneE164`.
+**Vale um teste rápido:** abrir `https://wa.me/554199528006` e conferir se a conversa abre. É um número de 8 dígitos após o DDD, e o WhatsApp normalmente espera 9 para celular — se der "número inválido", é só ajustar essa linha.
 
 ### 1.4 Sócios da página /empresa
 
@@ -98,13 +104,11 @@ A primeira versão deste redesign resolveu isso com uma garantia de resultado ("
 
 Todo o copy consome `src/config/oferta.ts` — `chamada`, `explicacao` e `pilares`. Não existe mais campo `selo`.
 
-### 2.1.1 Equipamento UP100 — CONFIRMAR
+### 2.1.1 Equipamento UP100 — CONFIRMADO
 
-`EQUIPAMENTO` em `src/config/oferta.ts` publica o modelo como **UP100**, descrito como detector ultrassônico de referência.
+Confirmado pelo time: **UP100 da UE Systems**, e no contrato o aparelho é **cedido — fica na planta do cliente durante toda a vigência, um por cliente**, não compartilhado nem emprestado por visita.
 
-**Pendente:** o fabricante não foi assumido. Se for o Ultraprobe 100 da UE Systems, vale nomear — mas nome de fabricante não se inventa. Confirmar antes de divulgar o site.
-
-Também vale confirmar a mecânica comercial exata do equipamento no contrato (cedido, locado ou vendido junto), porque o texto atual diz apenas "com o equipamento".
+Está em `EQUIPAMENTO` (`src/config/oferta.ts`), incluindo o campo `cessao` com esse texto, e é o argumento central do pilar "Autonomia da sua equipe".
 
 ### 2.1.2 Referências científicas
 

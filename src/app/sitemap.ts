@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { rota: '/sistema', prioridade: 0.8 },
     { rota: '/laudo-exemplo', prioridade: 0.9 },
     { rota: '/referencias', prioridade: 0.7 },
+    { rota: '/metodologia', prioridade: 0.8 },
     { rota: '/empresa', prioridade: 0.6 },
     { rota: '/cases', prioridade: 0.6 },
     { rota: '/conteudo', prioridade: 0.7 },

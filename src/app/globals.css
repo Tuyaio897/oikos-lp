@@ -60,6 +60,8 @@ h1, h2, h3, h4 {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.04em;
 }
+/* Legenda dentro de um número grande volta ao tracking normal */
+.t-data .t-body, .t-data .t-small { letter-spacing: normal; font-family: var(--font-text); }
 
 @media (min-width: 768px) {
   .t-display { font-size: 68px; }

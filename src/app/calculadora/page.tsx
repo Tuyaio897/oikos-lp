@@ -28,7 +28,7 @@ export default function CalculadoraPagina() {
           <TituloSecao
             nivel={1}
             titulo="Quanto sua planta perde com purgadores em falha"
-            lead="Ajuste os quatro parâmetros abaixo e veja a ordem de grandeza. O resultado aparece na hora, sem pedir e-mail."
+            lead="Ajuste os parâmetros da sua planta e veja a ordem de grandeza. A conta é a mesma do laudo, roda na hora e não pede e-mail."
           />
         </div>
       </Secao>

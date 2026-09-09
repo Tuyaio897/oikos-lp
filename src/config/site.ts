@@ -35,16 +35,12 @@ export const SITE = {
   /** Subdominio do sistema. Enquanto PENDENTE, "Acessar o sistema" vai para /contato. */
   urlSistema: `${PENDENTE}_URL_SISTEMA`,
 
-  /**
-   * Telefone conforme registrado no CNPJ. CONFIRMAR: o numero registrado tem 8
-   * digitos apos o DDD, formato de fixo. Se for celular/WhatsApp, o correto e
-   * provavelmente (41) 99952-8006 — nao assumimos o digito extra. Ver DECISOES.md.
-   */
+  /** Telefone conforme registrado no CNPJ, confirmado pelo time. */
   telefone: '(41) 9952-8006',
   telefoneE164: '+554199528006',
 
-  /** So digitos com DDI. PENDENTE ate a confirmacao acima. */
-  whatsapp: `${PENDENTE}_WHATSAPP`,
+  /** So digitos com DDI, para links wa.me. */
+  whatsapp: '554199528006',
 
   email: 'comercial@oikos.eco.br',
 

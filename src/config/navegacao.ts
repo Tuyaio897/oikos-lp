@@ -21,6 +21,7 @@ export const RODAPE: { titulo: string; itens: ItemNav[] }[] = [
       ...(CALCULADORA_PUBLICADA
         ? [{ href: '/calculadora', rotulo: 'Calculadora de perdas' }]
         : []),
+      { href: '/metodologia', rotulo: 'Metodologia de cálculo' },
     ],
   },
   {
@@ -36,6 +37,7 @@ export const RODAPE: { titulo: string; itens: ItemNav[] }[] = [
     itens: [
       { href: '/conteudo', rotulo: 'Conhecimento técnico' },
       { href: '/referencias', rotulo: 'Referências científicas' },
+      { href: '/metodologia', rotulo: 'Metodologia de cálculo' },
       { href: '/conteudo/quanto-custa-um-purgador-com-falha', rotulo: 'Quanto custa um purgador com falha' },
       { href: '/conteudo/auditoria-manual-deixa-passar-falhas', rotulo: 'Por que a auditoria manual falha' },
     ],

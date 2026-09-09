@@ -15,7 +15,7 @@ import {
  * Parque hipotético usado no exemplo. Os agregados são derivados da engine —
  * nenhum número aqui é digitado à mão, para que o site nunca divirja do laudo.
  */
-const DEMO: EntradaCalculo = { ...PADRAO, pressaoBar: 10 };
+const DEMO: EntradaCalculo = { ...PADRAO, pressaoBar: 10, diametroOrificioMm: 5.1 };
 const resumo = calcularPerda(DEMO);
 
 export const metadata: Metadata = {
