@@ -7,7 +7,12 @@
  * vetorial improvisado envelhece mal.
  */
 
-const VERDE = 'var(--verde-500)';
+/* Cores de traco e de texto sao diferentes de proposito: o verde-500 tem
+   contraste de 2,6:1 como texto de 12px, o que reprova AA. Para rotulo
+   dentro da ilustracao vale o verde-texto, que da 7:1. */
+const VERDE_TRACO = 'var(--verde)';
+const VERDE_TEXTO = 'var(--verde-texto)';
+const CINZA_TEXTO = 'var(--grafite-700)';
 const LARANJA = 'var(--laranja)';
 
 /** Detecção por ultrassom: a faixa onde o escoamento se manifesta. */
@@ -26,19 +31,19 @@ export function IlustracaoUltrassom({ className = '' }: { className?: string }) 
 
       {/* faixa audível */}
       <rect x="40" y="40" width="120" height="150" fill="var(--aco-100)" />
-      <text x="100" y="212" textAnchor="middle" fontSize="12" fill="var(--grafite-500)">
+      <text x="100" y="212" textAnchor="middle" fontSize="12" fill={CINZA_TEXTO}>
         faixa audível
       </text>
 
       {/* faixa do ultrassom */}
       <rect x="160" y="40" width="220" height="150" fill="var(--verde-50)" />
-      <text x="270" y="212" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--verde)">
+      <text x="270" y="212" textAnchor="middle" fontSize="12" fontWeight="600" fill={VERDE_TEXTO}>
         ultrassom · acima de 20 kHz
       </text>
 
       {/* divisor */}
-      <line x1="160" y1="40" x2="160" y2="190" stroke={VERDE} strokeWidth="2" strokeDasharray="5 4" />
-      <text x="160" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill={VERDE}>
+      <line x1="160" y1="40" x2="160" y2="190" stroke={VERDE_TRACO} strokeWidth="2" strokeDasharray="5 4" />
+      <text x="160" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill={VERDE_TEXTO}>
         20 kHz
       </text>
 
@@ -57,7 +62,7 @@ export function IlustracaoUltrassom({ className = '' }: { className?: string }) 
       <line x1="276" y1="62" x2="330" y2="50" stroke={LARANJA} strokeWidth="1.5" opacity=".55" />
 
       {/* rótulo do eixo */}
-      <text x="12" y="118" fontSize="11" fill="var(--grafite-500)" transform="rotate(-90 12 118)" textAnchor="middle">
+      <text x="12" y="118" fontSize="11" fill={CINZA_TEXTO} transform="rotate(-90 12 118)" textAnchor="middle">
         intensidade
       </text>
     </svg>
